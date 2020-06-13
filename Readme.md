@@ -1,1 +1,1 @@
-Repositorios de bloques para Icestudio.
+Repositorio de bloques para Icestudio.

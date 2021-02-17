@@ -1,6 +1,6 @@
 División entera positiva, con sumas sucesivas, de 8 y 16 bits, con bloques de Icestudio.
 
-He utilizado sumas sucesivas en vez de restas, el método es muy similar. En vez de ir restando el divisor al dividendo y esperar a llegar a 0 o negativo, voy sumando el divisor para alcanzar el dividendo.
+He utilizado el método de sumas sucesivas en vez de restas, el método es muy similar. En vez de ir restando el divisor al dividendo y esperar llegar a 0 o negativo, voy sumando el divisor sucesivamente hasta alcanzar o sobrepasar al dividendo.
 
 Están los bloques principales y ejemplos respectivos.
 

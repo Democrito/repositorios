@@ -2,12 +2,12 @@ DD // Temporizador
 10 // cantidad de tiempo en ms * 10 [Recuerda poner los valores siempre en hexadecimal]
 CC // Cantidad de bytes para leer
 00 // = 0
-FF // Cantidad total de bytes, escritura y lectura.
+FF // Cantidad de bytes para escribir
 03 // = 3
-3C // 
-00 // 
-70 // 
-CC
+3C // dirección
+00 // dato
+70 // dato
+CC // ...
 00
 FF
 03
@@ -21,23 +21,23 @@ FF
 3C
 02
 01
-DD
-10
-DA
-00
-CC
-06
-FF
-02
-3D
-06
-00
-00
-00
-00
-00
-00
-DA
-FF
-AA
-00
+DD // Temporizador
+10 // 160ms
+DA // Guarda en un registro externo el valor
+00 // = 0
+CC // Cantidad de datos para leer
+06 // = 6 bytes.
+FF // Cantidad de datos para escribir
+02 // = 2
+3D // dirección I2C (escribe)
+06 // dato (escribe)
+00 // dato (lee)
+00 // dato (lee)
+00 // dato (lee)
+00 // dato (lee)
+00 // dato (lee)
+00 // dato (lee)
+DA // Guarda en un registro externo el valor
+FF // = 255
+AA // Ir a la dirección de memoria
+00 // = 'h00

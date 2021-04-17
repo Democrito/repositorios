@@ -5,4 +5,6 @@
 
 **CCS811.list** es un archivo que siempre ha de acompañar (en el mismo directorio o carpeta) al módulo o ejemplo.
 
-Los detalles sobre el funcionamiento lo encontrarás aquí: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/zpN-ueBAqHE/m/KRDAu-4_AQAJ
+Los detalles sobre el funcionamiento lo encontrarás aquí:
+
+https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/zpN-ueBAqHE/m/KRDAu-4_AQAJ

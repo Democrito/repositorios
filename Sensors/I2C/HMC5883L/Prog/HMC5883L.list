@@ -1,0 +1,43 @@
+DD // Temporizador
+10 // cantidad de tiempo en ms * 10 [Recuerda poner los valores siempre en hexadecimal]
+CC // Cantidad de bytes para leer
+00 // = 0
+FF // Cantidad total de bytes, escritura y lectura.
+03 // = 3
+3C // 
+00 // 
+70 // 
+CC
+00
+FF
+03
+3C
+01
+A0
+CC
+00
+FF
+03
+3C
+02
+01
+DD
+10
+DA
+00
+CC
+06
+FF
+02
+3D
+06
+00
+00
+00
+00
+00
+00
+DA
+FF
+AA
+00

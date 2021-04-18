@@ -1,1 +1,1 @@
-
+Esta es una versión programable para el ADC que viene en las Alhambras. En el interior contiene un pequeño microcontrolador que está especialmente diseñado para el control del I2C. El fichero con extensión **.list** contiene el programa en código máquina para el ADC.

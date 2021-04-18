@@ -1,0 +1,27 @@
+DD // Temporizador
+FE // cantidad de tiempo en ms * 10 [Recuerda poner los valores siempre en hexadecimal]
+CC // Cantidad de bytes para leer
+00 // = 'h00
+FF // Cantidad de bytes para escribir
+03 // = 'h03
+90 // se envía 90 (Dirección I2C de escritura)
+00 // se envía 00 (primer byte de configuración)
+CC // se envía CC (segundo byte de configuración)
+EE // Carga externa de un dato (es el canal) <<<<<<<<<<<<<<<<< repeat.
+12 // dirección de memoria donde se guardará el dato externo. (Es el byte de selección de canal)
+DD // Temporizador
+05 // 5 * 10 = 50 milisegundos (1 = 10 milisegundos) [Recuerda poner los valores siempre en hexadecimal]
+CC // Cantidad de datos para leer
+00 // = 'h00
+FF // Cantidad de datos para escribir
+02 // = 'h02
+90 // se envía 'h90 (Dirección I2C de escritura)
+02 // En realidad este byte se cargará de forma externa (este es el canal 0 por defecto del ADC) La instrucción "EE, 12" es quien realmente carga aquí el canal.
+CC // Cantidad de datos para leer
+01 // = 'h01
+FF // Cantidad de datos para escribir
+01 // = 'h01
+91 // se envía 'h91 (Dirección I2C de lectura)
+00 // se recibe un byte, que es la lectura del ADC. El "00" que ponemos aquí es arbitrario, se carga de forma externa a través del I2C.
+AA // Ir a la posición de memoria
+09 // = 'h09

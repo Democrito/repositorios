@@ -3,7 +3,7 @@
 
 **example_CCS811.ice** es un ejemplo de funcionamiento a través del serial.
 
-**CCS811.list** es un archivo que siempre ha de acompañar (en el mismo directorio o carpeta) al módulo o ejemplo.
+**CCS811.txt** Sólo es un archivo para ver cómodamente el código que ejecuta un pequeño micro-controlador interno. El código está contenido en una RAM interna preprogramada que se comporta a la vez como ROM y RAM.
 
 Los detalles sobre el funcionamiento lo encontrarás aquí:
 

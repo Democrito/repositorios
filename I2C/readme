@@ -1,1 +1,5 @@
-I2C master de escritura y lectura
+### I2C master de escritura y lectura
+
+Este proyecto está pendiente de documentar porque es muy extenso y tengo varias versiones: I2C de sólo escritura, y dos versiones de I2C de escritura y lectura en las que todavía tengo pendiente unificar (y simplificar conceptos).
+
+De momento tengo una documentación que he de simplificar y traer a esta sección sobre el I2C de sólo escritura que se encuentra aquí: https://github.com/Democrito/I2C_only_write

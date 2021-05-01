@@ -4,25 +4,25 @@ CC // Cantidad de bytes para leer
 00 // = 0
 FF // Cantidad de bytes para escribir
 03 // = 3
-3C // dirección
+3C // dirección de escritura
 00 // dato
 70 // dato
-CC // ...
-00
-FF
-03
-3C
-01
-A0
-CC
-00
-FF
-03
-3C
-02
-01
+CC // Cantidad de bytes para leer
+00 // = 0
+FF // Cantidad de bytes para escribir
+03 // = 3
+3C // Dirección de escritura
+01 // dato
+A0 // dato
+CC // Cantidad de datos para leer
+00 // = 0
+FF // Cantidad de datos para escribir
+03 // = 3
+3C // Dirección de escritura
+02 // dato
+01 // dato
 DD // Temporizador
-10 // 160ms
+10 // 160ms (está en hexadecimal!)
 DA // Guarda en un registro externo el valor
 00 // = 0
 CC // Cantidad de datos para leer

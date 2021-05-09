@@ -1,0 +1,92 @@
+// ---------------------- This is a sample of the internal code that runs a special small microcontroller for I2C. ----------------------
+// -------(If someone is interested in knowing what you put in the comments (in spanish), please use the google translator.) ------------
+DA // Saca un valor externo que selecciona la entrada de los registros de desplazamiento.
+04 // el valor es 'h04.
+DD // Temporizador (He modificado el temporizador interno, ahora una unidad es 1ms en vez de 10ms) [Máximo valor para el temporizador es 'hFE (254); Nunca poner 'hFF como máximo valor.]
+FE // 254ms
+CC // Cantidad de datos para leer
+00 // = 'h00
+FF // Cantidad de datos para escribir
+01 // = 'h01 [Se envía un único byte y es la dirección de escritura I2C del RTC. El RTC reconocerá que existe a través del ACK y se pondrá en marcha.]
+D0 // dirección de escritura I2C.
+CC // Cargamos con 'hFF un registro de propósito general (tiene doble función) para luego comparar con el salto condicional
+FF // dato para luego ser comparado por el salto condicional.
+BB // Salto condicional. Si un valor externo es diferente a 'hFF (cargado anteriormente) salta a una dirección de la memoria
+40 // dirección de la memoria a la que salta.
+DD // Temporizador
+01 // 1ms
+EE // Un valor externo se guarda en la siguiente dirección de memoria: (El valor externo viene de los registros de desplazamiento con la configuración de la fecha y hora.)
+3A // dirección de memoria que se carga.
+DA // Dato de salida con valor:
+00 // 'h00
+DA // Dato de salida con valor:
+02 // 'h02 (esto crea un flanco de subida que hará que se adelante una posición la información en los registros de desplazamiento.)
+EE // Se repite en total 6 veces todo lo anterior comentado. (Comandos "DA" y "EE" con su byte acompañante respectivos.)
+3B
+DA
+00
+DA
+02
+EE
+3C
+DA
+00
+DA
+02
+EE
+3D
+DA
+00
+DA
+02
+EE
+3E
+DA
+00
+DA
+02
+EE
+3F
+DA
+00
+DA
+02
+CC // Cantidad de datos para leer
+00 // = 'h00
+FF // Cantidad de datos para escribir
+09 // = 'h09
+D0 // dirección i2c de escritura
+00 // comando (----------- Poner en hora ------------)
+00 // segundos
+00 // minutos    Los datos: minuto, hora, día de la semana, día, mes y año son arbitrarios, en realidad se modifica arriba (con el comando "EE", que es cuando se aprieta el pulsador "presed")
+00 // hora
+00 // día de la semana (lunes...domingo)
+00 // día
+00 // mes
+00 // año
+CC // Cantidad de bytes para leer
+00 // = 0
+FF // Cantidad de bytes para escribir
+02 // = 2
+D0 // Dirección de escritura
+00 // dato
+CC // Cantidad de datos para leer
+07 // = 7
+FF // Cantidad de datos para escribir
+01 // = 'h01
+D1 // dirección de lectura
+00 // dato leído a través del I2C. "00" es arbitrario.
+00 // dato leído a través del I2C. "00" es arbitrario.
+00 // dato leído a través del I2C. "00" es arbitrario.
+00 // dato leído a través del I2C. "00" es arbitrario.
+00 // dato leído a través del I2C. "00" es arbitrario.
+00 // dato leído a través del I2C. "00" es arbitrario.
+00 // dato leído a través del I2C. "00" es arbitrario.
+DA // Cargo un registro externo con el valor:
+01 // ='h01
+DA // Cargo un registro externo con el valor:
+00 // = 'h00 Producirá un flanco de bajada fuera del circuito y se quedará memorizado los datos obtenidos.
+DD // Temporizador
+FE // 254 milisegundos
+AA // Ir a la siguiente posición de la memoria:
+40 // dirección de memoria a la que salta.

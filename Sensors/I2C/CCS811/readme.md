@@ -8,3 +8,5 @@
 Los detalles sobre el funcionamiento lo encontrarás aquí:
 
 https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/zpN-ueBAqHE/m/KRDAu-4_AQAJ
+
+La carpeta "**CCS811newMicro**" es un experimento donde utilizo un nuevo micro de 16 bits con el que estoy experimentado y validando su buen funcionamiento. Lo estoy probando con diferentes periféricos, includo el CCS811. Al ser de 16 bits y con nuevas funciones ocupa más espacio.

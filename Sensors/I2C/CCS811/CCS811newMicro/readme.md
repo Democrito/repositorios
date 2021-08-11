@@ -1,1 +1,12 @@
 
+He hecho un nuevo micro y lo estoy probando con diferentes periféricos (este sensor es uno de ellos). El nuevo micro, al igual que el anterior, está diseñado especialmente para la gestión de paquetes de datos tanto para el I2C como SPI (y cualquier otro protocolo, sea paralelo o serie). Lo nuevo es que tiene interrupción externa (la dirección del salto de interrupción es configurable desde el propio bloque de Icestudio). Permite envíos de bloques de memoria (sólo enviar) de cualquier tamaño y a cualquier dirección (siempre que esté dentro de los 16 bits de direccionamiento y lo que la memoria de la FPGA permita). Permite ejecutar un grupo de instrucciones de forma repetida (como si fuese un bucle tipo while, for, etc). El salto incodicional tiene aquí dos funciones, como un simple "goto" del BASIC, pero si se encuentra una instrucción "return" retornaría al lugar donde el goto salió más una posición más (es decir a la siguiente instrucción después del goto); por tanto el "goto" también puede comportarse como un "gosub". Debido a que no tiene pila no permite hacer saltos anidados.
+
+Sobre el circuito:
+
+- Cuando inicia hay que esperar unos 10 segundos a que los datos comiencen a salir.
+- Si se hace un reset a la FPGA conviene hacer un reset largo (no hacer un simple clic) No es por la FPGA sino por el sensor.
+- Si observamos las señales con PulseView, cuando hace la lectura de datos, los dos primeros bytes que salen son los de CO2, y los siguiente 2 bytes son los de compuestos aromáticos. Despues salen otros que todavía no sé qué son pero creo que el par de bytes finales son de temperatura, pero creo que a estos últimos hay que aplicarle una fómula para convertirlos a grados (y no es porque estén en grados Farenheit, sino que tiene una fórmula propia).
+- El CSS811 tiene una patilla llamada WAK, esta patilla hay que llevarla a masa. Esto es muy importante tenerlo en cuenta, de otra manera no funcionará.
+- Hay que poner resistencias en configuración "pull-up". Me falta saber cómo configurar las salidas para que no haga falta ponerlas.
+- Este nuevo micro (Atto64K) puede direccionar una memoria de hasta 64K, sin embargo la memoria la he limitado a 2K. El código de las instrucciones ha cambiado con respecto a su versión anterior (pendiente documentar esta parte). El micro permite hacer saltos incondicionales y también con retornos (como "gosub-return" del BASIC) pero carece de pila, por tanto no son encadenables.
+

@@ -4,6 +4,7 @@ He hecho un nuevo micro y lo estoy probando con diferentes periféricos (este se
 Sobre el circuito:
 
 - Cuando inicia hay que esperar unos 10 segundos a que los datos comiencen a salir.
+- Una vez que comienza a salir datos (CO2 y compuestos aromáticos), irán saliendo los datos cada 5 segundos.
 - Si se hace un reset a la FPGA conviene hacer un reset largo (no hacer un simple clic) No es por la FPGA sino por el sensor.
 - Si observamos las señales con PulseView, cuando hace la lectura de datos, los dos primeros bytes que salen son los de CO2, y los siguiente 2 bytes son los de compuestos aromáticos. Despues salen otros que todavía no sé qué son pero creo que el par de bytes finales son de temperatura, pero creo que a estos últimos hay que aplicarle una fómula para convertirlos a grados (y no es porque estén en grados Farenheit, sino que tiene una fórmula propia).
 - El CSS811 tiene una patilla llamada WAK, esta patilla hay que llevarla a masa. Esto es muy importante tenerlo en cuenta, de otra manera no funcionará.

@@ -1,4 +1,4 @@
-# SPI Master Multibyte
+# SPI Master Multibytes
 
 ![](https://github.com/Democrito/repositorios/blob/master/SPI/SPI_Master/SPI_master_multibytes.png)
 

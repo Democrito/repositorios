@@ -23,5 +23,6 @@ Cada vez que quieras enviar o recibir un byte le has de dar un tic a la patilla 
 
 Si estás familiarizado con las "máquinas de contar" que diseñó Obijuan, te darás cuenta que el funcionamiento es muy parecido, aunque "juego" con la señal **exec** de "la máquina de contar" para crear el **sck** del módulo SPI. Si abres el circuito y miras dentro verás que hay una máquina de contar y gracias a ella el diseño fue muy sencillo. Se podría decir que este módulo SPI es una máquina de contar ampliada para que haga la función de SPI Master.
 
-El archivo "SPI_Master_Multibytes.ice" es el módulo para incluir en tu diseño dentro de ICEstudio. 
+El archivo "SPI_Master_Multibytes.ice" es el módulo para incluir en tu diseño dentro de ICEstudio.
+
 La carpeta "Ejemplos" contiene un sencillo ejemplo en el que utilizo el MAX7912 para mostrar un corazón o una letra A en una matriz de leds de 8x8.

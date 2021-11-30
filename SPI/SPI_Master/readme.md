@@ -4,14 +4,12 @@
 
 Este módulo es un SPI Master multibyte y eso significa que puedes enviar paquetes de información desde un byte hasta infinitos bytes seguidos.
 
-
 **Caracterísiticas:**
 
 * Funciona a una velocidad fija de 3 Mhz.
 * Permite los 4 modos de trabajo (Mode 0, 1, 2 y 3).
 * Multibyte, es decir, permite enviar y recibir paquetes de información variable.
 * Funcionamiento intuitivo y muy sencillo.
-
 
 **Funcionamiento:**
 
@@ -25,4 +23,5 @@ Cada vez que quieras enviar o recibir un byte le has de dar un tic a la patilla 
 
 Si estás familiarizado con las "máquinas de contar" que diseñó Obijuan, te darás cuenta que el funcionamiento es muy parecido, aunque "juego" con la señal **exec** de "la máquina de contar" para crear el **sck** del módulo SPI. Si abres el circuito y miras dentro verás que hay una máquina de contar y gracias a ella el diseño fue muy sencillo. Se podría decir que este módulo SPI es una máquina de contar ampliada para que haga la función de SPI Master.
 
-El archivo "SPI_Master_Multibytes.ice" es el módulo para incluir en tu diseño dentro de ICEstudio.
+El archivo "SPI_Master_Multibytes.ice" es el módulo para incluir en tu diseño dentro de ICEstudio. 
+La carpeta "Ejemplos" contiene un sencillo ejemplo en el que utilizo el MAX7912 para mostrar un corazón o una letra A en una matriz de leds de 8x8.

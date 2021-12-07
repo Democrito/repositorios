@@ -21,7 +21,7 @@ Pongamos que queremos enviar 4 bytes seguidos, por ejemplo los bytes con valores
 
 Cada vez que quieras enviar o recibir un byte le has de dar un tic a la patilla **start**. La patilla **cs** es la encargada de validar el paquete de información, mientras esté en estado bajo podremos enviar y recibir tantos bytes como necesitemos. Cualquier envío y recepción (cada vez que le damos un tic a **start**) hará que **cs** se ponga a 0 y mantendrá ese estado hasta que finalmente le demos un tic a **stop**, sólo entonces **cs** volverá a pasar a valer 1.
 
-Si estás familiarizado con las "máquinas de contar" que diseñó Obijuan, te darás cuenta que el funcionamiento es muy parecido, aunque "juego" con la señal **exec** de "la máquina de contar" para crear el **sck** del módulo SPI. Si abres el circuito y miras dentro verás que hay una máquina de contar y gracias a ella el diseño fue muy sencillo. Se podría decir que este módulo SPI es una máquina de contar ampliada para que haga la función de SPI Master.
+Si estás familiarizado con las [máquinas de contar](https://www.youtube.com/watch?v=TT8eNQ2egnw) que diseñó Obijuan, te darás cuenta que el funcionamiento es muy parecido, aunque "juego" con la señal **exec** de "la máquina de contar" para crear el **sck** del módulo SPI. Si abres el circuito y miras dentro verás que hay una máquina de contar y gracias a ella el diseño fue muy sencillo. Se podría decir que este módulo SPI es una máquina de contar ampliada para que haga la función de SPI Master.
 
 El archivo "SPI_Master_Multibytes.ice" es el módulo para incluir en tu diseño dentro de ICEstudio.
 

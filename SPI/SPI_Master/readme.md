@@ -27,4 +27,5 @@ El archivo "SPI_Master_Multibytes.ice" es el módulo para incluir en tu diseño 
 
 La carpeta "Ejemplos" contiene un sencillo ejemplo en el que utilizo el MAX7912 para mostrar un corazón o una letra A en una matriz de leds de 8x8.
 
-Más información sobre el funcionamiento de este módulo aquí: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/v7BfxhlcMcA
+Más información sobre el funcionamiento de este módulo aquí: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/v7BfxhlcMcA/m/sdjuF6gQBQAJ
+

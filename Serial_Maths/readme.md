@@ -11,4 +11,4 @@ El módulo "Converts_Q8_8_format_to_serial.ice" convierte un formato binario pos
 El módulo "Converts_Q16_16_format_to_serial.ice" hace lo mismo que el anterior, pero para el formato Q16.16. La parte entera puede representar de 0 hasta 65535, y la parte de decimales puede representar de 0 hasta 9999.
 
 
-Para ver ejemplos de cómo se utiliza haz clic en [aquí](https://github.com/Democrito/repositorios/tree/master/Maths/div_fix_point#ejemplos-de-implementaci%C3%B3n-a-trav%C3%A9s-del-puerto-serie)
+Para ver ejemplos de cómo se utiliza haz [clic aquí](https://github.com/Democrito/repositorios/tree/master/Maths/div_fix_point#ejemplos-de-implementaci%C3%B3n-a-trav%C3%A9s-del-puerto-serie)

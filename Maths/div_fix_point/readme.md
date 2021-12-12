@@ -29,16 +29,18 @@ Pongo una imagen de cada ejemplo y la explicación es común a ambos ya que func
 
 ![](https://github.com/Democrito/repositorios/blob/master/Maths/div_fix_point/images/example_serial_div_fix_point_q16_16.PNG)
 
-El funcionamiento y puesta en marcha es común en ambos ejemplos. A través de un terminal serie introducimos dos números separados por un espacio, enter o el símbolo que le corresponde a la división (/) y al pulsar enter o "igual" nos aparecerá el resultado. Para simplificar el ejemplo y que fuese lo más sencillo posible, en esta división sólo utilizaremos números enteros (siempre positivos). En el mismo terminal nos aparecerá el resultado.
+El funcionamiento y puesta en marcha es común en ambos ejemplos. A través de un terminal serie introducimos dos números separados por un espacio, "enter" o el símbolo que le corresponde a la división '/' y al pulsar "enter" o "igual" nos aparecerá el resultado. Para simplificar el ejemplo y que fuese lo más sencillo posible, en esta división sólo utilizaremos números enteros (siempre positivos). En el mismo terminal nos aparecerá el resultado.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Maths/div_fix_point/images/example_div_q8_8_serial_terminal.png)
 
 Podemos comprobar que puede realizar cualquier tipo de operación y en el caso de la división entre **0** nos saldrá el mensaje "Error!". Para **Q8.8** tendremos dos decimales, y para **Q16.16** tendremos cuatro decimales. Recomiendo utilizar el terminal serie que viene en ICEstudio, y de ser así, recuerda activar la cajita "Echo local" para poder ver lo que se introduce en el terminal serie.
 
-Reconocimientos: El algoritmo de división en coma fija lo conseguí aquí: https://projectf.io/posts/division-in-verilog/ es una generalización para cualquier número de bits y lo apliqué a **Q8.8** y **Q16.16**
+### Reconocimientos:
+
+El algoritmo de división en punto fijo lo conseguí aquí: https://projectf.io/posts/division-in-verilog/ es una generalización para cualquier número de bits y lo apliqué a **Q8.8** y **Q16.16**
 
 Es una web muy buena de la que se puede sacar material excelente. Todo mi reconocimiento a [**Will Green**](https://github.com/projf/projf-explore) ¡Muchísimas gracias!
 
-Información complementaria:
+### Información complementaria:
 
 https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/Is2UsxOY4Bk/m/RDpd8n6zAQAJ

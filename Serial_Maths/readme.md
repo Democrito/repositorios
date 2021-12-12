@@ -4,8 +4,11 @@ Si te fijas en las imágenes de abajo por un momento, verás que uno de los mód
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/ConvertQ0808formatSerial.PNG)
 
-El módulo "Converts_Q8_8_format_to_serial.ice" convierte un formato binario positivo Q8.8 a notación decimal (máximo valor 255 en la parte entera) con dos decimales (máximo valor .99 en a parte decimal) y lo envía a un terminal serie. Este módulo fue utilizado aquí: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/Is2UsxOY4Bk/m/RDpd8n6zAQAJ
+El módulo "Converts_Q8_8_format_to_serial.ice" convierte un formato binario positivo Q8.8 a notación decimal (máximo valor 255 en la parte entera) con dos decimales (máximo valor .99 en a parte decimal) y lo envía a un terminal serie.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/ConvertQ1616formatSerial.PNG)
 
-El módulo "Converts_Q16_16_format_to_serial.ice" hace lo mismo que el anterior, pero para el formato Q16.16. La parte entera puede representar de 0 hasta 65535, y la parte de decimales puede representar de 0 hasta 9999. Este módulo en concreto está actualizado y ahora puede representar todo el rango mencionado.
+El módulo "Converts_Q16_16_format_to_serial.ice" hace lo mismo que el anterior, pero para el formato Q16.16. La parte entera puede representar de 0 hasta 65535, y la parte de decimales puede representar de 0 hasta 9999.
+
+
+Para ver ejemplos de cómo se utiliza haz clic en este enlace: https://github.com/Democrito/repositorios/tree/master/Maths/div_fix_point

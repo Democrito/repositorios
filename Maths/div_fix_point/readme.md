@@ -10,7 +10,7 @@ Este módulo realiza divisiones en formato Q8.8. La entrada **num[15:0]** es el 
 
 Este módulo realiza divisiones en formato Q16.16. La entrada **num[31:0]** es el numerador o dividendo, y la entrada **den[31:0]** es el denominador o divisor. En estas entradas de 32 bits hemos de recordar que los 16 bits más altos pondríamos la parte entera y en los 16 bits más bajos la parte de decimales porque es así el formato Q16.16. Una vez que colocamos los números que queremos dividir hay que darle un tic a la patilla **start**, en un pocos ciclos de reloj realizará la operación y a la salida tendremos el resultado llamado "cociente" por la salida **quo[31:0]**, y el resto o remanente por la salida **rem[31:0]**, y ambos valores serán validados con un tic que saldrá por la salida **done**. La patilla de salida **dbz** (*divide by zero*) normalmente estará a **0**, pero si hubo una división entre **0** esta patilla se pondrá a **1** y será validado por la patilla **done**.
 
-### Partes del interior de ambos módulos.
+### Repartición de la información.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Maths/div_fix_point/images/Inside_fix_point_Q8_8.png)
 

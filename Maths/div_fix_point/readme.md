@@ -39,7 +39,7 @@ Podemos comprobar que puede realizar cualquier tipo de división, y en el caso d
 
 El algoritmo de división en punto fijo lo conseguí aquí: https://projectf.io/posts/division-in-verilog/ es una generalización para cualquier número de bits y lo apliqué a **Q8.8** y **Q16.16**
 
-Es una web muy buena de la que se puede extraer material excelente. Todo mi reconocimiento a [**Will Green**](https://github.com/projf/projf-explore) ¡Muchísimas gracias!
+Es una web muy buena de la que se puede extraer material excelente. Todo mi reconocimiento a [**@WillGreen**](https://github.com/projf/projf-explore) ¡Muchísimas gracias!
 
 ### Información complementaria:
 

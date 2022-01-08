@@ -1,4 +1,4 @@
-# Square root in Q8.8 format
+# Square root in Q8.8 & Q16.16 format
 
 The "sqrt_Q8_8.ice" module will allow you to make square roots in Q8.8 format (fixed point).
 

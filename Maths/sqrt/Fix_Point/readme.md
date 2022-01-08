@@ -12,6 +12,12 @@ In Q 8.8 the maximum value will be 255 (in the integer part) and in Q16.16 (in t
 
 There is no rounding up, it must be borne in mind.
 
+*Example whith Serial Terminal*
+
+![](https://github.com/Democrito/repositorios/blob/master/Maths/sqrt/Fix_Point/Images/Serial_example.PNG)
+
+This is an example of integer input and the results that the FPGA returns. If you are using the Icestudio serial terminal (highly recommended), remember to validate the "Echo Local" box. To simplify the example, only integers numbers are used, but the module that calculates the square root allows input fixed point.
+
 ### Acknowledgments:
 The fixed point square root algorithm I got it here: https://projectf.io/posts/square-root-in-verilog/ is a generalization for any number of bits and I applied it to Q8.8 and Q16.16
 

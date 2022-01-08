@@ -12,7 +12,7 @@ In Q 8.8 the maximum value will be 255 (in the integer part) and in Q16.16 (in t
 
 There is no rounding up, it must be borne in mind.
 
-*Example whith Serial Terminal*
+**Example whith Serial Terminal**
 
 ![](https://github.com/Democrito/repositorios/blob/master/Maths/sqrt/Fix_Point/Images/Serial_example.PNG)
 

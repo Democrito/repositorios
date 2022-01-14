@@ -1,1 +1,0 @@
-Dejo un ejemplo en el que utilizo un MAX7912 para controlar una matriz de 8x8 leds en el que se puede representar un corazón o la letra A en negrita. Por defecto he puesto para representar el corazón, si conectas la caja de memoria que está justo al lado podrás representar la letra A en negrita.

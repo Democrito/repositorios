@@ -11,3 +11,4 @@ Sobre el circuito:
 - Hay que poner resistencias en configuración "pull-up". Me falta saber cómo configurar las salidas para que no haga falta ponerlas.
 - Este nuevo micro (Atto64K) puede direccionar una memoria de hasta 64K, sin embargo la memoria la he limitado a 2K. El código de las instrucciones ha cambiado con respecto a su versión anterior (pendiente documentar esta parte). El micro permite hacer saltos incondicionales y también con retornos (como "gosub-return" del BASIC) pero carece de pila, por tanto no son encadenables.
 
+Nota importante: A partir de la versión de toolchain 8.0 las entradas al aire no las considera a cero y no sintetiza esas partes (casi siempre son resets de contadores al aire). Me llevaría mucho tiempo corregir todos los circuitos con esta condición, pero si deseas este circuito corregido, avísame y te lo paso corregido y de paso lo subo aquí también corregido. De todas formas poco a poco iré corrigiendo esta condición nueva.

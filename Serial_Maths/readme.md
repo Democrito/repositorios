@@ -17,11 +17,11 @@ El módulo "Converts_Q16_16_format_to_serial.ice" hace lo mismo que el anterior,
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/signQ16_16_to_serial.PNG)
 
-El módulo "Converts_Q16_16_Sign_format_to_serial.ice" hace lo mismo que el anterior, pero contempla el signo. Esto quiere decir que puedes representar números desde el -32767.9999 hasta el 32767.9999.
+El módulo "Converts_Q16_16_Sign_format_to_serial.ice" hace lo mismo que el anterior, pero contempla el signo. Esto quiere decir que puedes representar números desde el -32768.9999 hasta el 32767.9999.
 
 Para ver ejemplos de cómo se utiliza haz [clic aquí](https://github.com/Democrito/repositorios/tree/master/Maths/div_fix_point#ejemplos-de-implementaci%C3%B3n-a-trav%C3%A9s-del-puerto-serie)
 
-Pones un número en formato **Qn.n** (siempre positivo) en la entrada de datos y cuando le das un tic en **start** enviará ese valor al puerto serie. Si la entrada **error** está a **1**, al darle **start** enviará al puerto serie el mensaje "Error!", sin importar lo que haya en la entrada de datos.
+Pones un número en formato **Qn.n** (recuerda que es con signo, por tanto si es negativo ha de ser en complemento a 2) en la entrada de datos y cuando le das un tic en **start** enviará ese valor al puerto serie. Si la entrada **error** está a **1**, al darle **start** enviará al puerto serie el mensaje "Error!", sin importar lo que haya en la entrada de datos.
 
 **De Serial a Qn.n**
 
@@ -29,9 +29,9 @@ Pones un número en formato **Qn.n** (siempre positivo) en la entrada de datos y
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/Real_to_signQ16_16.PNG)
 
-El rango de entrada puede ser desde -32767.9999 hasta 32767.9999 y te lo convertirá a Q16.16 con signo.
+El rango de entrada puede ser desde -32768.9999 hasta 32767.9999 y te lo convertirá a Q16.16 con signo.
 
-Si dominas el punto fijo, sabrás que de un Qn.n puedes pasar a otro de distinta resolución, sólo requiere de una conversión de buses. Te dejo una imagen de ejemplo para convertir un Q16.16 a Q1.8 (es un ejemplo)
+Si dominas el punto fijo, sabrás que de un Qn.n puedes pasar a otro de distinta resolución, sólo requiere de una conversión de buses. Te dejo una imagen de ejemplo para convertir un Q1.10 a Q16.16 (es un ejemplo)
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/casar%20bits.png)
 

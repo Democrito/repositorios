@@ -1,4 +1,4 @@
-Dim As Double  a, r, n
+Dim As Integer  a, r, n
 Dim As Integer i
 
 Input "Number: ", n

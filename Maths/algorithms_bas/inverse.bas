@@ -5,7 +5,7 @@ Input "Number: ", n
 a = 1
 r = 0
 
-for i = 0 To 15   ' Cuanto más ciclos, más precisión.
+for i = 0 To 15   ' The more cycles, the more precision.
   r = 2 * r
   
   if a >= n Then
@@ -18,6 +18,6 @@ Next
 
 if a >= n Then  r = r + 1
 
-Print r/32768.0   ' Resultado final, el inverso (1/n) del número que hemos introducido.
+Print r/32768.0   ' Final result, the inverse (1/n) of the number we have entered.
 
 sleep ' stop, end.

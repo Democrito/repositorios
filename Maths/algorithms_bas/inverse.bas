@@ -1,14 +1,15 @@
-Dim As Integer a, r, n, i
+Dim As Integer a, r, n, i, p
 
 Input "Number: ", n
 
 a = 1
 r = 0
+p = 15 ' Precision. Example for 15 ---> 2^15 = 5 decimals.
 
-for i = 0 To 15 
+For i = 0 To p
   r = 2 * r
   
-  if a >= n Then
+  If a >= n Then
      r = r + 1
      a = a - n
   EndIf  
@@ -16,8 +17,8 @@ for i = 0 To 15
   a = 2 * a
 Next
 
-if a >= n Then  r = r + 1
+If a >= n Then  r = r + 1
 
-  Print r/32768.0   ' Final result, the inverse (1/n) of the number we have entered. 5 digit precision.
-
-sleep ' stop, end.
+Print r/2^p   ' Final result, the inverse (1/n) of the number we have entered.
+              ' This division must be in floating point.
+Sleep ' stop, end.

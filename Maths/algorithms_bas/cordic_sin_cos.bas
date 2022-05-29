@@ -6,11 +6,11 @@ Dim Shared As Integer ATAN_Table(0 To 14) => {11520, 6801, 3593, 1824, 916, 458,
 Dim Shared As Integer angle, desiredAngle, X, Y, Xnew, Ynew, i, cose, sine
 
 
-Input "Dime un angulo: ", angle
+Input "Angle: ", angle
 
 desiredAngle = angle * 256         ' Angle input * 256
 
-dec256(desiredAngle)
+dec256(desiredAngle)  ' You can replace this function with "Print desireAngle/256.0"
 
 angle = 0
 Y     = 0
@@ -43,14 +43,14 @@ cose = X
 sine = Y 
 
 Print "Sin = ";
-dec256(sine)
+dec256(sine)  ' You can replace this function with "Print sine/256"
 
 Print "Cos = ";
-dec256(cose)
+dec256(cose)  ' You can replace this function with "Print cose/256"
 
-Sleep
+Sleep ' stop, end.
 
-Sub dec256(ByVal given As Integer)
+Sub dec256(ByVal given As Integer) '  This translates the result to a fixed point.
 	dim temp As Integer
 	
 	If given < 0 Then

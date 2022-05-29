@@ -48,12 +48,12 @@ cose = X
 sine = Y
 
 Print "Sin = ";
-dec256(sine)
+dec256(sine) ' You can replace this function with "Print sine/256.0"
 
 Print "Cos = ";
-dec256(cose)
+dec256(cose) ' You can replace this function with "Print cose/256.0"
 
-Sleep
+Sleep ' stop, end.
 
 Sub dec256(ByVal given As Integer)
 	dim As Integer temp

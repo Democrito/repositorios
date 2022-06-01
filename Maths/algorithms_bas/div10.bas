@@ -1,6 +1,6 @@
 ' info: https://hackaday.com/2020/06/12/binary-math-tricks-shifting-to-divide-by-ten-aint-easy/
 
-Dim As UInteger q, r, n             ' Is important that the variables are "UInteger" (uint32). 
+Dim As UInteger q, r, n             ' Is important that the variables are "UInteger" or "ULong" (Integer or Long unsigned). 
 
 Input "number: ", n
 

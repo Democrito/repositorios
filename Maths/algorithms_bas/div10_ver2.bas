@@ -1,4 +1,4 @@
-Dim As Integer m, q, n
+Dim As UInteger m, q, n   ' Is important that the variables are "UInteger" (Integer unsigned).
 
 Input "div10 of: ", n
 

@@ -1,6 +1,6 @@
 ' info: https://hackaday.com/2020/06/12/binary-math-tricks-shifting-to-divide-by-ten-aint-easy/
 
-Dim As Integer q, r, n
+Dim As UInteger q, r, n             ' Is important that the variables are "UInteger" (uint32). 
 
 Input "number: ", n
 
@@ -13,4 +13,4 @@ r = n - (((q Shl 2) + q) Shl 1)     ' Shl = left shift (>>)
 
 If (r > 9) Then Print q + 1 Else Print q
 
-Sleep
+Sleep                               ' stop, end.

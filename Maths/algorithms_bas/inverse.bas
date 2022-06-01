@@ -1,10 +1,10 @@
 Dim As Integer a, r, n, i, p
 
-Input "Number: ", n
+Input "Inverse of: ", n
 
 a = 1
 r = 0
-p = 15 ' Precision. Example for 15 ---> 2^15 = 5 decimals.
+p = 15 ' Precision. Example for 15 ---> 2^15 = 4 decimals.
 
 For i = 0 To p
   r = 2 * r

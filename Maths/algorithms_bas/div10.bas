@@ -4,12 +4,12 @@ Dim As UInteger q, r, n             ' Is important that the variables are "UInte
 
 Input "number: ", n
 
-q = (n Shr 1) + (n Shr 2)           ' Shr = right shift (<<)
+q = (n Shr 1) + (n Shr 2)           ' Shr = right shift (>>)
 q = q + (q Shr 4)
 q = q + (q Shr 8)
 q = q + (q Shr 16)
 q = q Shr 3
-r = n - (((q Shl 2) + q) Shl 1)     ' Shl = left shift (>>)
+r = n - (((q Shl 2) + q) Shl 1)     ' Shl = left shift (<<)
 
 If (r > 9) Then Print q + 1 Else Print q
 

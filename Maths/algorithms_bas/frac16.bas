@@ -29,14 +29,14 @@ x = inf   * 2^16 + (2^16 / 3)    ' This part "2^16 + (2^16 / 3)" will be convert
 
 While(1)
 	
-   If (cnt < 16) Then
+	If (cnt < 16) Then
 		If(x >= s) Then		
-         outf = BitSet(outf, (16 - cnt))
-         x = x - s
+			outf = BitSet(outf, (16 - cnt))
+			x = x - s
 		EndIf
-	   s   = s / 2
-	   cnt = cnt + 1
-   EndIf    
+		s   = s / 2
+		cnt = cnt + 1
+	EndIf    
     
 	If (cnt = 16)  Then Exit While  ' Exit loop (While - Wend).
 	

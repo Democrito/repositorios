@@ -31,7 +31,7 @@ While(1)
 	
 	If (cnt < 16) Then
 		If(x >= s) Then		
-			outf = BitSet(outf, (16 - cnt))
+			outf = BitSet(outf, (16 - cnt))  ' This is equivalent to: outf[16-cnt] = 1
 			x = x - s
 		EndIf
 		s   = s / 2

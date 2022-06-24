@@ -51,6 +51,6 @@ For i = 0 To 14
 Next
 
 Print "Angle = ";
-Print angle/256
+Print angle/256.0
 
 Sleep ' stop, end.

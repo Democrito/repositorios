@@ -43,10 +43,10 @@ cose = X
 sine = Y 
 
 Print "Sin = ";
-dec256(sine)  ' You can replace this function with "Print sine/256"
+dec256(sine)  ' You can replace this function with "Print sine/256.0"
 
 Print "Cos = ";
-dec256(cose)  ' You can replace this function with "Print cose/256"
+dec256(cose)  ' You can replace this function with "Print cose/256.0"
 
 Sleep ' stop, end.
 

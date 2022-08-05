@@ -1,3 +1,5 @@
-En esta carpeta voy añadiendo algoritmos matemáticos en lenguaje FreeBasic que de algún modo u otro pueden servir para inspirar cálculos con FPGA.
-Se procura, aunque no siempre es así, que estos algoritmos sólo usen sumas y desplazamientos.
-Algunos de ellos ya han sido aplicados en proyectos para Icestudio.
+In this folder I am adding mathematical algorithms in FreeBasic language that in one way or another can serve to inspire calculations with FPGA.
+It is intended, though not always the case, that these algorithms only use additions and shifts.
+Some of them have already been applied in projects for Icestudio.
+
+If you want to compile these programs, follow these instructions: https://sites.google.com/site/proyectosroboticos/instalacion-fbide

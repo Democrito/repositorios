@@ -1,4 +1,4 @@
-Dim As UInteger x2, lg10int, lg10man                                            ' Unsigned 32-bit variable.  x2: In this variable we will store a multiplication of two 16-bit numbers, so we need 32 bits to store the result.
+Dim As UInteger x2                                                              ' Unsigned 32-bit variable.  x2: In this variable we will store a multiplication of two 16-bit numbers, so we need 32 bits to store the result.
 Dim As UShort   wj, wx, wy, wz                                                  ' Unsigned 16-bit variables. wj = integer part; wz = mantissa fixed point (Q16.16).
 Dim As Byte     ix                                                              ' Index variable  for  the loop (for..next).
 Dim As UByte    wy15, wx15, bt                                                  ' These variables will only be worth 0 or 1. 

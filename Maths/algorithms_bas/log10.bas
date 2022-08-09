@@ -31,7 +31,7 @@ Next
 
 '   wj contains the integer value of log2.
 '   wz to be fractional part (mantissa, as "wz/32768" implied, Qn.16 fixed point).
-'   When you get the log2, converting it to log10 is very easy, you just have to multiply the result of log2 by a constant (0.30103).                                                  
+'   When you get the log2, converting it to log10 is very easy, you just have to multiply the result of log2 by a constant: log10(2) = 0.3010299...                                                  
                                                                                
 Print (((wj + wz/32768) * 19728) + 5)/ 65536                                    ' 0.30103 * 65536 = 19728                         
                                                                                 ' "+ 5" is to reduce the error of implicit divisions in constants, achieving a precision of -0.0001 and only in some cases.                                                                              

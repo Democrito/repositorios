@@ -1,6 +1,6 @@
 Dim As Single x, r, t
 
-Input "Raiz de: ", x
+Input "square root of: ", x
 
 r = x
 t = 0
@@ -12,4 +12,5 @@ Wend
 
 Print r
 
-sleep
+Sleep
+End

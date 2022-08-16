@@ -1,4 +1,4 @@
-Dim As Single x, r, t
+Dim As double x, r, t
 
 Input "square root of: ", x
 

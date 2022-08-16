@@ -1428,7 +1428,7 @@
           "id": "bb37733e-4f4c-42e2-8d55-8c036de4844a",
           "type": "basic.info",
           "data": {
-            "info": "Convert the fractional part (Qn.16) to a decimal. To do this, the input is multiplied by 1000 and then divided by 65536.",
+            "info": "Convert the fractional part (Qn.16) to a decimal. To do this the input is multiplied by 10000 and then divided by 65536",
             "readonly": true
           },
           "position": {

@@ -2,10 +2,10 @@
 
 Dim As UInteger dd = 0, in = 0
 
-While 1                                 ' Press Control+C to exit the program.
+While 1                                      ' Press Control+C to exit the program.
 	Input "number: ", in
 	
-  'dd = in + ((in\10) * 6 )             ' Method 1.
+	'dd = in + ((in\10) * 6 )            ' Method 1.
 	
 	dd = ((in\10) * 16) + (in Mod 10)    ' Method 2.
 	                                     ' "in\10" must be an integer division, with no rounding up or down.
@@ -15,6 +15,7 @@ While 1                                 ' Press Control+C to exit the program.
 	Print
 Wend
 End
+
 
 
 ' Using an unorthodox method we can get a third digit. It's about adding these "if" before the "print".
@@ -29,4 +30,3 @@ End
 'If in > 699 Then dd += 96
 'If in > 799 Then dd += 96
 'If in > 899 Then dd += 96
-'If in > 999 Then dd += 96

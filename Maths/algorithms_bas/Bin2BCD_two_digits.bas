@@ -14,7 +14,7 @@ While 1                                 ' Press Control+C to exit the program.
 Wend
 End
 
-' Using an unorthodox method we can get a third digit. It's about adding these "if" before the "print".
+' Using an unorthodox method we can get a third digit. It's about adding these "if's" after the calculation.
 
 'If in >   99 Then dd +=  96
 'If in >  199 Then dd +=  96

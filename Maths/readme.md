@@ -1,1 +1,1 @@
-Aquí voy añadiendo módulos para realizar cálculos con Icestudio. 
+Here I am adding modules to perform calculations with [Icestudio](https://github.com/FPGAwars/icestudio).

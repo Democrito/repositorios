@@ -50,7 +50,7 @@ RS is not fixed, simply RS=1 means that we send a character (as in the example) 
 
 The module I designed automates all these processes. For this I used 3 1-bit counting machines. There are two counting machines that automate these 4 steps, then a third one, also 1 bit, that takes care of the arrival of an external data or command (for example, from the serial port). And the last 4-bit counting machine is only used to load the configuration.
 
-The module that I designed works perfectly, the only problem is that when doing these 4 steps and respecting the times of the LCD screen, it is very time consuming. What I need to verify is the busy pin of the module, because if you add external control modules (to convert the "enter" into a "goto xy" of the display, for example) you need to know very well when the module is available or not, to send the next character or command.
+The module that I designed works perfectly, the only problem is that when doing these 4 steps and respecting the times of the LCD screen, it is very time consuming. What I need to verify is the busy pin of the module, because if you add external control modules (to convert the "enter" into a "goto xy" of the display, for example) needs to know if it can send another control character or byte.
 
 To finish, I will explain how to handle the I2C module that is inside it. It is designed to work together with a counting machine.
 

@@ -4,9 +4,9 @@ When we want to try to connect an LCD to an FPGA we find that many cables have t
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/LCD/img/ex-serial-lcd-i2c.PNG)
 
-The .ICE that I attach in the codes section I have left you with an example. It is about sending text to the LCD screen through a serial terminal. This example is very limited because it only does that, it writes to the screen and doesn't deal with the carriage returns or special functions that we are used to. On a 16x2 screen you can only type on the first line, then whatever you keep typing disappears, but if you insist it reappears on the second row. On a 16x4 or 20x4 screen you will see that when you finish typing in the first row the text starts to appear in the third row, then the second and finally the fourth row. And if you continue, you will erase the text you have written before, for the new text. Maybe in the future I will make a full controller, right now I need to attend to other projects.
+The .ICE that I attach in the codes section I have left you with an example. It is about sending text to the LCD screen through a serial terminal. This example is very limited because it only does that, it writes to the screen and doesn't deal with the carriage returns or special functions that we are used to. On a 16x2 screen you can only type on the first line, then whatever you keep typing disappears, but if you insist it reappears on the second row. On a 20x4 screen you will see that when you finish typing in the first row the text starts to appear in the third row, then the second and finally the fourth row. And if you continue, you will erase the text you have written before for the new text. Maybe in the future I will make a full controller, right now I need to attend to other projects.
 
-If you double click on the LCD-I2C module, you will see that each of its parts is explained inside.
+If you double click on the LCD_I2C_Driver module, you will see that each of its parts is explained inside.
 
 If you want to learn all about LCD screens and drive it from an FPGA, [click here](https://github.com/Obijuan/Cuadernos-tecnicos-FPGAs-libres/wiki/Controlador-LCD-16x2).    
 And to see many examples of using the LCD with an FPGA, [click here](https://github.com/cavearr/icecrystal/tree/master/examples), it's a mine!
@@ -23,20 +23,20 @@ When the I2C shield is connected to the LCD, it looks like this:
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/LCD/img/config%20pinouts%20i2c%20lcd.png)
 
-We see that the I2C chip uses outputs P0 to P7, except for P3. "P3" is used for backlight (not pictured but true).
+We see that the I2C chip uses outputs P0 to P7, except for P3. "P3" is used for backlight (not is in the scheme).
 
 The order of the 8 bits must be the following, on the left is the bit with greater weight (MSB):
 
 D3, D2, D1, D0, Backlight, Enable, RW, RS
 
-To make it easier, I leave the "backlight" and RW bits fixed.
+To make it easier, I leave the "backlight" and RW bit fixed.
 
 This way of handling the LCD is... a bit complicated, because we are forced to send the data like this, and the worst thing is that to send a command or write a character we have to do it in 4 sends. Why do we have to do it like this?
 
 Let's see the 4 steps in detail, and imagine I want to send the letter "A" which is 41 in hex, so the high nibble is 4 and the low nibble is 1.
 On the other hand, the control bits will be like this and in this order (as in binary, MSB on the left)
 
-Backlighting (it will always be 1), Enable (we will control this bit), RW (always 0), RS (we will control it depending on whether it is a command or text)
+Backlighting (it will always be 1), Enable (we will control this bit), RW (always 0), RS (we will control it depending on whether it is a command or character ASCII)
 
 1.) Nibble high "4" + control (enable = 1, RS = 1, others fixed)
 
@@ -46,7 +46,7 @@ Backlighting (it will always be 1), Enable (we will control this bit), RW (alway
 
 4.) Nibble low "1" + control (enable = 0, RS = 1, others fixed)  At this point, the LCD picks up that nibble low, the "1", because it has "noticed" the change in the pin enable .
 
-RS is not fixed, simply RS=1 means that we send a character (as in the example) and not a command, if so then RS=0.
+RS is not fixed, simply RS=1 means that we send a character (as in the example) and not a command, if were so then RS=0.
 
 The module I designed automates all these processes. For this I used 3 1-bit counting machines. There are two counting machines that automate these 4 steps, then a third one, also 1 bit, that takes care of the arrival of an external data or command (for example, from the serial port). And the last 4-bit counting machine is only used to load the configuration.
 
@@ -58,7 +58,7 @@ To finish, I will explain how to handle the I2C module that is inside it. It is 
 
 If we put an 8-bit data (d[7:0]) and we tick the "send" pin, this module will send that data through the I2C, and this is done with as many bytes as we want and with the size of packets of bytes that we want (it is to repeat this action). When we tick the "stop" pin, the data packet is closed. The first byte must always be the I2C address. If you know the I2C protocol, you should know that with the first byte it sends, the I2C protocol "start" signal is automatically produced (because it is the first), and when it has finished sending data (of any width), when emitting a tick on the "stop" pin creates the I2C protocol's "stop" signal.
 
-For this I2C module, the address is treated like any other data (it is not different from the rest of the data you send), so the byte of the address (which is 7 bits) must be multiplied by 2 to add the bit RW and form the 8 bits. You don't have to worry about anything inside the circuit do this. The ACK bit of the I2C protocol is added inside the module automatically.
+For this I2C module, the address is treated like any other data (it is not different from the rest of the data you send), so the byte of the address (which is 7 bits) must be multiplied by 2 to add the bit RW and form the 8 bits. You don't have to worry about anything inside the circuit do this, this conversion is done by the module directly. The ACK bit of the I2C protocol is added inside the module automatically.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/LCD/img/ejemplo%20simple%20i2c.PNG)
 
@@ -66,4 +66,4 @@ To illustrate how simple it is to make it work, I leave you with this image. It 
 
 If you view the signals through [PulseView](https://sigrok.org/doc/pulseview/0.4.1/manual.html), the first byte is always interpreted as an address, so it doesn't come out with the value 55 (in this example), but this doesn't mean it's wrong, just that it interprets the first byte as an address 7 bits instead of 8.
 
-I have taken an image from a web page, which also helped me understand certain things when I was informed, it is this: https://alselectro.wordpress.com/2016/05/12/serial-lcd-i2c-module-pcf8574/
+I have taken an image from a web page, which also helped me understand certain things when I informed, it's this: https://alselectro.wordpress.com/2016/05/12/serial-lcd-i2c-module-pcf8574/

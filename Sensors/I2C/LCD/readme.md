@@ -66,4 +66,4 @@ To illustrate how simple it is to make it work, I leave you with this image. It 
 
 If you view the signals through [PulseView](https://sigrok.org/doc/pulseview/0.4.1/manual.html), the first byte is always interpreted as an address, so it doesn't come out with the value 55 (in this example), but this doesn't mean it's wrong, just that it interprets the first byte as an address 7 bits instead of 8.
 
-I have taken an image from a web page, which also helped me understand certain things when I informed, it's this: https://alselectro.wordpress.com/2016/05/12/serial-lcd-i2c-module-pcf8574/
+I have taken an image from a web page, which also helped me understand certain things when I was informed, it's this: https://alselectro.wordpress.com/2016/05/12/serial-lcd-i2c-module-pcf8574/

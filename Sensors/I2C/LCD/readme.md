@@ -58,7 +58,7 @@ To finish, I will explain how to handle the I2C module that is inside it. It is 
 
 If we put an 8-bit data (d[7:0]) and we tick the "send" pin, this module will send that data through the I2C, and this is done with as many bytes as we want and with the size of packets of bytes that we want (it is to repeat this action). When we tick the "stop" pin, the data packet is closed. The first byte must always be the I2C address. If you know the I2C protocol, you should know that with the first byte it sends, the I2C protocol "start" signal is automatically produced (because it is the first), and when it has finished sending data (of any width), when emitting a tick on the "stop" pin creates the I2C protocol's "stop" signal.
 
-For this I2C module, the address is treated like any other data (it is not different from the rest of the data you send), so the byte of the address (which is 7 bits) must be multiplied by 2 to add the bit RW and form the 8 bits. You don't have to worry about anything inside the circuit do this, this conversion is done by the module directly. The ACK bit of the I2C protocol is added inside the module automatically.
+For this I2C module, the address is treated like any other data (it is not different from the rest of the data you send), so the byte of the address (which is 7 bits) must be multiplied by 2 to add the bit RW and form the 8 bits. You don't have to worry about anything inside the circuit, this conversion is done by the module directly. The ACK bit of the I2C protocol is added inside the module automatically.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/LCD/img/ejemplo%20simple%20i2c.PNG)
 

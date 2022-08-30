@@ -1,3 +1,3 @@
-En este apartado voy incluyendo sensores I2C.
+### In this section I include sensors and I2C peripherals.
 
-Nota importante: A partir de la versión de toolchain 8.0 las entradas al aire no las considera a cero y no sintetiza esas partes (casi siempre son resets de contadores al aire). Me llevaría mucho tiempo corregir todos los circuitos con esta condición, pero si deseas este circuito corregido, avísame y te lo paso corregido y de paso lo subo aquí también corregido. De todas formas poco a poco iré corrigiendo esta condición nueva.
+If you find a module that doesn't work, please let me know, it would mean there are air leaks inside the design. As of toolchain version 8.0, those inputs are not considered logical 0s.

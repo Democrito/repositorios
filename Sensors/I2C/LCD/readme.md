@@ -8,7 +8,8 @@ The .ICE that I attach in the codes section I have left you with an example. It 
 
 If you double click on the LCD-I2C module, you will see that each of its parts is explained inside.
 
-If you want to learn all about LCD screens and drive it from an FPGA, [click here](https://github.com/Obijuan/Cuadernos-tecnicos-FPGAs-libres/wiki/Controlador-LCD-16x2).
+If you want to learn all about LCD screens and drive it from an FPGA, [click here](https://github.com/Obijuan/Cuadernos-tecnicos-FPGAs-libres/wiki/Controlador-LCD-16x2).    
+And to see many examples of using the LCD with an FPGA, [click here](https://github.com/cavearr/icecrystal/tree/master/examples), it's a mine!
 
 I leave you with a retro photo I took of this project.
 

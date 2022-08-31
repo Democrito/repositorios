@@ -27,7 +27,7 @@ We see that the I2C chip uses outputs P0 to P7, except for P3. "P3" is used for 
 
 The order of the 8 bits must be the following, on the left is the bit with greater weight (MSB):
 
-D3, D2, D1, D0, Backlight, Enable, RW, RS
+D7, D6, D5, D4, Backlight, Enable, RW, RS
 
 To make it easier, I leave the "backlight" and RW bit fixed.
 

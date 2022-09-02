@@ -1,5 +1,7 @@
 # LCD via I2C
 
+### Attention: I am doing the updates and examples in another repository. This section is the basic part. To see examples and stay up to date [go to this website](https://github.com/cavearr/icecrystal/tree/master/examples/I2C/LCD).
+
 When we want to try to connect an LCD to an FPGA we find that many cables have to be used. There is an easy way to summarize the cables, which is by using the integrated PCF8574T, it summarizes a lot of cables into just two, and obviously the two power cables.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/LCD/img/example_lcd_i2c_with_ligh.PNG)

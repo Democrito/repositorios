@@ -50,3 +50,7 @@ In the image you can see how the shift register is connected and, through anothe
 
 On the left side of the schematic is a delayed start circuit. I put it on purpose to warn that when you do a design for a peripheral, many of them need a timeout before they get to work. When a circuit doesn't work the first time, this could be one of the problems. You can find the delay time before starting in the datasheet.
 
+I leave an image of the signals that PulseView reads.
+
+![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/ads7924_signals.png)
+

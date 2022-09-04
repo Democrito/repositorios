@@ -26,7 +26,7 @@ We can verify that the first byte, being the address, instead of "55" PulseWiew 
 
 Taking readings from an I2C is not trivial. A good knowledge of the I2C protocol is required. As a general rule, peripherals and sensors must be configured first in order to read the data later.
 
-Like the write-only I2C, through the input d[7:0] we will put the byte that we want to send and giving it a tick in "start" it will be sent. The "next" output pin will give us a tick once it has been sent. And when we're done sending the data packet, we tick "stop" and it will close the data packet and tick the "done" pin. We can check that so far it is exactly the same as the read-only I2C module.
+Like the write-only I2C, through the input d[7:0] we will put the byte that we want to send and giving it a tick in "start" it will be sent. The "next" output pin will give us a tick once it has been sent. And when we're done sending the data packet, we tick "stop" and it will close the data packet and tick the "done" pin. We can check that so far it is exactly the same as the write-only I2C module.
 
 ![](https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG)
 

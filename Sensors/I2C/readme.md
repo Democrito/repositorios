@@ -40,7 +40,7 @@ The "sda" and "scl" pins are obviously where we connect the I2C bus.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/image_example_I2C_RW_ADC.PNG)
 
-As an example, I have used the ADC that comes with the Alhambras FPGA. And to make it as simple as possible, it only reads channel 0.
+As an example, I have used the ADC that comes with the [Alhambras FPGA](https://alhambrabits.com/alhambra/). And to make it as simple as possible, it only reads channel 0.
 
 The counting machine is in charge of sending each one of the bytes of the table. But in the table there are actually 3 data packets: one 3-byte packet and two 2-byte packets. We need to create a control logic, to know what value the counting machine has and thus manage the "stop" pin (end of the packet) and the control of "RW" and "nack". Since we are only going to read 1 byte, "RW" and "nack" must be linked to the same control logic.
 
@@ -48,9 +48,9 @@ If you double click on the "ControlLogic" module, you will see a control logic c
 
 In the image you can see how the shift register is connected and, through another register, the retention of that read byte.
 
-On the left side of the schematic is a delayed start circuit. I put it on purpose to warn that when you do a design for a peripheral, many of them need a timeout before they get to work. When a circuit doesn't work the first time, this could be one of the problems. You can find the delay time before starting in the datasheet.
+On the left side of the schematic is a delayed start circuit. I put it on purpose to warn that when you do a design for a peripheral, many of them need a timeout before they get to work. When a circuit doesn't work the first time, this could be one of the problems. You can find the delay time in the datasheet.
 
-I leave an image of the signals that PulseView reads.
+I leave an image of the signals that [PulseView](https://sigrok.org/doc/pulseview/0.4.1/manual.html) reads.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/ads7924_signals.png)
 

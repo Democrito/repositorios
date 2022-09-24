@@ -1,1 +1,1 @@
-Aquí voy poniendo circuitos diseñados con Icestudio que son experimentos y que normalmente no están publicado en el foro de forma oficial.
+Here I am putting circuits designed with Icestudio that are experiments and that are not normally published in the forum officially, or because they are not completed, or because they contain glitches. If the project contains any problems in the corresponding folder you are notified of what is happening.

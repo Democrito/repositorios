@@ -1,0 +1,1 @@
+This is an example of vertical scrolling. It's not officially released because it contains glitches (although it's functional) and I'm keeping it here because there are modules I might use in the future.

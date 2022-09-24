@@ -1,1 +1,1 @@
-This is an example of vertical scrolling. It's not officially released because it contains glitches (although it's functional) and I'm keeping it here because there are modules I might use in the future.
+This is an example of vertical scrolling. It's not officially released because it's glitch (although it's functional) and I'll keep it here because there are modules I could use in the future. Inside there is a timer with 500ms, that timer prevents but does not completely eliminate the fault.

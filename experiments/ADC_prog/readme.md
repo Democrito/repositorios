@@ -1,4 +1,4 @@
-Esta es una versión programable para el ADC que viene en las Alhambras (ADS7924). En el interior contiene un pequeño microcontrolador que está especialmente diseñado para el control del I2C. El fichero con extensión **.list** contiene el programa en código máquina para el ADC. Descarga el **.ICE** y el **.list** y ten ambos archivos en la misma carpeta antes de subir el diseño.
+This is a programmable version for the ADC that comes in the Alhambras (ADS7924). Inside it contains a small microcontroller that is specially designed for I2C control. The file with extension **.list** contains the machine code program for the ADC. Download the **.ICE** and the **.list** and have both files in the same folder before uploading the design.
 
-Como es un ejemplo sencillo he puesto para leer sólo dos canales de los 4 que tiene, pero en realidad se podría leer 256 canales si los tuviera.
+As it is a simple example, I have set to read only two channels of the 4 that it has, but in reality it could read 256 channels if it had them.
 

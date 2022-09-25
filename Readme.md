@@ -1,1 +1,1 @@
-My repositories for Icestudio.
+My repositories for [Icestudio](https://github.com/FPGAwars/icestudio).

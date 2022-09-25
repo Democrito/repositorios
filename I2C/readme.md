@@ -16,6 +16,8 @@ If you view the signals through [PulseView](https://sigrok.org/doc/pulseview/0.4
 
 We can verify that the first byte, being the address, instead of "55" PulseWiew interprets it as "2A", however, if we read the binary part, we verify that it is "0101_0101", therefore it is "55". Everything's fine!
 
+To go deeper into the write-only I2C protocol, you can go here: https://github.com/Democrito/I2C_only_write  although the I2C master module and the examples work with another philosophy.
+
 # How the I2C read and write module works
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/image_I2C_RW_module.PNG)

@@ -1,6 +1,6 @@
-Sensor de campo magnético de 3 ejes para Icestudio.
+3-axis magnetic field sensor for Icestudio.
 
 Info: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/ZyD4azqhqFI/m/6RlJN5n_AwAJ
 
-Esta carpeta contiene el módulo de control y un ejemplo.
-En la carpeta **Prog** contiene un experimento, es otra versión con otra filosofía en el que se programa el módulo con código máquina.
+This folder contains the control module and an example.
+The **Prog** folder contains an experiment, it is another version with another philosophy in which the module is programmed with machine code because it is controlled by a small microcontroller.

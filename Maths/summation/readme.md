@@ -1,3 +1,3 @@
-# 16 bit epsilon adder.
+# 16 bit epsilon adder
 
-**Successive sums for any number.**
+## Successive sums for any number.

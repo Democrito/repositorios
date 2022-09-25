@@ -1,4 +1,4 @@
-#Atto 64K with DS3231
+# Atto 64K with DS3231
 
 **"Serial_Atto64K_ds3231.ice"** does exactly the same as the previous version (it is an example for serial), but inside it contains a new 16-bit microcontroller instead of 8. The I2C part is improved by implementing new functions of that protocol.
 

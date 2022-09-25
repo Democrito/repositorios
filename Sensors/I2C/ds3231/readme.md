@@ -1,11 +1,11 @@
 ## RTC DS3231.
 
-**"ds3231.ice"** es el módulo principal para controlar este RTC.
+**"ds3231.ice"** is the main module to control this RTC.
 
-**"serial_ds3231.ice"** es un ejemplo donde los datos son transmitidos a través de un puerto serie.
+**"serial_ds3231.ice"** is an example where data is transmitted through a serial port.
 
-**"ds3231.txt"** es el código interno (lenguaje máquina) que maneja la parte de I2C y otras gestiones de electrónica interna. Este archivo sólo sive para ver interiormente cuál es el código interno, nada más.
+**"ds3231.txt"** is the internal code (machine language) that handles the I2C part and other internal electronic management. This file is only used to see inside what the internal code is, nothing more.
 
-**"newMicro"** Contiene el ejemplo para el serial, pero con un nuevo microcontrolador de 16 bits (en vez de 8 bits de aquí). También contiene un módulo para I2C que está actualizado con nuevas funciones. Son pruebas que voy haciendo para testear que el nuevo micro trabaja bien.
+**"newMicro"** Contains the example for the serial, but with a new 16-bit microcontroller (instead of 8-bit here). It also contains a module for I2C that is updated with new features. They are tests that I am doing to test that the new micro works well.
 
-**Información, preguntas y respuestas: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/UrntmXPgsac**
+**Information, questions and answers: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/UrntmXPgsac**

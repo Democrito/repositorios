@@ -1,1 +1,1 @@
-This is an example of vertical scrolling. It was not officially released because it is glitch (although it is functional). The ideal is to send it a string of characters that ends with LF (ASCII 10).
+This is an example of vertical scrolling. It was not officially released because it needs to receive character strings ending in LF (ASCII 10). Otherwise you will commit glitches on the screen. It can be functional as a visual terminal, but as long as it ends up receiving an LF at the end of the string.

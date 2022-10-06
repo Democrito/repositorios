@@ -1,5 +1,6 @@
 # Needle indicator
 
+![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/OLED/needle_indicator/IMG/ADC%20to%20OLED%20needle%20indicator.PNG)
 
 This project is an example where you take an ADC and turn the data it gives you into a graph where an indicator needle gives the position of the voltage.
 
@@ -27,4 +28,4 @@ You can connect it without the need for cables, directly to the [Alhambra II](ht
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/OLED/drawLines/img/alhambra%20fpga%20oled.jpg)
 
-# Credits: [Obijuan](https://github.com/Obijuan), [Carlos Venegas Arrabé](https://github.com/cavearr) and [Joaquim](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo).
+### Credits: [Obijuan](https://github.com/Obijuan), [Carlos Venegas Arrabé](https://github.com/cavearr) and [Joaquim](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo).

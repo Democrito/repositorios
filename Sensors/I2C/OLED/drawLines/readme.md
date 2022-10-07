@@ -2,7 +2,7 @@
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/OLED/drawLines/img/draw_lines.PNG)
 
-This project draws one or more lines on a 128x64 pixel monochrome OLED screen.
+This project draws one or more lines on a 128x64 pixel monochrome OLED screen (SSD1306).
 
 To draw a single line we need two points. Each point is formed by two coordinates (x,y). The first point will be made up of two numbers that will go in the input variables x0 and y0; in the same way the second point will go in the variable x1 and y1. Having defined two points, a Bresenham algorithm for lines will draw a line between those two points.
 

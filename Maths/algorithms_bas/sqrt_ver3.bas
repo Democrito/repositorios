@@ -7,7 +7,7 @@ x = 1
 
 For i = 0 To 15
 	x_new = (x + n/x) / 2
-   x = x_new
+	x = x_new
 Next
 
 Print x

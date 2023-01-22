@@ -10,4 +10,5 @@ SH1106 displays differ from SSDs in that they have a 132x64 resolution; however,
 The image represents the controller module for an SSD, however the pinout is exactly the same as for the SH1106 displays.
 
 **1.) To draw a line, we put the coordinate data (x0,y0), (x1,y1) and give it a tick on the "startln" pin and wait for a tick on the "nextln" pin . If you want to draw more lines, repeat the same thing again.**  
+
 **2.) When you want to see the drawing on the screen, give the "print" pin a tick. Wait for a "done" tick to return to point 1.)**

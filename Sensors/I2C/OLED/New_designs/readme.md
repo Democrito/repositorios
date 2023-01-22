@@ -5,6 +5,8 @@
 The two folders (SSD and SH1106) contain the modules and examples of a driver that will allow you to paint lines with a wallpaper. Both folders contain the same examples, the only difference being the driver chip type.
 SH1106 displays differ from SSDs in that they have a 132x64 resolution; however, here we run them at the same resolution as the SSD displays (128x64 pixels).
 
+I highly recommend using these new improved modules. They are very easy to implement in any design and it is much more powerful.
+
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/OLED/New_designs/Lines_skin_module_generic.PNG)
 
 The image represents the controller module for an SSD, however the pinout is exactly the same as for the SH1106 displays.

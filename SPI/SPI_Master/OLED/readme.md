@@ -9,7 +9,7 @@ GND---VDD---SCK---SDA---RES---DC---CS
 
 GND: 0V  
 VDD: 3.3V or 5V  
-SCK: clock  
+SCK: Clock  
 SDA: Data out (MOSI)  
 RES: Reset (reverse logic)  
 DC:  Data / Command  

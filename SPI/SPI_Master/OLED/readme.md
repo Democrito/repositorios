@@ -12,5 +12,5 @@ VDD: 3.3V or 5V
 SCK: clock  
 SDA: Data out (MOSI)  
 RES: Reset (reverse logic)  
-DC:  Data/command  
+DC:  Data / Command  
 CS:  Chip Select (reverse logic)  

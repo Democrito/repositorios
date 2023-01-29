@@ -1,3 +1,4 @@
+
 ![](https://github.com/Democrito/repositorios/blob/master/debug/I2C/img/debugger_I2C.PNG)
 
 # Debugger for I2C write only.
@@ -12,3 +13,6 @@
 
 If we put data in the config box, this saves us having to write those codes later. And if later you want to change the configuration or some configuration parameter, you can also do it from the serial terminal.
 
+This circuit does not need pull-up resistors.
+
+In this link you have an example of use with an OLED screen: https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo/m/n3fmpcMuBQAJ

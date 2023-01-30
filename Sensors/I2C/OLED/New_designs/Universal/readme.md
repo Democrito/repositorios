@@ -1,4 +1,4 @@
-# Universal Driver for paint lines (SH1106 and SSD130x)
+# Universal module for drawing lines: SH1106 and SSD130x
 
 ![](https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/OLED/New_designs/Universal/img/Universal_OLED_Driver_SH_and_SSD_128x64_monochrome.PNG)
 

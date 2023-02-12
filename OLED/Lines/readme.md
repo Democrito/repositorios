@@ -77,6 +77,8 @@ This is the important part to know how to handle these modules. With external el
 
 It is very easy to handle and has no mystery.
 
+To start familiarizing yourself with the circuit, [**go here**](https://github.com/Democrito/repositorios/tree/master/OLED/Lines/Simple_examples), it's the simplest example out there.
+
 ## Differences in sending data, depending on whether it is I2C or 4-wire SPI.
 
 When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.

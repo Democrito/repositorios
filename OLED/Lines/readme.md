@@ -66,6 +66,17 @@ The bytes "78 40" means that we are going to paint on the screen, in this case t
  
 The initial configuration is common for both types of screens and is configured with paging. What indicates that we are using one screen or another is only that final byte. (00 or 02).
 
+## How to memorize lines and paint on the screen.
+
+The operation is common to both modules, that is, it works the same with the SPI module as with the I2C module.
+This is the important part to know how to handle these modules. With external electronics we will tell you where to paint one or more lines.
+
+1.) To draw a line, we put the coordinate data (x0,y0), (x1,y1) and give it a tick on the "startln" pin and wait for a tick on the "nextln" pin . If you want to draw more lines, repeat the same thing again.
+
+2.) When you want to see the drawing on the screen, give the "print" pin a tick. Wait for a "done" tick to return to point 1.
+
+It is very easy to handle and has no mystery.
+
 ## Differences in sending data, depending on whether it is I2C or 4-wire SPI.
 
 When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.

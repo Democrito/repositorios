@@ -34,14 +34,14 @@ The "RES" (reset) pin should be brought to logic 1 (3.3V or 5V); if you set it t
 
 GND---VDD---SCK---SDA---RES---DC---CS
 
-GND: 0V
-VDD: 3.3V or 5V (I have an SSD display that only works if I feed it with 5V)
-SCK: Clock
-SDA: Data out (MOSI)
-RES: Reset (reverse logic)
-DC: Data / Command
-CS: Chip Select (reverse logic)
-
+GND: 0V   
+VDD: 3.3V or 5V (I have an SSD display that only works if I feed it with 5V)   
+SCK: Clock   
+SDA: Data out (MOSI)   
+RES: Reset (reverse logic)   
+DC: Data / Command   
+CS: Chip Select (reverse logic)   
+   
 **The rest of the pins are common to both modules and work as follows:**
 
 This circuit works by paging. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens (by paging). The Adafruit libraries also work like this to maintain compatibility between the two displays.

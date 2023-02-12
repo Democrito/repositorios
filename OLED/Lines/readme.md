@@ -81,3 +81,25 @@ It is very easy to handle and has no mystery.
 
 When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.
 The address in SPI is always fixed, and to know if we are sending data or commands it is done through the DC pin. This makes it work a little faster by avoiding the address and command bytes. It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz.
+
+## Test of the 4 points in the corners.
+
+Many times it happens that we don't know if our screen is SSDxxxx or SH1106, rarely does the manufacturer specify it on the silkscreen. In all the examples you'll find in this project (with a few exceptions) I put a single pixel in each corner of the screen. This will help us to know if our screen is SSDxxxx or SH1106.
+
+Look at this image:
+
+![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/good.JPG)
+
+The only thing we have to look at are the 4 corner points, the rest of the image does not interest us. If you see the 4 pixels in each corner it means that you have selected the screen correctly from the "choose" pin. You don't have to do anything, everything is fine.
+
+Now look at this other image:
+
+![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/bad.PNG)
+
+Only two points are visible correctly and the other two are scattered. This means that in the choice of the pin "choose" is the other way around. If that pin is at '1', you should set it to '0', and if it's at '0', you should set it to '1'. That's it and once you upload the circuit back to the FPGA everything will appear fine.
+
+And from all this we deduce what type of screen we are handling, if an SSDxxxx or a SH1106.
+
+
+
+

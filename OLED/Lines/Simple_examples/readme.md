@@ -36,6 +36,6 @@ Now yes, press SW2 (print) and the line will appear on the screen, that is, the 
 
 ![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/Simple_examples/img/diagonal.jpg)
 
-The X axis works the same as in math, but the Y axis starts at the top right. That's why the line goes from top left to bottom right: (0,0) to (127,63)
+The X axis works the same as in math, but the Y axis starts at the top left. That's why the line goes from top left to bottom right: (0,0) to (127,63)
 
 This is a fixed example, so it only does this. To start over it is necessary to remove power from both the FPGA and the OLED. I do it by unplugging the USB that connects to the FPGA and since the OLED also feeds it with the FPGA, both elements are turned off. I plug it back in and can repeat the experiment.

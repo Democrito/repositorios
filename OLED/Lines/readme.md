@@ -71,9 +71,9 @@ The initial configuration is common for both types of screens and is configured 
 The operation is common to both modules, that is, it works the same with the SPI module as with the I2C module.
 This is the important part to know how to handle these modules. With external electronics we will tell you where to paint one or more lines.
 
-1.) To draw a line, we put the coordinate data (x0,y0), (x1,y1) and give it a tick on the "startln" pin and wait for a tick on the "nextln" pin . If you want to draw more lines, repeat the same thing again.
+1.) To draw a line, we put the coordinate data (x0,y0), (x1,y1) and give it a tick on the "startln" pin and wait for a tick on the "nextln" pin . If you want to draw more lines, repeat the same thing again. At this point, the lines are "painted" (calculated) into memory, nothing is sent to the screen.
 
-2.) When you want to see the drawing on the screen, give the "print" pin a tick. Wait for a "done" tick to return to point 1.
+2.) When you want to see the drawing on the screen, give the "print" pin a tick. At this point the entire content of the memory is sent to the screen. Wait for a "done" tick to return to point 1.
 
 It is very easy to handle and has no mystery.
 

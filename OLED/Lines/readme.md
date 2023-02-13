@@ -50,6 +50,8 @@ This circuit works by paging. The SH1106 always works by paging, and the SSD130x
 
 Paging consists of sending 128 bytes in a row, but indicating the page number on which you want to do it. The screen has 8 pages (it's actually 8 bit vertical x 128). The circuit sends a command telling it which page it wants to write to and then "paints" the 128 bytes, then tells it that it wants to paint the next page, and paints those 128 bytes, like this 8 times.
 
+For example, for I2C it would be like this:
+
  78 00    B0 10  02           <-- command for switching to page 0 (B0).   
  78 40    ..... Paint 128 bytes.   
     
@@ -60,6 +62,8 @@ Paging consists of sending 128 bytes in a row, but indicating the page number on
     
  78 00    B7 10  02            <-- command for switching to page 7 (B7).   
  78 40    ..... Paint 128 bytes.   
+ 
+![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/command%20page%20and%20type%20screen.PNG)
     
 This example would be for the SH1106. To use the SSD130x, the last byte of the configuration command that indicates the page, instead of "'02" would be changed to "00". "02" means a 132 byte wide display is being used (this would be for the SH1106), and a "00" means a 128 byte wide display is being used (this would be for the SSD130x).
 

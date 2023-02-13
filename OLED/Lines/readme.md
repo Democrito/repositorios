@@ -116,3 +116,42 @@ Now look at this other image:
 Only two points are visible correctly and the other two are scattered. This means that in the choice of the pin "choose" is the other way around. If that pin is at '1', you should set it to '0', and if it's at '0', you should set it to '1'. That's it and once you upload the circuit back to the FPGA everything will appear fine.
 
 And from all this we deduce what type of screen we are handling, if an SSDxxxx or a SH1106.
+
+## Initial configuration (by pagination) :
+
+OLED screens take a while to boot up when turned on or after a reboot, but I don't know how long that is. I know it is very fast, but just in case I have put a time of 500 ms.
+
+After that time we can start sending the initial configuration data to the screen. For example, telling it what type of display we're going to use, how bright the pixels should be, whether we want to use paging or 1024-byte batch processing, etc.
+
+**The configuration that I am using is this, and remember that it is by pagination:**
+
+(Initially I extracted this data from the configuration that uses an Arduino with the Adafruit library connected to an OLED SH1106)
+
+AE // Turn off the screen   
+D5 // Oscillator speed   
+80 // the number on the left, if the value is too high, random dark intermittent horizontal lines appear. The figure on the right affects the refresh rate of the screen.   
+A8 // Set max rows to 0x3F = 63   
+3F // that is, it will go from 0 to 63, therefore we have 64 rows of pixels.   
+D3 // offset   
+00 // = 0.   
+40 // Set start of line to 0.   
+8D // Activate the 'charge pump'  
+14 // ?  
+20 // Horizontal writing mode;  
+00 // = 0.  
+A1 // Invert or not the X axis of the screen. With 'A0' reverse to how you see it.  
+C8 // Invert or not the Y axis of the screen. With 'C0' reverse to how you see it.  
+DA // Map COM pins  
+12 // if the mapping doesn't work for you with '12', try '02'.  
+81 // Contrast,  
+DF // in theory this value has to be between 0x00 (min) and 0xFF (max).  
+D9 // ?  
+F1 // ?  
+DB // ?  
+40 // ?  
+A4 // What is in memory is what it has to represent.  
+A6 // A6 Puts the screen in Normal mode; A7 puts the screen in inverted mode, in the sense of a photographic negative.  
+AF // Turn on screen.  
+00 // ?  
+10 // ?  
+40 // ?  

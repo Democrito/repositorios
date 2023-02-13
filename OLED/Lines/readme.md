@@ -67,8 +67,8 @@ For example, for I2C it would be like this:
     
 This example would be for the SH1106. To use the SSD130x, the last byte of the configuration command that indicates the page, instead of "'02" would be changed to "00". "02" means a 132 byte wide display is being used (this would be for the SH1106), and a "00" means a 128 byte wide display is being used (this would be for the SSD130x).
 
-The bytes "78 00" means that we are going to send configuration commands and they are all that follow.   
-The bytes "78 40" means that we are going to paint on the screen, in this case there are 128 bytes in a row.   
+The bytes "78 00 ..." means that we are going to send configuration commands and they are all that follow.   
+The bytes "78 40 ..." means that we are going to paint on the screen, in this case there are 128 bytes in a row.   
  
 The initial configuration is common for both types of screens and is configured with paging. What indicates that we are using one screen or another is only that final byte. (00 or 02).
 

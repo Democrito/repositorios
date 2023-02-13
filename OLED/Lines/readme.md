@@ -32,31 +32,33 @@ The "RES" (reset) pin should be brought to logic 1 (3.3V or 5V); if you set it t
 
 **Pin assignment:**
 
-GND---VDD---SCK---SDA---RES---DC---CS
+| GND | VDD | SCK | SDA | RES | DC | CS |
 
-GND: 0V   
-VDD: 3.3V or 5V (I have an SSD display that only works if I feed it with 5V)   
-SCK: Clock   
-SDA: Data out (MOSI)   
-RES: Reset (reverse logic)   
-DC: Data / Command   
-CS: Chip Select (reverse logic)   
+* GND: 0V   
+* VDD: 3.3V or 5V (I have an SSDxxxx SPI display that only works with 5V)   
+* SCK: Clock   
+* SDA: Data out (MOSI)   
+* RES: Reset (reverse logic)   
+* DC: Data / Command   
+* CS: Chip Select (reverse logic)   
    
 **The rest of the pins are common to both modules and work as follows:**
 
 This circuit works by paging. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens (by paging). The Adafruit libraries also work like this to maintain compatibility between the two displays.
 
+![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/Pages%20OLED.PNG)
+
 Paging consists of sending 128 bytes in a row, but indicating the page number on which you want to do it. The screen has 8 pages (it's actually 8 bit vertical x 128). The circuit sends a command telling it which page it wants to write to and then "paints" the 128 bytes, then tells it that it wants to paint the next page, and paints those 128 bytes, like this 8 times.
 
- 78 00    B0 10  02           <-- command for switching to page 0 (B0) of the buffer.   
+ 78 00    B0 10  02           <-- command for switching to page 0 (B0).   
  78 40    ..... Paint 128 bytes.   
     
- 78 00    B1 10  02           <-- command for switching to page 1 (B1) of the buffer.   
+ 78 00    B1 10  02           <-- command for switching to page 1 (B1).   
  78 40    ..... Paint 128 bytes.   
     
  ..... idem for pages 3,4,5,6   
     
- 78 00    B7 10  02            <-- command for switching to page 7 (B7) of the buffer.   
+ 78 00    B7 10  02            <-- command for switching to page 7 (B7).   
  78 40    ..... Paint 128 bytes.   
     
 This example would be for the SH1106. To use the SSD130x, the last byte of the configuration command that indicates the page, instead of "'02" would be changed to "00". "02" means a 132 byte wide display is being used (this would be for the SH1106), and a "00" means a 128 byte wide display is being used (this would be for the SSD130x).
@@ -110,7 +112,3 @@ Now look at this other image:
 Only two points are visible correctly and the other two are scattered. This means that in the choice of the pin "choose" is the other way around. If that pin is at '1', you should set it to '0', and if it's at '0', you should set it to '1'. That's it and once you upload the circuit back to the FPGA everything will appear fine.
 
 And from all this we deduce what type of screen we are handling, if an SSDxxxx or a SH1106.
-
-
-
-

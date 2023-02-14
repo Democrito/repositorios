@@ -81,7 +81,7 @@ This is the important part to know how to handle these modules. With external el
 
 1.) To draw a line, we put the coordinate data (x0,y0), (x1,y1) and give it a tick on the "startln" pin and wait for a tick on the "nextln" pin . If you want to draw more lines, repeat the same thing again. At this point, the lines are "painted" (calculated) into memory, nothing is sent to the screen.
 
-At this point what happens is that doing tick "startln" starts a Bresenham algorithm. Then each computed pixel is translated (it's another computation) to a 128x64 bitmap, and recorded pixel by pixel and at the same time in memory. When this algorithm finishes writing the line into memory, it produces a tick on the "nextln" output. You can put in memory as many lines as you want. In this section we only act on the memory. Remember that for each "startln" tick you must wait for a "nextln" tick to write another line in memory. You must also wait for a "nextln" tick before doing a print.
+At this point what happens is that doing tick "startln" starts a Bresenham algorithm. Then each computed pixel is translated (it's another computation) to a 128x64 bitmap, and recorded pixel by pixel and at the same time in memory. When this algorithm finishes writing the line into memory, it produces a tick on the "nextln" output. You can put in memory as many lines as you want. In this section we only act on the memory. Remember that for each "startln" tick you must wait for a "nextln" tick to write another line in memory. You must also wait for a "nextln" tick before doing a tick to the "print" pin.
 
 2.) When you want to see the drawing on the screen, give the "print" pin a tick. At this point the entire content of the memory is sent to the screen. Wait for a "done" tick to return to point 1.
 
@@ -89,8 +89,6 @@ At this point what happens is that doing tick "startln" starts a Bresenham algor
 Point 1 writes to memory and point 2 reads from memory, and those read data are sent to an SPI or I2C bus.
 
 When going from point 2 to point 1, the memory is "cleared". Actually, at this point, what happens is that the wallpaper gets loaded and destroys everything that was in memory before.
-
-It is very easy to handle and has no mystery.
 
 To start familiarizing yourself with the circuit, [**go here**](https://github.com/Democrito/repositorios/tree/master/OLED/Lines/Simple_examples), it's the simplest example out there.
 

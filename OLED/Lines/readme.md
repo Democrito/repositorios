@@ -75,7 +75,9 @@ The initial configuration is common for both types of screens and is configured 
 ## Differences in sending data, depending on whether it is I2C or 4-wire SPI.
 
 When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.
-The address in SPI is always fixed, and to know if we are sending data or commands it is done through the DC pin. This makes it work a little faster by avoiding the address and command bytes. It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz.
+The address in SPI is always fixed, and to know if we are sending data or commands it is done through the DC pin. When we set the DC pin to '0', it means that we are going to send commands to it. And when we put that pin to '1', it means we're going to paint on the screen.
+
+This makes it work a little faster by avoiding the address and command bytes. It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz, and I think it has a 60 Hz screen refresh, but I'm not sure about this last data.
 
 ## How to memorize lines and paint on the screen.
 
@@ -86,7 +88,7 @@ This is the important part to know how to handle these modules. With external el
 
 1.) To draw a line, we put the coordinate data (x0,y0), (x1,y1) and give it a tick on the "startln" pin and wait for a tick on the "nextln" pin . If you want to draw more lines, repeat the same thing again. At this point, the lines are "painted" (calculated) into memory, nothing is sent to the screen.
 
-At this point what happens is that doing tick "startln" starts a Bresenham algorithm. Then each computed pixel is translated (it's another computation) to a 128x64 bitmap, and recorded pixel by pixel and at the same time in memory. When this algorithm finishes writing the line into memory, it produces a tick on the "nextln" output. You can put in memory as many lines as you want. In this section we only act on the memory. Remember that for each "startln" tick you must wait for a "nextln" tick to write another line in memory. You must also wait for a "nextln" tick before doing a tick to the "print" pin.
+At this point what happens is that doing tick "startln" starts a Bresenham algorithm. Then each computed pixel is translated (it's another computation) to a 128x64 bitmap, and recorded pixel by pixel at the memory. When this algorithm finishes writing the line into memory, it produces a tick on the "nextln" output. You can put in memory as many lines as you want. In this section we only act on the memory. Remember that for each "startln" tick you must wait for a "nextln" tick to write another line in memory. You must also wait for a "nextln" tick before doing a tick to the "print" pin.
 
 2.) When you want to see the drawing on the screen, give the "print" pin a tick. At this point the entire content of the memory is sent to the screen. Wait for a "done" tick to return to point 1.
 

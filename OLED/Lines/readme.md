@@ -128,7 +128,7 @@ After that time we can start sending the initial configuration data to the scree
 
 **The configuration that I am using is this, and remember that it is by pagination:**
 
-(Initially I extracted this data from the configuration that uses an Arduino with the [dafruit library](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) connected to an OLED SH1106)
+(Initially I extracted this data from the configuration that uses an Arduino with the [Adafruit library](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) connected to an OLED SH1106)
 
 AE // Turn off the screen   
 D5 // Oscillator speed   

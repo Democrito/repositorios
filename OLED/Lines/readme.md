@@ -44,7 +44,7 @@ The "RES" (reset) pin should be brought to logic 1 (3.3V or 5V); if you set it t
    
 **The rest of the pins are common to both modules and work as follows:**
 
-This circuit works by paging. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens (by paging). The Adafruit libraries also work like this to maintain compatibility between the two displays.
+This circuit works by paging. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens (by paging). The [Adafruit libraries](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) also work like this to maintain compatibility between the two displays.
 
 ![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/Pages%20OLED.PNG)
 
@@ -75,9 +75,11 @@ The initial configuration is common for both types of screens and is configured 
 ## Differences in sending data, depending on whether it is I2C or 4-wire SPI.
 
 When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.
-The address in SPI is always fixed, and to know if we are sending data or commands it is done through the DC pin. When we set the DC pin to '0', it means that we are going to send commands to it. And when we put that pin to '1', it means we're going to paint on the screen.
+In 4-wire SPI there is no address byte (does not exist), and to know if we are sending data or commands it is done through the DC pin. When we set the DC pin to '0', it means that we are going to send commands to it. And when we put that pin to '1', it means we're going to paint on the screen.
 
-This makes it work a little faster by avoiding the address and command bytes. It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz, and I think it has a 60 Hz screen refresh, but I'm not sure about this last data.
+This makes it work a bit faster by avoiding sending the address byte or specifying with a byte that what comes after are commands.
+
+It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz, and I think it has a 60 Hz screen refresh, but I'm not sure about this last data.
 
 ## How to memorize lines and paint on the screen.
 
@@ -112,19 +114,21 @@ Now look at this other image:
 
 ![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/bad.PNG)
 
-Only two points are visible correctly and the other two are scattered. This means that in the choice of the pin "choose" is the other way around. If that pin is at '1', you should set it to '0', and if it's at '0', you should set it to '1'. That's it and once you upload the circuit back to the FPGA everything will appear fine.
+Only two dots are visible correctly and are shifted one pixel to the right or down depending on the position the screen is in (horizontal/vertical), and the other two are scattered.
+
+This means that in the choice of the pin "choose" is the other way around. If that pin is at '1', you should set it to '0', and if it's at '0', you should set it to '1'. That's it and once you upload the circuit back to the FPGA everything will appear fine.
 
 And from all this we deduce what type of screen we are handling, if an SSDxxxx or a SH1106.
 
 ## Initial configuration (by pagination) :
 
-OLED screens take a while to boot up when turned on or after a reboot, but I don't know how long that is. I know it is very fast, but just in case I have put a time of 500 ms.
+OLED screens take a while to boot up when turned on or after a reboot, but I don't know how long that is. I know it's very fast, but just in case I put a 500ms timeout before sending it the initial setup commands.
 
-After that time we can start sending the initial configuration data to the screen. For example, telling it what type of display we're going to use, how bright the pixels should be, whether we want to use paging or 1024-byte batch processing, etc.
+After that time we can start sending the initial configuration data to the screen. For example, telling it what type of display we're going to use, how bright the pixels should be, whether we want to use paging or send 1024 bytes at a time, etc.
 
 **The configuration that I am using is this, and remember that it is by pagination:**
 
-(Initially I extracted this data from the configuration that uses an Arduino with the Adafruit library connected to an OLED SH1106)
+(Initially I extracted this data from the configuration that uses an Arduino with the [dafruit library](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) connected to an OLED SH1106)
 
 AE // Turn off the screen   
 D5 // Oscillator speed   

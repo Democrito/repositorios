@@ -72,6 +72,11 @@ The bytes "78 40 ..." means that we are going to paint on the screen, in this ca
  
 The initial configuration is common for both types of screens and is configured with paging. What indicates that we are using one screen or another is only that final byte. (00 or 02).
 
+## Differences in sending data, depending on whether it is I2C or 4-wire SPI.
+
+When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.
+The address in SPI is always fixed, and to know if we are sending data or commands it is done through the DC pin. This makes it work a little faster by avoiding the address and command bytes. It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz.
+
 ## How to memorize lines and paint on the screen.
 
 The operation is common to both modules, that is, it works the same with the SPI module as with the I2C module.
@@ -85,17 +90,11 @@ At this point what happens is that doing tick "startln" starts a Bresenham algor
 
 2.) When you want to see the drawing on the screen, give the "print" pin a tick. At this point the entire content of the memory is sent to the screen. Wait for a "done" tick to return to point 1.
 
-
 Point 1 writes to memory and point 2 reads from memory, and those read data are sent to an SPI or I2C bus.
 
 When going from point 2 to point 1, the memory is "cleared". Actually, at this point, what happens is that the wallpaper gets loaded and destroys everything that was in memory before.
 
 To start familiarizing yourself with the circuit, [**go here**](https://github.com/Democrito/repositorios/tree/master/OLED/Lines/Simple_examples), it's the simplest example out there.
-
-## Differences in sending data, depending on whether it is I2C or 4-wire SPI.
-
-When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.
-The address in SPI is always fixed, and to know if we are sending data or commands it is done through the DC pin. This makes it work a little faster by avoiding the address and command bytes. It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz.
 
 ## Test of the 4 points in the corners.
 

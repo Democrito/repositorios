@@ -165,7 +165,7 @@ In [**this section**](https://github.com/Democrito/repositorios/tree/master/OLED
 
 ## Acknowledgment:
 
-To @joaquim for his help in the mathematical calculations and corrections in these aspects, contribution of ideas and very well achieved wallpapers. He is always there lending his shoulder to improve and contribute to the projects. I send you a big hug from here!
+To [@joaquim](https://github.com/jojo535275) for his help in the mathematical calculations and corrections in these aspects, contribution of ideas and very well achieved wallpapers. He is always there lending his shoulder to improve and contribute to the projects. I send you a big hug from here!
 
 ## Log:
 

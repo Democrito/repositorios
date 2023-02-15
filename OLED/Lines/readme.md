@@ -86,7 +86,7 @@ It must be remembered that in our case we are working at a frequency of 3 MHz. S
 The operation is common to both modules, that is, it works the same with the SPI module as with the I2C module.
 This is the important part to know how to handle these modules. With external electronics we will tell you where to paint one or more lines.
 
-![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/Schem.PNG)
+![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/Scheme.png)
 
 1.) To draw a line, we put the coordinate data (x0,y0), (x1,y1) and give it a tick on the "startln" pin and wait for a tick on the "nextln" pin . If you want to draw more lines, repeat the same thing again. At this point, the lines are "painted" (calculated) into memory, nothing is sent to the screen.
 

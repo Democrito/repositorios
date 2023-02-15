@@ -8,7 +8,7 @@ We are going to do three processes. The first is to create or load a drawing of 
 
 # Creating a BMP image.
 
-*I'm going to explain it my way, if something confuses you (because I use images in Spanish), for this section [**go here**](https://exploreembedded.com/wiki/Displaying_Images_and_Icons_on_GLCD), and once you finish that part, skip to the last section [**here**](https://github.com/Democrito/repositorios/edit/master/OLED/128x64%20bitmap%20creation/readme.md#notepad).*
+*I'm going to explain it my way, if something confuses you (because I use images in Spanish), for this section [**go here**](https://exploreembedded.com/wiki/Displaying_Images_and_Icons_on_GLCD), and once you finish that part, skip to the last section [**here**](https://github.com/Democrito/repositorios/tree/master/OLED/128x64%20bitmap%20creation#notepad).*
 
 In Windows you open the Paint that comes by default. You give to change size:
 

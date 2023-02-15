@@ -158,3 +158,15 @@ AF // Turn on screen.
 00 // ?  
 10 // ?  
 40 // ?  
+
+## BMP:
+
+In [**this section**](https://github.com/Democrito/repositorios/tree/master/OLED/128x64%20bitmap%20creation) I explain how to create a wallpaper or drawing and transfer it to a memory box for Icestudio.
+
+## Acknowledgment:
+
+To @joaquim for his help in the mathematical calculations and corrections in these aspects, contribution of ideas and very well achieved wallpapers. He is always there lending his shoulder to improve and contribute to the projects. I send you a big hug from here!
+
+## Log:
+
+If you want to see the whole process, click on [**this link**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo). It is very extensive, but it reflects the work, doubts, corrections, etc., up to here.

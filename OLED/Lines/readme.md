@@ -81,6 +81,14 @@ This makes it work a bit faster by avoiding sending the address byte or specifyi
 
 It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz, and I think it has a 60 Hz screen refresh, but I'm not sure about this last data.
 
+## 4-wire to 3-wire SPI conversion.
+
+The 4-wire SPI of the OLED displays that we are using here is a particular case of SPI, because we always write to it, either to configure or to paint, but we never read data from the screen.
+
+![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/SPI%204%20wires%20to%203%20wires.png)
+
+The 4-wire SPI, having the DC pin to tell the OLED if we send commands or data to paint, the CS pin is not necessary if we are only going to use a screen. If so (and it is usually the usual) we can omit the CS pin and take it to ground (always selected, inverse logic). In this way, instead of using 4 cables, we use only 3 and the power ones.
+
 ## How to memorize lines and paint on the screen.
 
 The operation is common to both modules, that is, it works the same with the SPI module as with the I2C module.

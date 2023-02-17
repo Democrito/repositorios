@@ -177,4 +177,4 @@ To [@joaquim](https://github.com/jojo535275) for his help in the mathematical ca
 
 ## Log:
 
-If you want to see the whole process, click on [**this link**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo). It is very extensive, but it reflects the work, doubts, corrections, etc., up to here.
+If you want to see the whole process, click on [**this link**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo). It is very extensive, but it reflects the work, doubts, corrections, etc., until to get here.

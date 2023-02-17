@@ -89,7 +89,7 @@ The 4-wire SPI of the OLED displays that we are using here is a particular case 
 
 The 4-wire SPI, having the DC pin to tell the OLED if we send commands or data to paint, the CS pin is not necessary if we are only going to use a screen. If so (and it is usually the usual) we can omit the CS pin and take it to ground (always selected, inverse logic). In this way, instead of using 4 cables, we use only 3 and the power ones.
 
-The problem with using only three threads (eliminating CS) is that when making any change the image doesn't work out, it will do weird things. This is resolved by turning the FPGA and OLED off (turning the power off) and back on again. My advice is to always use 4 threads (CS included) and once your project is done and there are no changes, then put CS in bulk, and now yes, you can use only 3 threads.
+The problem with using only three threads (eliminating CS) is that when making any change the image doesn't work out, it will do weird things. This is resolved by turning the FPGA and OLED off (turning the power off) and back on again. My advice is to always use 4 threads (CS included) and once your project is done and there are no changes, then put CS to ground, and now yes, you can use only 3 threads.
 
 ## How to memorize lines and paint on the screen.
 

@@ -85,7 +85,7 @@ It must be remembered that in our case we are working at a frequency of 3 MHz. S
 
 The 4-wire SPI of the OLED displays that we are using here is a particular case of SPI, because we always write to it, either to configure or to paint, but we never read data from the screen.
 
-![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/SPI%204%20wires%20to%203%20wires.png)
+![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/4%20wires%20to%203%20wires%20SPI.png)
 
 The 4-wire SPI, having the DC pin to tell the OLED if we send commands or data to paint, the CS pin is not necessary if we are only going to use a screen. If so (and it is usually the usual) we can omit the CS pin and take it to ground (always selected, inverse logic). In this way, instead of using 4 cables, we use only 3 and the power ones.
 

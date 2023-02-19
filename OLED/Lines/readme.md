@@ -6,17 +6,19 @@
 
 This folder contains examples for drawing one or more lines with a wallpaper (skin). You will see that within the subfolders they are divided into two protocols: SPI and I2C, and both folders contain the same examples.
 
-The "2D_rotations" folder contains examples for SPI and I2C where geometric figures and lines are rotated.
+The "**Needle_Indicator**" folder contains examples for drawing a single line to use as a needle indicator (SPI & I2C). All the examples incorporate a wallpaper, which allows you to give a lot of play to a simple project. In this project you can see the potential that both combinations (a needle and a wallpaper) can give.
+
+The "**2D_rotations**" folder contains examples for SPI and I2C where geometric figures and lines are rotated.
 
 If you look at the image above you will see that the two modules (I2C and SPI) have a very similar pinout, just change the appropriate pins for the protocol they are designed on.
 
-## Power supply for OLED screens.
+## Power supply for OLED screens
 
 I have many OLED screens and not all of them agree on the supply voltage. Some need to be powered with 3.3V exclusively, others need 5V exclusively, and others can be powered with both voltages.
 
 If you don't know what voltage your screen needs, start with 3.3V, if it works you already have it, but if it doesn't turn on or does strange things then feed it with 5V.
 
-## Pinout.
+## Pinout
 
 **Pin "choose":** This pin allows us to choose what type of screen we want to use. If we put a '1' on that pin, we will be telling it that we are going to use a SH1106 screen; and if we put a '0' on that same pin, we are telling it that we are going to use an SSD130x screen.
 
@@ -28,7 +30,7 @@ If you don't know what voltage your screen needs, start with 3.3V, if it works y
 
 The SPI module does not have the "Hz" pin because it operates at a fixed frequency of 3 MHz.
 
-### Pins according to the protocol.
+### Pins according to the protocol:
 
 The main **I2C module** only has 2 pins which are SDA (serial data) and SCL (clock). The I2C outputs do not need pull-up resistors, at no time does it enter a floating state because the I2C it carries is write-only, that is, it never reads.
 
@@ -48,9 +50,11 @@ The "RES" (reset) pin should be brought to logic 1 (3.3V or 5V); if you set it t
 * DC: Data / Command   
 * CS: Chip Select (reverse logic)   
    
-**The rest of the pins are common to both modules and work as follows:**
+The rest of the pins (startln, nextln, print and done) are common to both modules and it is [explained later](https://github.com/Democrito/repositorios/tree/master/OLED/Lines#how-to-memorize-lines-and-paint-on-the-screen).
 
-This circuit works by paging. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens (by paging). The [Adafruit libraries](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) also work like this to maintain compatibility between the two displays.
+## Pagination and screen type (SH vs SSD)
+
+This circuit works by pagination. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens (by paging). The [Adafruit libraries](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) also work like this to maintain compatibility between the two displays.
 
 ![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/Pages%20OLED.PNG)
 
@@ -78,7 +82,7 @@ The bytes "78 40 ..." means that we are going to paint on the screen, in this ca
  
 The initial configuration is common for both types of screens and is configured with paging. What indicates that we are using one screen or another is only that final byte. (00 or 02).
 
-## Differences in sending data, depending on whether it is I2C or 4-wire SPI.
+## Differences in sending data, depending on whether it is I2C or 4-wire SPI
 
 When we send data via I2C, it is always headed by the address byte and then by one or more commands. However, the 4-wire SPI does not issue addresses or command bytes.
 In 4-wire SPI there is no address byte (does not exist), and to know if we are sending data or commands it is done through the DC pin. When we set the DC pin to '0', it means that we are going to send commands to it. And when we put that pin to '1', it means we're going to paint on the screen.
@@ -87,7 +91,7 @@ This makes it work a bit faster by avoiding sending the address byte or specifyi
 
 It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz, and I think it has a 60 Hz screen refresh, but I'm not sure about this last data.
 
-## 4-wire to 3-wire SPI conversion.
+## 4-wire to 3-wire SPI conversion
 
 The 4-wire SPI of the OLED displays that we are using here is a particular case of SPI, because we always write to it, either to configure or to paint, but we never read data from the screen.
 
@@ -97,7 +101,7 @@ The 4-wire SPI, having the DC pin to tell the OLED if we send commands or data t
 
 The problem with using only three threads (eliminating CS) is that when making any change the image doesn't work out, it will do weird things. This is resolved by turning the FPGA and OLED off (turning the power off) and back on again. My advice is to always use 4 threads (CS included) and once your project is done and there are no changes, then put CS to ground, and now yes, you can use only 3 threads.
 
-## How to memorize lines and paint on the screen.
+## How to memorize lines and paint on the screen
 
 The operation is common to both modules, that is, it works the same with the SPI module as with the I2C module.
 This is the important part to know how to handle these modules. With external electronics we will tell you where to paint one or more lines.
@@ -116,7 +120,7 @@ When going from point 2 to point 1, the memory is "cleared". Actually, at this p
 
 To start familiarizing yourself with the circuit, [**go here**](https://github.com/Democrito/repositorios/tree/master/OLED/Lines/Simple_examples), it's the simplest example out there.
 
-## Test of the 4 points in the corners.
+## Test of the 4 points in the corners
 
 Many times it happens that we don't know if our screen is SSDxxxx or SH1106, rarely does the manufacturer specify it on the silkscreen. In all the examples you'll find in this project (with a few exceptions) I put a single pixel in each corner of the screen. This will help us to know if our screen is SSDxxxx or SH1106.
 
@@ -136,7 +140,7 @@ This means that in the choice of the pin "choose" is the other way around. If th
 
 And from all this we deduce what type of screen we are handling, if an SSDxxxx or a SH1106.
 
-## Initial configuration (by pagination).
+## Initial configuration (by pagination)
 
 OLED screens take a while to boot up when turned on or after a reboot, but I don't know how long that is. I know it's very fast, but just in case I put a 500ms timeout before sending it the initial setup commands.
 
@@ -175,14 +179,14 @@ AF // Turn on screen.
 10 // ?  
 40 // ?  
 
-## BMP.
+## BMP
 
 In [**this section**](https://github.com/Democrito/repositorios/tree/master/OLED/128x64%20bitmap%20creation) I explain how to create a wallpaper or drawing and transfer it to a memory box for Icestudio.
 
-## Acknowledgment.
+## Acknowledgment
 
 To [**@joaquim**](https://github.com/jojo535275) for his help in the mathematical calculations and corrections in these aspects, contribution of ideas and very well achieved wallpapers. He is always there lending his shoulder to improve and contribute to the projects. I send you a big hug from here!
 
-## Log.
+## Log
 
 If you want to see the whole process, click on [**this link**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo). It is very extensive, but it reflects the work, doubts, corrections, etc., until to get here.

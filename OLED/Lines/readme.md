@@ -126,9 +126,7 @@ At this point what happens is that doing tick "startln" starts a Bresenham algor
 
 Point 1 writes to memory and point 2 reads from memory, and those read data are sent to an SPI or I2C bus.
 
-When going from point 2 to point 1, the memory is "cleared". Actually, at this point, what happens is that the wallpaper gets loaded and destroys everything that was in memory before.
-
-To start familiarizing yourself with the circuit, [**go here**](https://github.com/Democrito/repositorios/tree/master/OLED/Lines/Simple_examples), it's the simplest example out there.
+When going from point 2 to point 1, the memory is "cleared". Actually, at this point, what happens is that the wallpaper gets loaded and destroys everything that was in memory before. This is so because just before creating the first line the wallpaper is loaded.
 
 ## Test of the 4 points in the corners
 

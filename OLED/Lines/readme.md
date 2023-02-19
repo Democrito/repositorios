@@ -30,23 +30,31 @@ If you don't know what voltage your screen needs, start with 3.3V, if it works y
 
 The SPI module does not have the "Hz" pin because it operates at a fixed frequency of 3 MHz.
 
-### Pins according to the protocol:
+## Pins according to the protocol
 
-The main **I2C module** only has 2 pins which are SDA (serial data) and SCL (clock). The I2C outputs do not need pull-up resistors, at no time does it enter a floating state because the I2C it carries is write-only, that is, it never reads.
+*OLED display power pins may be reversed, they are not always in this order.*
 
-The main **SPI module** is 4-wire:
+**I2C:**
 
-The "RES" (reset) pin should be brought to logic 1 (3.3V or 5V); if you set it to 0 then it will reboot.
+| GND | VDD | SCL | SDA | RES |
 
-**Pin assignment:**
+* GND: 0V   
+* VDD: 3.3V or 5V (It starts with 3.3V and if it doesn't turn on put 5V on it.)
+* SCL: Serial clock   
+* SDA: Serial data  
+* RES: Reset. The most common is that it does not have this pin, but there are some that do.
+
+The main **I2C module** only has 2 pins which are SDA (serial data) and SCL (serial clock). The I2C outputs do not need pull-up resistors, at no time does it go into a floating state.
+
+**SPI:**
 
 | GND | VDD | SCK | SDA | RES | DC | CS |
 
 * GND: 0V   
-* VDD: 3.3V or 5V (I have an SSDxxxx SPI display that only works with 5V)   
+* VDD: 3.3V or 5V (It starts with 3.3V and if it doesn't turn on put 5V on it.)
 * SCK: Clock   
 * SDA: Data out (MOSI)   
-* RES: Reset (reverse logic)   
+* RES: Reset pin should be brought to logic 1 (3.3V or 5V); if you set it to 0 then it will reboot (reverse logic)  
 * DC: Data / Command   
 * CS: Chip Select (reverse logic)   
    
@@ -54,13 +62,15 @@ The rest of the pins (startln, nextln, print and done) are common to both module
 
 ## Pagination and screen type (SH vs SSD)
 
-This circuit works by pagination. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens (by paging). The [Adafruit libraries](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) also work like this to maintain compatibility between the two displays.
+My layout always works by pagination. The SH1106 always works by paging, and the SSD130x allows you to page or send 1024 bytes in a row. The configuration in this case is common to both screens: by pagination. The [Adafruit libraries](https://learn.adafruit.com/monochrome-oled-breakouts/arduino-library-and-examples) also work like this to maintain compatibility between the two displays.
 
 ![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/Pages%20OLED.PNG)
 
-Paging consists of sending 128 bytes in a row, but indicating the page number on which you want to do it. The screen has 8 pages (it's actually 8 bit vertical x 128). The circuit sends a command telling it which page it wants to write to and then "paints" the 128 bytes, then tells it that it wants to paint the next page, and paints those 128 bytes, like this 8 times.
+Paging consists of sending 128 bytes in a row, but indicating the page number in which you want to do it. The screen has 8 pages. The circuit sends a command telling it which page it wants to write to and then "paints" the 128 bytes (one page), then tells it that it wants to paint the next page and paints those 128 bytes, like this 8 times.
 
 For example, for I2C it would be like this:
+
+(The SPI OLEDs, in this case, do not send addresses or commands, that is, there would be no "78 00" or "78 40")
 
  78 00    B0 10  02           <-- command for switching to page 0 (B0).   
  78 40    ..... Paint 128 bytes.   
@@ -75,7 +85,7 @@ For example, for I2C it would be like this:
  
 ![](https://github.com/Democrito/repositorios/blob/master/OLED/Lines/img/command%20page%20and%20type%20screen.PNG)
     
-This example would be for the SH1106. To use the SSD130x, the last byte of the configuration command that indicates the page, instead of "'02" would be changed to "00". "02" means a 132 byte wide display is being used (this would be for the SH1106), and a "00" means a 128 byte wide display is being used (this would be for the SSD130x).
+This example would be for the SH1106. To use the SSD130x, the last byte of the configuration command indicating the page, instead of "02" would be changed to "00". "02" means you are using a 132-byte wide display (this would be for the SH1106) and it set to 128, adding two empty bytes (pixels) to the beginning and two to the end of the display. "00" means no width adjustment.
 
 The bytes "78 00 ..." means that we are going to send configuration commands and they are all that follow.   
 The bytes "78 40 ..." means that we are going to paint on the screen, in this case there are 128 bytes in a row.   

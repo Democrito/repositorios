@@ -189,7 +189,7 @@ AF // Turn on screen.
 10 // ?  
 40 // ?  
 
-## BMP
+## Bitmap
 
 In [**this section**](https://github.com/Democrito/repositorios/tree/master/OLED/128x64%20bitmap%20creation) I explain how to create a wallpaper or drawing and transfer it to a memory box for Icestudio.
 

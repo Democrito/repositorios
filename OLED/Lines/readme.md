@@ -10,6 +10,12 @@ The "2D_rotations" folder contains examples for SPI and I2C where geometric figu
 
 If you look at the image above you will see that the two modules (I2C and SPI) have a very similar pinout, just change the appropriate pins for the protocol they are designed on.
 
+## Power supply for OLED screens:
+
+I have many OLED screens and not all of them agree on the supply voltage. Some need to be powered with 3.3V exclusively, others need 5V exclusively, and others can be powered with both voltages.
+
+If you don't know what voltage your screen needs, start with 3.3V, if it works you already have it, but if it doesn't turn on or does strange things then feed it with 5V.
+
 ## Pinout
 
 **Pin "choose":** This pin allows us to choose what type of screen we want to use. If we put a '1' on that pin, we will be telling it that we are going to use a SH1106 screen; and if we put a '0' on that same pin, we are telling it that we are going to use an SSD130x screen.

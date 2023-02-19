@@ -10,13 +10,13 @@ The "2D_rotations" folder contains examples for SPI and I2C where geometric figu
 
 If you look at the image above you will see that the two modules (I2C and SPI) have a very similar pinout, just change the appropriate pins for the protocol they are designed on.
 
-## Power supply for OLED screens:
+## Power supply for OLED screens.
 
 I have many OLED screens and not all of them agree on the supply voltage. Some need to be powered with 3.3V exclusively, others need 5V exclusively, and others can be powered with both voltages.
 
 If you don't know what voltage your screen needs, start with 3.3V, if it works you already have it, but if it doesn't turn on or does strange things then feed it with 5V.
 
-## Pinout
+## Pinout.
 
 **Pin "choose":** This pin allows us to choose what type of screen we want to use. If we put a '1' on that pin, we will be telling it that we are going to use a SH1106 screen; and if we put a '0' on that same pin, we are telling it that we are going to use an SSD130x screen.
 
@@ -28,7 +28,7 @@ If you don't know what voltage your screen needs, start with 3.3V, if it works y
 
 The SPI module does not have the "Hz" pin because it operates at a fixed frequency of 3 MHz.
 
-### Pins according to the protocol:
+### Pins according to the protocol.
 
 The main **I2C module** only has 2 pins which are SDA (serial data) and SCL (clock). The I2C outputs do not need pull-up resistors, at no time does it enter a floating state because the I2C it carries is write-only, that is, it never reads.
 
@@ -136,7 +136,7 @@ This means that in the choice of the pin "choose" is the other way around. If th
 
 And from all this we deduce what type of screen we are handling, if an SSDxxxx or a SH1106.
 
-## Initial configuration (by pagination) :
+## Initial configuration (by pagination).
 
 OLED screens take a while to boot up when turned on or after a reboot, but I don't know how long that is. I know it's very fast, but just in case I put a 500ms timeout before sending it the initial setup commands.
 
@@ -175,14 +175,14 @@ AF // Turn on screen.
 10 // ?  
 40 // ?  
 
-## BMP:
+## BMP.
 
 In [**this section**](https://github.com/Democrito/repositorios/tree/master/OLED/128x64%20bitmap%20creation) I explain how to create a wallpaper or drawing and transfer it to a memory box for Icestudio.
 
-## Acknowledgment:
+## Acknowledgment.
 
 To [**@joaquim**](https://github.com/jojo535275) for his help in the mathematical calculations and corrections in these aspects, contribution of ideas and very well achieved wallpapers. He is always there lending his shoulder to improve and contribute to the projects. I send you a big hug from here!
 
-## Log:
+## Log.
 
 If you want to see the whole process, click on [**this link**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/FN34KJtfhSo). It is very extensive, but it reflects the work, doubts, corrections, etc., until to get here.

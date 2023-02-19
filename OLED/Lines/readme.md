@@ -99,7 +99,7 @@ In 4-wire SPI there is no address byte (does not exist), and to know if we are s
 
 This makes it work a bit faster by avoiding sending the address byte or specifying with a byte that what comes after are commands.
 
-It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz, and I think it has a 60 Hz screen refresh, but I'm not sure about this last data.
+It must be remembered that in our case we are working at a frequency of 3 MHz. SPI screens have a maximum operating speed of 10 MHz, and I think it has a 60 Hz screen refresh, but I'm not sure about this last data; the refresh rate is configurable. Further down this page there is an initial configuration, there is a command that takes care of this function, but I have never tried it.
 
 ## 4-wire to 3-wire SPI conversion
 

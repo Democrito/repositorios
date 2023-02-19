@@ -1,1 +1,1 @@
-Examples of needle indicators.
+Examples of needle indicators for I2C and SPI OLEDs.

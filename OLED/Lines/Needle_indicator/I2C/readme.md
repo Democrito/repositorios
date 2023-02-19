@@ -1,1 +1,3 @@
+The "" and "" files are identical, only the wallpaper changes. As their names indicate, each one is fixed in that role. The ADC that comes in the Alhambras II FPGA is used to simulate speed or voltage.
 
+If your FPGA is not an Alhambra II, you can use the "" example where you will see a needle move from start to finish and then back again, like this indefinitely. Inside this circuit there are two wallpapers, try both.

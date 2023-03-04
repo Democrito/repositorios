@@ -10,7 +10,7 @@ The "**Needle_Indicator**" folder contains examples for drawing a single line to
 
 The "**2D_rotations**" folder contains examples for SPI and I2C where geometric figures and lines are rotated.
 
-In the example circuits, the folders "**Needle_Indicator**" and "**2D_rotations**" contain two boxes with precomputed values of sine and cosine multiplied by the constant 63. For "**Needle_Indicator**" those values go through 180º and for "**2D_rotations**" those values go through 360º. In the boxes there are only 128 possible values, that means that for 180º it has a resolution of approx. 1.4º. and for 360º it has a resolution of 2.8º.
+In the example circuits, the folders "**Needle_Indicator**" and "**2D_rotations**" contain two boxes with precomputed values of sine and cosine multiplied by the constant 63 for 180º or 31 for 360º. For "**Needle_Indicator**" those values go through 180º and for "**2D_rotations**" those values go through 360º. In the boxes there are only 128 possible values, that means that for 180º it has a resolution of approx. 1.4º. and for 360º it has a resolution of 2.8º.
 
 If you look at the image above you will see that the two modules (I2C and SPI) have a very similar pinout, just change the appropriate pins for the protocol they are designed on.
 

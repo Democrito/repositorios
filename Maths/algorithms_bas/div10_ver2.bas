@@ -1,6 +1,7 @@
-Dim As UInteger m, n, K     ' Is important that the variables are "UInteger" (Integer unsigned).
+Dim As UInteger m, n, K   ' Is important that the variables are "UInteger" (Integer unsigned).
 
-Input "div10 of: ", n
+Input "div10 of: ", n     ' The entered value must not be greater than the bit resolution.
+                          ' In this example we use 11 bits, so the entered value must not be greater than 2048 (2^11).
 
 K = 205                   ' 205 = round up 2048/10 is for 11 bits (2^11 = 2048)
 

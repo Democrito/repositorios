@@ -28,7 +28,7 @@ For i=0 To 14
       Xnew  = X + (Y Shr i)
       Ynew  = Y - (X Shr i)
       angle = angle - ATAN_Table(i)
-	EndIf
+EndIf
 	
    X = Xnew
    Y = Ynew 

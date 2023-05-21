@@ -14,24 +14,24 @@ dec256(desiredAngle)  ' You can replace this function with "Print desireAngle/25
 
 angle = 0
 Y     = 0
-X     = 155                        ' 256 * CORDIC gain (the gain approaches 0.6037)
+X     = 155           ' 256 * CORDIC gain (the gain approaches 0.6037)
 
 If (desiredAngle > ( 90*256)) Then angle = 180*256
 If (desiredAngle > (270*256)) Then angle = 360*256
 
 For i=0 To 14
 	If desiredAngle > angle Then   ' Rotate counter-clockwise
-      Xnew  = X - (Y Shr i)
-      Ynew  = Y + (X Shr i)
-      angle = angle + ATAN_Table(i)
-   Else                           ' Rotate clockwise      
-      Xnew  = X + (Y Shr i)
-      Ynew  = Y - (X Shr i)
-      angle = angle - ATAN_Table(i)
-EndIf
+		Xnew  = X - (Y Shr i)
+		Ynew  = Y + (X Shr i)
+		angle = angle + ATAN_Table(i)
+	Else                           ' Rotate clockwise      
+		Xnew  = X + (Y Shr i)
+		Ynew  = Y - (X Shr i)
+		angle = angle - ATAN_Table(i)
+	EndIf
 	
-   X = Xnew
-   Y = Ynew 
+	X = Xnew
+	Y = Ynew 
 Next
 
 If (desiredAngle > (90*256)) And (desiredAngle < (270*256)) Then

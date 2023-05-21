@@ -4,4 +4,4 @@ You will see three columns of numbers. The first column is the values for the X 
 
 Actually, the points X and Y are not to draw a circle or semicircle, but these points will help us to draw a line (the radius) from the center to the desired point, keeping the radius constant.
 
-On 128x64 pixel screens, to draw a great circle its center would be at point XY (63, 31). And to draw a maximum semicircle, its center would be at the point XY (63,63). These centers are the starting point for plotting the radius.
+On 128x64 pixel screens, to draw a maximum circle its center would be at point XY (63, 31). And to draw a maximum semicircle, its center would be at the point XY (63,63). These centers are the starting point for plotting the radius.

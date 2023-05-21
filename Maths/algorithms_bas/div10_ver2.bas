@@ -1,8 +1,8 @@
-Dim As UInteger m, q, n, K     ' Is important that the variables are "UInteger" (Integer unsigned).
+Dim As UInteger m, n, K     ' Is important that the variables are "UInteger" (Integer unsigned).
 
 Input "div10 of: ", n
 
-K = 205
+K = 205                   ' 205 = round up 2048/10 is for 11 bits (2^11 = 2048)
 
 m = (K * n) Shr 11        ' Shr = right shift (>>) "Shr 11" it is the same as dividing by 2048.
 

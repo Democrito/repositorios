@@ -19,7 +19,7 @@ auxdesir = desiredAngle
 desiredAngle *= 256                 ' desiredAngle = desiredAngle * 256
 angle        *= 256                 ' angle        = angle        * 256
 
-X = 155                             ' Gain * 256
+X = 155                             ' 256 * CORDIC gain (the gain approaches 0.6037)
 Y =   0
 
 For i = 0 To 14
@@ -55,7 +55,7 @@ dec256(cose) ' You can replace this function with "Print cose/256.0"
 
 Sleep ' stop, end.
 
-Sub dec256(ByVal given As Integer)
+Sub dec256(ByVal given As Integer) ' This translates the result to a fixed point Q1,8
 	dim As Integer temp
 	
 	If given < 0 Then

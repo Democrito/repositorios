@@ -50,7 +50,7 @@ dec256(cose)  ' You can replace this function with "Print cose/256.0"
 
 Sleep ' stop, end.
 
-Sub dec256(ByVal given As Integer) '  This translates the result to a fixed point.
+Sub dec256(ByVal given As Integer) ' This translates the result to a fixed point Q1,8
 	dim temp As Integer
 	
 	If given < 0 Then

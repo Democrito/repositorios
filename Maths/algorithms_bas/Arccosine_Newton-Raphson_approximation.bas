@@ -2,7 +2,7 @@ Dim As Double approx, erro, approx_prev, x, tolerance, pi
 
 pi = Atn(1)*4
 
- ' For example, cos(60) = 0.5, if you enter 0.5 the result will be 60บ
+ ' For example, cos(60) = 0.5, if you enter 0.5 the result will be 60ยบ
  Input "Enter the value to calculate the arccosine: ", x
 
 

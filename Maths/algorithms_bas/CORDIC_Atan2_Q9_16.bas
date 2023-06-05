@@ -54,6 +54,6 @@ For i = 0 To 17
    Y = Ynew
 Next
 
-Print "angle ="; angle/65536
+Print "angle ="; angle/65536.0
 
 Sleep ' stop, end.

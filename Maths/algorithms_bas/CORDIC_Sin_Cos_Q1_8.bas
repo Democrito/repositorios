@@ -14,7 +14,7 @@ dec256(desiredAngle)  ' You can replace this function with "Print desireAngle/25
 
 angle = 0
 Y     = 0
-X     = 155           ' 256 * CORDIC gain (the gain approaches 0.6037)
+X     = 155           ' 256 * CORDIC gain (the gain approaches 0.607252935)
 
 If (desiredAngle > ( 90*256)) Then angle = 180*256
 If (desiredAngle > (270*256)) Then angle = 360*256

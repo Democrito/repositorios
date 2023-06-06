@@ -19,7 +19,7 @@ auxdesir = desiredAngle
 desiredAngle *= 256                 ' desiredAngle = desiredAngle * 256
 angle        *= 256                 ' angle        = angle        * 256
 
-X = 155                             ' 256 * CORDIC gain (the gain approaches 0.6037)
+X = 155                             ' 256 * CORDIC gain (the gain approaches 0.607252935)
 Y =   0
 
 For i = 0 To 14

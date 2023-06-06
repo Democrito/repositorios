@@ -12,7 +12,7 @@ Se introduce primero la coordenada Y y después la X (esto es así porque en rea
 
 *Los signos de los ejes X e Y son los que dictan en qué parte del cuadrante se encuentra.*
 
-![](https://github.com/Democrito/repositorios/blob/master/Maths/trigonometric/atan2/IMG/atan2_serial.PNG)
+![](https://github.com/Democrito/repositorios/blob/master/Maths/trigonometric/atan2/IMG/Atan2_Serial.PNG)
 
 Recordemos que todos los algoritmos CORDIC son de aproximación. Tiene una resolución de tres decimales que en la gran mayoría de los casos es más que suficiente (imagina un sólo grado dividido en 1000 partes...). Los ángulos en este circuito nos da una resolución desde 0.00º hasta 359.998º. Los Atan2 convencionales dan el resultado de 0º hasta 180º, y de 0º hasta -179º, sin embargo he preferido la modalidad de 0º hasta 360º.
 

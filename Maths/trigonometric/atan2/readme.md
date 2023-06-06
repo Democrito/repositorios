@@ -6,7 +6,7 @@ Dado un punto (x,y) atan2 nos devolverá el ángulo, como puedes ver en la image
 
 Las entradas X e Y son de 16 bits con signo, esto significa que podremos introducir puntos con resolución desde -32768 hasta 32767. La salida del ángulo está en formato Q16.16. la salida tiene una resolución de 3 decimales, y el tercer decimal es una aproximación relativamente buena.
 
-![](https://github.com/Democrito/repositorios/blob/master/Maths/trigonometric/atan2/IMG/Example_Atan2_q9_8_CORDIC.PNG)
+![](Example_Atan2_q16_16_CORDIC.png)
 
 Se introduce primero la coordenada Y y después la X (esto es así porque en realidad es Y/X y a ese resultado se le hace el arco-tangente). En el terminal serie aparecerán datos como estos:
 

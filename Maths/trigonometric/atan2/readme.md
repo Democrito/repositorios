@@ -17,6 +17,7 @@ Se introduce primero la coordenada Y y después la X (esto es así porque en rea
 Recordemos que todos los algoritmos CORDIC son de aproximación. Tiene una resolución de tres decimales que en la gran mayoría de los casos es más que suficiente (imagina un sólo grado dividido en 1000 partes...). Los ángulos en este circuito nos da una resolución desde 0.00º hasta 359.998º. Los Atan2 convencionales dan el resultado de 0º hasta 180º, y de 0º hasta -179º, sin embargo he preferido la modalidad de 0º hasta 360º.
 
 Si subes el circuito que he puesto de ejemplo verás que ocupa muchos LUTs, pero esto es debido a los conversores que pasan de formato "humano" a máquina y vice-versa.
-***atan2_q9_8_CORDIC.ice*** Es el módulo para hacer el Atan2(y, x) de cualquier punto.
+
+***CORDIC_Atan2_Q16_16_module.ice*** Es el módulo para hacer el Atan2(y, x) de cualquier punto.
 
 ***Example_Serial_CORDIC_Atan2_Q16_16.ice*** Es un ejemplo para hacerlo funcionar a través del serial. Toma un terminal serie e introduces dos valores (con rango de 32767 hasta -32768) separados por enter, coma o espacio, y obtedrás el resultado.

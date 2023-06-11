@@ -29,11 +29,13 @@ Pongo una imagen de cada ejemplo y la explicación es común a ambos ya que func
 
 ![](https://github.com/Democrito/repositorios/blob/master/Maths/div_fix_point/images/example_serial_div_fix_point_q16_16.PNG)
 
-El funcionamiento y puesta en marcha es común en ambos ejemplos. A través de un terminal serie introducimos dos números separados por un espacio, "enter" o el símbolo que le corresponde a la división '/' y al pulsar "enter" o "igual" nos aparecerá el resultado. Para simplificar el ejemplo y que fuese lo más sencillo posible, en esta división sólo utilizaremos números enteros (siempre positivos). En el mismo terminal nos aparecerá el resultado.
+El funcionamiento y puesta en marcha es común en ambos ejemplos. A través de un terminal serie introducimos dos números separados por "enter". 
 
-![](https://github.com/Democrito/repositorios/blob/master/Maths/div_fix_point/images/example_div_q8_8_serial_terminal.png)
+![](https://github.com/Democrito/repositorios/blob/master/Maths/div_fix_point/images/Example%20terminal%20DIV%20Q16-16.PNG)
 
-Podemos comprobar que puede realizar cualquier tipo de división, y en el caso de la división entre **0** nos saldrá el mensaje "Error!". Para **Q8.8** tendremos dos decimales, y para **Q16.16** tendremos cuatro decimales. Recomiendo utilizar el terminal serie que viene en ICEstudio, y de ser así, recuerda activar la cajita "Echo local" para poder ver lo que se introduce en el terminal serie.
+Podemos comprobar que puede realizar cualquier tipo de división, y en el caso de la división entre **0** nos saldrá el mensaje "Error!". Para **Q8.8** tendremos dos decimales, y para **Q16.16** tendremos cuatro decimales. Recomiendo utilizar el terminal serie que viene en ICEstudio.
+
+Contine un "bug" y ocurre cuando el divisor es "0.algo", por ejemplo: "1 / 0.001". Trata de aproximar el resultado, pero en según que casos no es satisfactorio.
 
 ### Reconocimientos:
 

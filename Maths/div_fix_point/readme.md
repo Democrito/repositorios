@@ -35,7 +35,7 @@ El funcionamiento y puesta en marcha es común en ambos ejemplos. A través de u
 
 Podemos comprobar que puede realizar cualquier tipo de división, y en el caso de la división entre **0** nos saldrá el mensaje "Error!". Para **Q8.8** tendremos dos decimales, y para **Q16.16** tendremos cuatro decimales. Recomiendo utilizar el terminal serie que viene en ICEstudio.
 
-Contine un "bug" y ocurre cuando el divisor es "0.algo", por ejemplo: "1 / 0.001". Trata de aproximar el resultado, pero en según que casos no es satisfactorio.
+Contiene un "[bug](https://github.com/projf/projf-explore/issues/164)" y ocurre cuando el divisor es "0.algo", por ejemplo: "1 / 0.001". Trata de aproximar el resultado, pero en según que casos no es satisfactorio.
 
 ### Reconocimientos:
 

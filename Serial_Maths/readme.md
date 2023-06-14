@@ -1,11 +1,11 @@
-El formato "Qn.n" sirve para hacer operaciones matemáticas directas en punto fijo.
+El formato "Qm.n" sirve para hacer operaciones matemáticas directas en punto fijo.
 
-Cuando queramos ver por el puerto serie un resultado que está en notación Qn.n, necesitamos convertirlo a "humano" para poder verlo por el puerto serie.
-De la misma manera, si queremos introducir números reales (con signo y decimales) hemos de convertir de real a Qn.n
+Cuando queramos ver por el puerto serie un resultado que está en notación Qm.n, necesitamos convertirlo a "humano" para poder verlo por el puerto serie.
+De la misma manera, si queremos introducir números reales (con signo y decimales) hemos de convertir de real a Qm.n
 
-**De Qn.n a Serial**
+**De Qm.n a Serial**
 
-Si te fijas en las imágenes de abajo por un momento, verás que uno de los módulos es **Q8.8** y el otro es **Q16.16**. Esto significa que para **Q8.8** tiene una entrada de 16 bits, donde el byte alto es la parte entera y el byte bajo es la parte decimal. Lo mismo para **Q16.16**, tiene una entrada de 32 bits donde los 16 bits altos es la parte entera y los 16 bits más bajos es la parte decimal.
+Si te fijas en las imágenes de abajo por un momento, verás que uno de los módulos es **Q8.8** y el otro es **Q16.16**. Esto significa que para **Q8.8** tiene una entrada de 16 bits, donde el byte alto es la parte entera y el byte bajo es la parte decimal. Lo mismo para **Q16.16**, tiene una entrada de 32 bits donde los 16 bits altos son la parte entera y los 16 bits más bajos son la parte decimal.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/ConvertQ0808formatSerial.PNG)
 
@@ -21,9 +21,9 @@ El módulo "Converts_Q16_16_Sign_format_to_serial.ice" hace lo mismo que el ante
 
 Para ver ejemplos de cómo se utiliza haz [clic aquí](https://github.com/Democrito/repositorios/tree/master/Maths/div_fix_point#ejemplos-de-implementaci%C3%B3n-a-trav%C3%A9s-del-puerto-serie)
 
-Pones un número en formato **Qn.n** (recuerda que es con signo, por tanto si es negativo ha de ser en complemento a 2) en la entrada de datos y cuando le das un tic en **start** enviará ese valor al puerto serie. Si la entrada **error** está a **1**, al darle **start** enviará al puerto serie el mensaje "Error!", sin importar lo que haya en la entrada de datos.
+Pones un número en formato **Qm.n** (recuerda que es con signo, por tanto si es negativo ha de ser en complemento a 2) en la entrada de datos y cuando le das un tic en **start** enviará ese valor al puerto serie. Si la entrada **error** está a **1**, al darle **start** enviará al puerto serie el mensaje "Error!", sin importar lo que haya en la entrada de datos.
 
-**De Serial a Qn.n**
+**De Serial a Qm.n**
 
 "Converts_serialRX_real_numbers_to_Q16_16_sign.ice" nos permite hacer entradas de datos, esto significa que nos convertirá los números que vienen del puerto serie a formato Q16.16 con signo.
 
@@ -31,7 +31,7 @@ Pones un número en formato **Qn.n** (recuerda que es con signo, por tanto si es
 
 El rango de entrada puede ser desde -32768.9999 hasta 32767.9999 y te lo convertirá a Q16.16 con signo.
 
-Si dominas el punto fijo, sabrás que de un Qn.n puedes pasar a otro de distinta resolución, sólo requiere de una conversión de buses. Te dejo una imagen de ejemplo para convertir un Q1.10 a Q16.16 (es un ejemplo)
+Si dominas el punto fijo, sabrás que de un Qm.n puedes pasar a otro de distinta resolución, sólo requiere de una conversión de buses. Te dejo una imagen de ejemplo para convertir un Q1.10 a Q16.16 (es un ejemplo)
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/casar%20bits.png)
 

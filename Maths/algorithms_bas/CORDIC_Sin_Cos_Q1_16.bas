@@ -55,7 +55,7 @@ dec65536(cosi) ' You can replace this function with "Print cosi/65536.0"
 
 Sleep ' stop, end.
 
-Sub dec65536(ByVal given As Integer) ' This translates the result to a fixed point Q1,8
+Sub dec65536(ByVal given As Integer) ' Translates the Q1.16 format to "human", displaying it on the screen.
 	dim As Integer temp
 	
 	If given < 0 Then

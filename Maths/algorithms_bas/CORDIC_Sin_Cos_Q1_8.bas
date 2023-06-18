@@ -50,7 +50,7 @@ dec256(cose)  ' You can replace this function with "Print cose/256.0"
 
 Sleep ' stop, end.
 
-Sub dec256(ByVal given As Integer) ' This translates the result to a fixed point Q1,8
+Sub dec256(ByVal given As Integer) ' Translates the Q1.8 format to "human", displaying it on the screen.
 	dim temp As Integer
 	
 	If given < 0 Then
@@ -67,7 +67,7 @@ Sub dec256(ByVal given As Integer) ' This translates the result to a fixed point
 	
 	If temp < 100 Then
 	   Print "0";
-	   If temp < 10 Then Print"0";
+	   If temp < 10 Then Print "0";
 	EndIf
 	
 	Print Str(temp)

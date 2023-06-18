@@ -55,7 +55,7 @@ dec256(cose) ' You can replace this function with "Print cose/256.0"
 
 Sleep ' stop, end.
 
-Sub dec256(ByVal given As Integer) ' Translates the Q1.16 format to "human", displaying it on the screen.
+Sub dec256(ByVal given As Integer) ' Translates the Q1.8 format to "human", displaying it on the screen.
 	dim As Integer temp
 	
 	If given < 0 Then

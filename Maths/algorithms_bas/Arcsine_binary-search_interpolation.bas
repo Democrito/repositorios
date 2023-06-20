@@ -39,7 +39,7 @@ While 1                                 ' Infinite loop
 	
 	interpolation = (entrance - table(index)) / (table(index+1) - table(index)) ' Linear interpolation formula with relative input.
 	
-	Print "Arcsine ----->"; index + interpolation; Chr(167)                    ' Add index with interpolation.
+	Print "Arcsine ----->"; index + interpolation; Chr(248)                    ' Add index with interpolation.
 	
 	Print: Print                                                                ' Add two empty lines to separate each operation.
 Wend

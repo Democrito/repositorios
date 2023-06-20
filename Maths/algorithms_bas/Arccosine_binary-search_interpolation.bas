@@ -39,7 +39,7 @@ While 1                                 ' Infinite loop
 	
 	interpolation = (entrance - table(index)) / (table(index+1) - table(index)) ' Linear interpolation formula with relative input.
 	
-	Print "Arccosine ----->"; 90 - index - interpolation; Chr(167)              ' To convert arcsine to arccosine, subtract 90 with the index and interpolation.
+	Print "Arccosine ----->"; 90 - index - interpolation; Chr(248)              ' To convert arcsine to arccosine, subtract 90 with the index and interpolation.
 	
 	Print: Print                                                                ' Add two empty lines to separate each operation.
 Wend

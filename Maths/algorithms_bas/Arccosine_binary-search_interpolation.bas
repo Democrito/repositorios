@@ -13,12 +13,12 @@ Print "To exit the program, click on the X in the window": Print: Print
 
 While 1                                 ' Infinite loop
                                         ' At this point the variables are initialized.
-	start = 0                            ' The first element always starts at position 0.
-	last = 90                            ' Total number of elements in the table -1.
+	start = 0                       ' The first element always starts at position 0.
+	last = 90                       ' Total number of elements in the table -1.
 	
-	Input "Cosine -----> ", intro        ' Element_value to search for in the table.
+	Input "Cosine -----> ", intro   ' Element_value to search for in the table.
 	
-	entrance = (intro + 0.00001) * 65536 ' Add 0.00001 to compensate for rounding to decimals. Multiply by 65536 to convert the value to fixed point Q1.16
+	entrance = intro * 65536        ' Multiply by 65536 to convert the value to fixed point Q1.16
 	
 	' *********************** Binary search algorithm *********************** 
 	While start <= last

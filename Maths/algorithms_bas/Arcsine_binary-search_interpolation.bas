@@ -18,7 +18,7 @@ While 1                                 ' Infinite loop
 	
 	Input "Sine -----> ", intro          ' Element_value to search for in the table.
 	
-	entrance = (intro + 0.00001) * 65536 ' Add 0.00001 to compensate for rounding to decimals. Multiply by 65536 to convert the value to fixed point Q1.16
+	entrance = intro * 65536             ' Multiply by 65536 to convert the value to fixed point Q1.16
 	
 	' *********************** Binary search algorithm *********************** 
 	While start <= last
@@ -39,7 +39,7 @@ While 1                                 ' Infinite loop
 	
 	interpolation = (entrance - table(index)) / (table(index+1) - table(index)) ' Linear interpolation formula with relative input.
 	
-	Print "Arcsine ----->"; index + interpolation; Chr(248)                    ' Add index with interpolation.
+	Print "Arcsine ----->"; index + interpolation; Chr(248)                     ' To convert arcsine to arccosine: 90 - index + interpolation.
 	
 	Print: Print                                                                ' Add two empty lines to separate each operation.
 Wend

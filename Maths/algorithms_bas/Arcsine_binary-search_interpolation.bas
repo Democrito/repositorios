@@ -13,12 +13,12 @@ Print "To exit the program, click on the X in the window": Print: Print
 
 While 1                                 ' Infinite loop
                                         ' At this point the variables are initialized.
-	start = 0                            ' The first element always starts at position 0.
-	last = 90                            ' Total number of elements in the table -1.
+	start =  0                      ' The first element always starts at position 0.
+	last  = 90                      ' Total number of elements in the table -1.
 	
-	Input "Sine -----> ", intro          ' Element_value to search for in the table.
+	Input "Sine -----> ", intro     ' Element_value to search for in the table.
 	
-	entrance = intro * 65536             ' Multiply by 65536 to convert the value to fixed point Q1.16
+	entrance = intro * 65536        ' Multiply by 65536 to convert the value to fixed point Q1.16
 	
 	' *********************** Binary search algorithm *********************** 
 	While start <= last
@@ -35,11 +35,10 @@ While 1                                 ' Infinite loop
 	Wend
 	
 	' *********************** Linear interpolation with relative input ***********************
-	If table(index) > entrance Then index = index - 1                           ' When the index is not in the table, sometimes it points correctly and other times it is passed, with this condition the index to which it really corresponds is adjusted.
 	
 	interpolation = (entrance - table(index)) / (table(index+1) - table(index)) ' Linear interpolation formula with relative input.
 	
-	Print "Arcsine ----->"; index + interpolation; Chr(248)                     ' To convert arcsine to arccosine: 90 - index + interpolation.
+	Print "Arcsine ----->"; index + interpolation; Chr(248)                     ' Add index and interpolation.
 	
 	Print: Print                                                                ' Add two empty lines to separate each operation.
 Wend

@@ -13,8 +13,8 @@ Print "To exit the program, click on the X in the window": Print: Print
 
 While 1                                 ' Infinite loop
                                         ' At this point the variables are initialized.
-	start = 0                       ' The first element always starts at position 0.
-	last = 90                       ' Total number of elements in the table -1.
+	start =  0                      ' The first element always starts at position 0.
+	last  = 90                      ' Total number of elements in the table -1.
 	
 	Input "Cosine -----> ", intro   ' Element_value to search for in the table.
 	
@@ -35,7 +35,6 @@ While 1                                 ' Infinite loop
 	Wend
 	
 	' *********************** Linear interpolation with relative input ***********************
-	If table(index) > entrance Then index = index - 1                           ' When the index is not in the table, sometimes it points correctly and other times it is passed, with this condition the index to which it really corresponds is adjusted.
 	
 	interpolation = (entrance - table(index)) / (table(index+1) - table(index)) ' Linear interpolation formula with relative input.
 	

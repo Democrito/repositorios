@@ -40,8 +40,13 @@ Imagine we input "0.866" and run the Verilog code for binary search. It will sta
 
 The ultra-simplified Verilog code would be as follows:
 
-![](https://github.com/Democrito/repositorios/blob/master/Maths/trigonometric/inverse_sin_cos/img/code_verilog.PNG)
-
+<p align="center">
+   <img width="840" src="https://github.com/Democrito/repositorios/blob/master/Maths/trigonometric/inverse_sin_cos/img/code_verilog.PNG">
+</p>
+<p align="center">
+(To see the complete code use Icestudio.)
+</p>
+  
 To determine the maximum number of steps it will take to find the desired value, it can be calculated by taking the base-2 logarithm of the total number of values in the table, i.e., [log2(91)](https://www.google.com/search?client=opera&q=log2(91)&sourceid=opera&ie=UTF-8&oe=UTF-8) in our case. Therefore, to find a given value, it will take a maximum of 7 (rounded up) clock cycles.
 
 The binary search algorithm solves the integer part of the angle, but to achieve a bit more precision, we will add several decimal places. In Qn.16 fixed-point format, we can obtain a maximum of 4 decimal places.
@@ -60,7 +65,7 @@ Remember that this approach is approximate and rarely provides the exact 4 decim
 
 ### Resources
 
-I put two links where all this is explained in a much simpler way. It is in Spanish, please use a translator; today almost all Internet browsers have it integrated and do not modify the content and keep the images. [Microsoft Edge] and [Google Chrome] do it very well.
+I put two links where all this is explained in a much simpler way. It is in Spanish, please use a translator; today almost all Internet browsers have it integrated and do not modify the content and keep the images. [Microsoft Edge] and [Google Chrome] do it very well, [click here](https://kinsta.com/blog/how-to-translate-a-website/) for other browsers.
 
 * [Search binary algorithm](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria)
 * [Search binary algorithm + interpolation](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria_con_interpolacion)

@@ -7,7 +7,7 @@ Solving inverse sine and cosine is not a trivial task. There are algorithms that
 From now on, I will only discuss Sine and Arcsine because the sine values are in increasing order, which is necessary for the binary search algorithm. To find the Arccosine, only a small operation is required at the end of the Arcsine calculation, as follows: Arccosine = 90 - Arcsine.
 
 
-### Binary Search
+### Binary Search:
 We need to create a table with the 91 values (0..90) of the sine:
 
 (Angle = sine of that angle)
@@ -40,14 +40,13 @@ Imagine we input "0.866" and run the Verilog code for binary search. It will sta
 
 The ultra-simplified Verilog code would be as follows:
 
-<p align="center">
-   <img width="840" src="https://github.com/Democrito/repositorios/blob/master/Maths/trigonometric/inverse_sin_cos/img/code_verilog.PNG">
-</p>
-<p align="center">
-(To see the complete code use Icestudio.)
-</p>
-  
+![](https://github.com/Democrito/repositorios/blob/master/Maths/trigonometric/inverse_sin_cos/img/code_verilog.PNG)
+
+(To see the complete code use [**Icestudio**](https://icestudio.io/#lk-download))
+
 To determine the maximum number of steps it will take to find the desired value, it can be calculated by taking the base-2 logarithm of the total number of values in the table, i.e., [log2(91)](https://www.google.com/search?client=opera&q=log2(91)&sourceid=opera&ie=UTF-8&oe=UTF-8) in our case. Therefore, to find a given value, it will take a maximum of 7 (rounded up) clock cycles.
+
+### Relative Linear Interpolation:
 
 The binary search algorithm solves the integer part of the angle, but to achieve a bit more precision, we will add several decimal places. In Qn.16 fixed-point format, we can obtain a maximum of 4 decimal places.
 
@@ -59,17 +58,19 @@ The formula is as follows: **interpolation = (input - table(index)) / (table(ind
 
 In terms of the exact value, the decimals obtained have a precision of two decimal places in the majority of cases, while the other two decimal places tend to have an acceptable approximation.
 
+### Finally...:
+
 Once we have the angle (solved by the binary search) and the decimals (obtained through relative linear interpolation), the last step is to add both quantities together. This way, we obtain an integer value and its fractional part.
 
 Remember that this approach is approximate and rarely provides the exact 4 decimal places that a conventional calculator would offer.
 
-### Resources
+### Resources:
 
 I put two links where all this is explained in a much simpler way. It is in Spanish, please use a translator; today almost all Internet browsers have it integrated and do not modify the content and keep the images. [Microsoft Edge] and [Google Chrome] do it very well, [click here](https://kinsta.com/blog/how-to-translate-a-website/) for other browsers.
 
 * [Search binary algorithm](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria)
 * [Search binary algorithm + interpolation](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria_con_interpolacion)
 
-### LOG
+### LOG:
 
 https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/uEIIXut0paU

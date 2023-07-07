@@ -4,7 +4,8 @@
 
 Solving inverse sine and cosine is not a trivial task. There are algorithms that do it very well, but applying them to an FPGA becomes costly and complex. To overcome this problem, I came up with using two simple algorithms that together solve this problem with relative precision. The first step is to apply a binary search algorithm within a table, which allows obtaining the integer value of the angle. Then, to obtain the decimal values, I apply a formula called relative linear interpolation.
 
-From now on, I will only discuss Sine and Arcsine because the sine values are in increasing order, which is necessary for the binary search algorithm. To find the Arccosine, only a small operation is required at the end of the Arcsine calculation, as follows: Arccosine = 90 - Arcsine.
+From now on, I will only discuss Sine and Arcsine because the sine values are in increasing order, which is necessary for the binary search algorithm. To find the Arccosine, only a small operation is required at the end of the Arcsine calculation, as follows:  
+Arccosine = 90 - Arcsine.
 
 
 ### Binary Search:

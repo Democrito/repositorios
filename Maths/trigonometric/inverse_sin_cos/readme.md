@@ -69,8 +69,8 @@ Remember that this approach is approximate and rarely provides the exact 4 decim
 
 I put two links where all this is explained in a much simpler way. It is in Spanish, please use a translator; today almost all Internet browsers have it integrated and do not modify the content and keep the images. [Microsoft Edge] and [Google Chrome] do it very well, [click here](https://kinsta.com/blog/how-to-translate-a-website/) for other browsers. In both links, everything that has been commented here is explained from the point of view of a programming language, in my case I use [FreeBasic](https://www.freebasic.net/about.html).
 
-* [Search binary algorithm](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria)
-* [Search binary algorithm + interpolation](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria_con_interpolacion)
+* [**Search binary algorithm**](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria)
+* [**Search binary algorithm + interpolation**](https://github.com/Democrito/Didactico/tree/main/algoritmos/busqueda_binaria_con_interpolacion)
 
 ### LOG:
 

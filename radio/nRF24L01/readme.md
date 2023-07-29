@@ -17,7 +17,7 @@ Hay dos versiones de este transceptor, el "nRF24L01" (es una versión antigua) y
 
 # Alimentación
 
-Este apartado es muy importante y la mayoría de los problemas que te puedan surgir van a venir de aquí. Lo primero que has de hacer con los transceptores es soldarle un capacitor electrolítico justo en los pines de alimentación. Si no lo haces, te fallará o hará cosas muy extrañas.
+Este apartado es muy importante y la mayoría de los problemas que te puedan surgir van a estar aquí. Lo primero que has de hacer con los transceptores es soldarle un capacitor electrolítico justo en los pines de alimentación. Si no lo haces, te fallará o hará cosas muy extrañas.
 
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/transceptor%20con%20capacitor.jpg)
 

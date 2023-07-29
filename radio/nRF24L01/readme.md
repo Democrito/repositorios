@@ -61,7 +61,7 @@ Ya lo tenemos todo preparado y conectado, sólo nos falta subir el programa de A
 
 Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que hace cada uno.
 
-### RF24_leds.zip:
+### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_leds.zip);
 
 En este proyecto el emisor (Arduino TX) envía una cuenta que va del 0 al 255 y vuelta comenzar. Lo hace en los 32 bytes que envía, es decir, que en cada uno de esos 32 bytes envía la misma cuenta numérica.
 
@@ -70,7 +70,7 @@ El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32
 Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM 
 (aunque en el vídeo el transceptor sale sin capacitor electrolítico, por favor, no lo hagas funcionar así, pónselo.)
 
-### RF24_test_Serial.zip:
+### [RF24_test_Serial.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_test_Serial.zip):
 
 El emisor (Arduino TX) envía una frase en latín ("Per aspera ad astra") junto con una cuenta numérica.
 El receptor (FPGA RX) lo envía a un terminal serie. Se vería en el terminal serie de Icestudio esto:

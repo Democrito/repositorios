@@ -84,6 +84,8 @@ La velocidad en baudios por defecto es de 115200.
 
 En este caso no se necesita registrar las salidas porque el tiempo de envío a la terminal serie es muy amplio (cada 500ms), pero si fuese a toda velocidad, entonces habría que registrar todas las salidas validándolas con el pin "done".
 
+Tienes un ejemplo igual a este para una Icestick si cliqueas [**aquí**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01/Icestick)
+
 # Fin.
 ### Nota:
 Todo este trabajo es preliminar, esto significa que estoy subiendo todo en plan sucio, pero esto no afecta al funcionamiento, sino a la estética y comentarios que hay en los programas y circuitos. Muchos de los comentarios que hago dentro de Icestudio están desfasados o no son correctos porque iba modificando sobre la marcha.

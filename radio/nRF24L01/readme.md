@@ -61,7 +61,7 @@ Ya lo tenemos todo preparado y conectado, sólo nos falta subir el programa de A
 
 Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que hace cada uno.
 
-### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_leds.zip);
+### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_leds.zip):
 
 En este proyecto el emisor (Arduino TX) envía una cuenta que va del 0 al 255 y vuelta comenzar. Lo hace en los 32 bytes que envía, es decir, que en cada uno de esos 32 bytes envía la misma cuenta numérica.
 

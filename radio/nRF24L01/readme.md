@@ -12,7 +12,7 @@ Para que puedan establecer comunicación ambos transceptores necesitamos que est
 
 El pin IRQ no se utiliza en este proyecto. Ese pin sirve para crear una interrupción en el microcontrolador o FPGA y avisar de que han llegado datos. En la FPGA (RX), se comprueba continuamente si han llegado datos a través del SPI.
 
-Hay dos versiones de este transceptor, el "nRF24L01" (es una versión antigua) y el "nRF24L01+", sólo ese plus (+) los diferencia. Lo más importante es que el no tiene el plus (+) no tiene la opción de poder ir a 250KB/s. Con una lupa de muchos aumentos se puede leer el nombre del chip y averiguar este detalle. De todas formas a día de hoy creo que ya está descatalogado.
+Hay dos versiones de este transceptor, el "nRF24L01" (es una versión antigua) y el "nRF24L01+", sólo ese plus (+) los diferencia. Lo más importante es que el que no tiene el plus (+) no tiene la opción de poder ir a 250KB/s. Con una lupa de muchos aumentos se puede leer el nombre en el chip y averiguar este detalle. De todas formas a día de hoy creo que ya está descatalogado.
 
 
 # Alimentación
@@ -61,15 +61,16 @@ Ya lo tenemos todo preparado y conectado, sólo nos falta subir el programa de A
 
 Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que hace cada uno.
 
-### RF24_leds.zip
+### RF24_leds.zip:
 
 En este proyecto el emisor (Arduino TX) envía una cuenta que va del 0 al 255 y vuelta comenzar. Lo hace en los 32 bytes que envía, es decir, que en cada uno de esos 32 bytes envía la misma cuenta numérica.
 
 El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32 bytes de salida, y en este proyecto se repite la misma cuenta numérica en todos, no importa si cogemos el byte más alto, el más bajo o intermedios, todos te darán la misma salida. En este proyecto tomo uno de ellos, no importa cuál.
 
-Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM
+Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM 
+(aunque en el vídeo el transceptor sale sin capacitor electrolítico, por favor, no lo hagas funcionar así, pónselo.)
 
-### RF24_test_Serial.zip
+### RF24_test_Serial.zip:
 
 El emisor (Arduino TX) envía una frase en latín ("Per aspera ad astra") junto con una cuenta numérica.
 El receptor (FPGA RX) lo envía a un terminal serie. Se vería en el terminal serie de Icestudio esto:

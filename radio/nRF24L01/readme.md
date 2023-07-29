@@ -12,6 +12,8 @@ Para que puedan establecer comunicación ambos transceptores necesitamos que est
 
 El pin IRQ no se utiliza en este proyecto. Ese pin sirve para crear una interrupción en el microcontrolador o FPGA y avisar de que han llegado datos. En la FPGA (RX), se comprueba continuamente si han llegado datos a través del SPI.
 
+Hay dos versiones de este transceptor, el "nRF24L01" (es una versión antigua) y el "nRF24L01+", sólo ese plus (+) los diferencia. Lo más importante es que el no tiene el plus (+) no tiene la opción de poder ir a 250KB/s. Con una lupa de muchos aumentos se puede leer el nombre del chip y averiguar este detalle. De todas formas a día de hoy creo que ya está descatalogado.
+
 
 # Alimentación
 

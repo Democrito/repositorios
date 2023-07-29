@@ -65,7 +65,7 @@ Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que
 
 En este proyecto el emisor (Arduino TX) envía una cuenta que va del 0 al 255 y vuelta comenzar. Lo hace en los 32 bytes que envía, es decir, que en cada uno de esos 32 bytes envía la misma cuenta numérica.
 
-El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32 bytes de salida, y en este proyecto se repite la misma cuenta numérica en todos, no importa si cogemos el byte más alto, el más bajo o intermedios, todos te darán la misma salida. En este proyecto tomo uno de ellos, no importa cuál.
+El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32 bytes de salida, y en este proyecto se repite la misma cuenta numérica en todos, no importa si cogemos el byte más alto, el más bajo o intermedios, todos te darán la misma salida. En este proyecto tomo uno de ellos, no importa cuál. Observa en el esquema que la salida queda registrada con un registro de 8 bits y se valida con el pin "done". Es necesario registrar las salidas, porque si conectaras los leds directamente a la salida verías cosas extrañas, y es debido a que en el interior del circuito los bytes son desplazados a modo de registro de desplazamiento.
 
 Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM 
 (aunque en el vídeo el transceptor sale sin capacitor electrolítico, por favor, no lo hagas funcionar así, pónselo.)
@@ -78,6 +78,8 @@ El receptor (FPGA RX) lo envía a un terminal serie. Se vería en el terminal se
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/test_text_serial_nrf24l01_RX.png)
 
 La velocidad en baudios por defecto es de 115200.
+
+En este caso no se necesita registrar las salidas porque el tiempo de envío a la terminal serie es muy amplio (cada 500ms), pero si fuese a toda velocidad, entonces habría que registrar todas las salidas validándolas con el pin "done".
 
 # Fin.
 ### Nota:

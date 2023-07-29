@@ -38,6 +38,9 @@ Conclusión: Recuerda que jamás has de alimentar el transceptor a 5V, suéldale
 
 # Cableado
 ### FPGA:
+
+![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/pin%20out%20alhambra%20ii%20spi%20nrf24l01.jpg)
+
 El Cableado para la FPGA (como receptor) está a la vista cuando abres el circuito desde Icestudio. Te recomiendo usarlo todo tal y como está (si estás usando como FPGA la Alhambra II) pero si te interesa cambiar de pines de la FPGA lo puedes hacer sin problemas. Para la FPGA no necesitarás nada especial, sólo hacer las conexiones de la FPGA al transceptor, eso es todo.
 
 ### Arduino:

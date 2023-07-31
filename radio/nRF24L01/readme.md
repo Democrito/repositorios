@@ -76,7 +76,7 @@ Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.c
 ### [RF24_test_Serial.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_test_Serial.zip):
 
 El emisor (Arduino TX) envía una frase en latín ("Per aspera ad astra") junto con una cuenta numérica.
-El receptor (FPGA RX) lo envía a un terminal serie. Se vería en el terminal serie de Icestudio esto:
+El receptor (FPGA RX) toma lo que recibe del emisor y lo muestra en un terminal serie. Se vería, en el terminal serie de Icestudio, esto:
 
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/test_text_serial_nrf24l01_RX.png)
 

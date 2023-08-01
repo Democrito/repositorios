@@ -52,7 +52,7 @@ Ahora, como ejercicio para practicar un poco, te propongo dos ejercicios muy sen
 
 1.) Al primer 8B (outport) le dices que saque el valor 0x00AA, y al segundo 8B le dices que saque el valor 0x0055.  
 
-2.) Modifica los tiempos de temporización, por ejemplo, que parpadeen más rápido y que tus ojos lo pueda percibir.  
+2.) Modifica los tiempos de temporización, por ejemplo, que parpadeen más rápido y que tus ojos lo puedan percibir.  
 
 # To be continue :P
 

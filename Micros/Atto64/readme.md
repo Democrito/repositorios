@@ -61,7 +61,7 @@ Cada vez que haces "F3" (salto directo) se guarda en un registro la posición de
 
 Veamos un ejemplo:  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-Return.png)  
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-return.png)  
 
 En este caso el código es ineficiente (pasamos de 15 a 18 líneas de código), pero ejemplifica el funcionamiento de la instrucción "01" (return). Cuando haya algo que se repita mucho, entonces se le puede sacar partido a esta instrucción. Si haces [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_2-Return.ice) descargarás este ejemplo (ya conoces el proceso, haces clic con el botón derecho en "Raw" y eliges la opción "descargar enlace como..."), en la carpeta "Examples" tienes este ejemplo con el nombre de "Example_2-Return.ice".  
 

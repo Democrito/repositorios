@@ -19,7 +19,8 @@ Ahora pasamos a ver las 13 instrucciones máquina. No olvides que siempre-siempr
 ### F3 // Salto directo o absoluto:  
 Equivale al "goto" del Basic. Salta directamente a la dirección de memoria que le indiques. Escribes "F3" y los dos bytes siguientes es la dirección de memoria a la que ha de saltar. El formato es "**big-endian**", lo diseñé así porque me suponía poco esfuerzo y es más intuitivo. Es decir, que después de escribir "F3" pones el byte alto primero, y luego el byte bajo.  
 
-Ejemplo:  
+Ejemplo.  
+
 Quiero saltar a la dirección 0x01BC, entonces escribimos:  
 
 F3  
@@ -54,13 +55,13 @@ Ahora, como ejercicio para practicar un poco, te propongo dos ejercicios muy sen
 
 2.) Modifica los tiempos de temporización, por ejemplo, que parpadeen más rápido y que tus ojos lo puedan percibir.  
 
-# To be continue :P
+### 01 // Return (ret)  
 
+Cada vez que haces "F3" (salto directo) se guarda en un registro la posición de memoria en la que está +3 y a la vez salta a la posición de memoria que le has indicado. Se ejecutarán las instrucciones que encuentre a partir de esa posición, pero si en esas ejecuciones encuenta un return (01), el contador de programa carga la posición de memoria +3 que había memorizado antes de saltar (y retorna a la siguiente instrucción que había antes de saltar). Nos sirve para ejecutar código o sacar datos al exterior que se repite muchas veces. Cuando te interese economizar código y hay trozos que se repiten mucho, esta instrucción puede serte útil. Lo que has de tener presente es que cuando se programa en código máquina tú eres responsable de todo, esto significa que sabes a qué posición de memoria has de saltar porque sabes dónde se encuentran esos datos que se repiten. La instrución "01" (Return) sólo mide un byte.  
 
+Veamos un ejemplo:  
 
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-Return.png)  
 
-
-
-
-
+En este caso el código es ineficiente (pasamos de 15 a 18 líneas de código), pero ejemplifica el funcionamiento de la instrucción "01" (return). Cuando haya algo que se repita mucho, entonces se le puede sacar partido a esta instrucción. Si haces [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_2-Return.ice) descargarás este ejemplo (ya conoces el proceso, haces clic con el botón derecho en "Raw" y eliges la opción "descargar enlace como..."), en la carpeta "Examples" tienes este ejemplo con el nombre de "Example_2-Return.ice".  
 

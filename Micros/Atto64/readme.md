@@ -55,7 +55,7 @@ Ahora, como ejercicio para practicar un poco, te propongo dos ejercicios muy sen
 
 2.) Modifica los tiempos de temporización, por ejemplo, que parpadeen más rápido y que tus ojos lo puedan percibir. 
 
-Si has tenido problemas en resolver este ejercicio, lo puedes [**ver aquí resuelto**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/3-Bzxm2XAwAJ).  
+Si has tenido problemas en resolver este ejercicio, lo puedes ver [**aquí resuelto**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/3-Bzxm2XAwAJ).  
 
 ### 01 // Return (ret):  
 
@@ -78,7 +78,22 @@ Te propongo que por "dout" salga en secuencia los siguientes valores hexadecimal
 
 0x00FF, 0x0000, 0x00AA, 0x0055, y vuelta a comenzar.  
 
-Si has tenido problemas en resolver este ejercicio, lo puedes [**ver aquí resuelto**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/dvazF1epAQAJ).  
+Si has tenido problemas en resolver este ejercicio, lo puedes ver [**aquí resuelto**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/dvazF1epAQAJ).  
 
-# Continuará  
+### C3 // Guarda en un registro de 16 bits un valor concreto que puede ser utilizado por varias instrucciones.  
 
+"C3" es una instrucción que lo único que hace es guardar un dato de 16 bits en un registro interno dentro de ATTO. Este registro interno sólo aporta información (el valor o dato que guarda), y será utilizado por tres instrucciones que veremos más adelante. Nos servirá por ejemplo para comparar, para indicar cuántos bytes vamos a leer (sólo para el I2C), o cuántos bytes queremos pasar de la memoria al exterior (ya sea I2C o SPI). Tres instrucciones usan este registro, y antes de ejecutar cualquiera de esas tres instrucciones le tendremos que dar un valor a ese registro. No te preocupes si esto suena extraño, cuando veamos las instrucciones que lo utiliza es cuando adquiere sentido.  
+
+"C3" lo único que hace es cargar un valor (desde el propio programa) a un registro interno dentro de ATTO, eso es todo.  
+
+Esta instrucción usa 3 bytes.  
+
+### E3 // Salto condicional: Si NO es igual, saltar:  
+
+Observa la siguiente imagen.
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Comparator%20input.png)
+
+Vamos a comparar un valor externo de 8 bits a través del bus "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación (en este caso "E3") siempre-siempre hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ejecutemos "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.
+
+# Continuará

@@ -94,7 +94,7 @@ Observa la siguiente imagen.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Comparator%20input.png)  
 
-Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación (en este caso "E3") siempre hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ATOO ejecute "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.  
+Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación (en este caso "E3") siempre hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ATTO ejecute "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.  
 
 El valor que cargamos con "C3" es un valor de 16 bits, sin embargo, para comparar lo hace siempre con el byte bajo, el byte alto queda descartado.  
 

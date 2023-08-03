@@ -94,21 +94,21 @@ Observa la siguiente imagen.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Comparator%20input.png)  
 
-Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación (en este caso "E3") siempre hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ejecutemos "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.  
+Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación (en este caso "E3") siempre hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ATOO ejecute "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.  
 
 El valor que cargamos con "C3" es un valor de 16 bits, sin embargo, para comparar lo hace siempre con el byte bajo, el byte alto queda descartado.  
 
-"E3" está compuesto por tres bytes, el primero es la instrucción y los dos siguientes es la dirección de memoria a la que salta si no es igual. Recuerda que, antes de usar "E3" hay que poner "C3", ambas instrucciones siempre van en pareja.  
+"E3" está compuesto por tres bytes, el primero es la instrucción y los dos siguientes es la dirección de memoria a la que salta si no es igual. Recuerda que, antes de usar "E3" hay que cargar un valor con "C3", ambas instrucciones siempre van en pareja.  
 
-Pongo un ejemplo de funcionamiento de esta instrucción, que puedes descargar de la carpeta "Examples" con el nombre de "Example_3-JNE.ice", o bien haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_3-JNE.ice). Es mejor que lo descargues ahora, lo abras con Icestudio para verlo más grande.  
+Pongo un ejemplo de funcionamiento de esta instrucción que podrás descargar de la carpeta "Examples" con el nombre de "Example_3-JNE.ice", o bien, haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_3-JNE.ice). Es mejor que lo descargues ahora y lo abras con Icestudio para verlo más grande.  
 
-Echemos un ojo al circuito.  
+Echemos un ojo al circuito de ejemplo.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Circuito%20ejemplo%20JNE.png)  
 
-Vemos que un pulsador (SW1) puede seleccionar dos entradas a través de un multiplexor. Si no se pulsa, el multiplexor sacará el valor 0, y si se mantiene pulsado, el multiplexor sacará el valor 255. La salida del multiplexor va conectada a la entrada "cmp" de ATTO.  
+Vemos que un pulsador (SW1) puede seleccionar dos entradas a través de un multiplexor. Si no se pulsa, el multiplexor sacará el valor 0, y si se mantiene pulsado el multiplexor sacará el valor 255. La salida del multiplexor va conectada a la entrada "cmp" de ATTO.  
 
-El programa ejemplo (lo verás en grande si abres el circuito con Icestudio) hace lo siguiente. Si no se pulsa "SW1" parpadearán todos los leds de la Alhambra FPGA; y si lo mantienes pulsado (SW1), se alternarán en encendidos y apagados. Estudia el programa y trata de comprenderlo. Esta instrucción la he usado mucho en todos los proyectos que he aplicado ATTO a un periférico.  
+El programa ejemplo (verás el programa en grande si abres el circuito con Icestudio) hace lo siguiente. Si no se pulsa "SW1" parpadearán todos los leds de la Alhambra FPGA; y si lo mantienes pulsado (SW1) se alternarán en encendidos y apagados. Estudia el programa y trata de comprenderlo. Esta instrucción la he usado mucho en todos los proyectos que he aplicado ATTO a un periférico.  
 
 Te propongo un ejercicio sencillo. En vez de usar los valores 0 y 255, sustitúyelo por los valores 0 y 170 (en la [Colección Jedi](https://github.com/FPGAwars/Collection-Jedi/releases) existe esa constante de 8 bits).  
 

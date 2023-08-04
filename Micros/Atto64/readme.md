@@ -93,7 +93,7 @@ Si has tenido problemas en resolver este ejercicio, lo puedes ver [**aquí resue
 
 "C3" es una instrucción que lo único que hace es guardar un dato de 16 bits en un registro interno dentro de ATTO. Este registro interno sólo aporta información (el valor o dato que guarda), y será utilizado por tres instrucciones que veremos más adelante. Nos servirá por ejemplo para comparar, para indicar cuántos bytes vamos a leer (sólo para el I2C), o cuántos bytes queremos pasar de la memoria al exterior (ya sea I2C o SPI). Tres instrucciones usan este registro, y antes de ejecutar cualquiera de esas tres instrucciones le tendremos que dar un valor a ese registro. No te preocupes si esto suena extraño, cuando veamos las instrucciones que lo utiliza es cuando adquiere sentido.  
 
-"C3" lo único que hace es cargar un valor (desde el propio programa) a un registro interno dentro de ATTO, eso es todo.  
+"C3" lo único que hace es cargar un valor (desde el propio programa) a un registro interno dentro de ATTO, eso es todo. El valor que guarda siempre estará ahí, sólo otro "C3" puede modificarlo.  
 
 Esta instrucción usa 3 bytes.  
 
@@ -143,8 +143,8 @@ Este es el código.
 
 Es mucho más sencillo que el anterior, ya que si comprendiste "E3", "83" es evidente.  
 
-Te propongo un ejercicio en el que te explico un detalle y tú haces el cambio que propongo:  
+Ejercicio:  
 
-Justo al comenzar el programa "C3" carga el registro que luego será comparado con la entrada "cmp". Como ese valor (cargado con "C3") nunca se modifica (siempre tiene el mismo valor), entonces no es necesario que los saltos vayan a la posición 0x0000. Haz que todos los saltos vayan a donde le corresponde, además esto hará que el código corra más rápido.
+Justo al comenzar el programa "C3" carga el registro que luego será comparado con la entrada "cmp". Como ese valor (cargado con "C3") nunca se modifica (siempre tiene el mismo valor), entonces no es necesario que los saltos vayan a la posición 0x0000. Haz que todos los saltos vayan a donde le corresponde, además esto hará que el código corra un poquito más rápido.
 
 # Continuará

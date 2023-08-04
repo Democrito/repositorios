@@ -42,10 +42,10 @@ FB
 
 Donde "0x000A" = 10 en decimal, y como cada unidad vale 10us, en total son 10x10 = 100us. La temporización la realiza un circuito dedicado sólo a esto. Como puedes comprobar esta instrucción se compone en total por 3 bytes. El máximo tiempo que puede temporizar sería 65535 x 10 = 655350us, es decir, 655.35ms. Si necesitas más temporización sólo has de añadir otra (o más) instrucción como esta hasta completar el tiempo necesario.  
 
-Podría suceder que necesitarse temporizar tiempos menores de 10us, para conseguirlo veremos cómo hacerlo usando trucos con una pareja de instrucciones de la que hablaré más adelante.  
+Temporizar tiempos menores de 10us lo veremos más adelante usando trucos con una pareja de instrucciones de la que hablaré más adelante.  
 
 ### 8B // Out port:  
-ATTO tiene un puerto de salida de 16 bits. Este puerto lo vamos a necesitar para que nos ayude a multiplexar o seleccionar acciones externas, como por ejemplo, decirle a un multiplexor qué entrada queremos seleccionar (esto es añadiendo hardware), o seleccionar salidas concretas. Ahora mismo esto suena complicado, pero es un simple puerto de salida de 16 bits. La mayoría de las veces sólo usaremos unos poco bits.  
+ATTO tiene un puerto de salida de 16 bits. Este puerto lo usaremos para que nos ayude a multiplexar o seleccionar acciones externas, como por ejemplo, decirle a un multiplexor qué entrada queremos seleccionar (esto es añadiendo hardware), o seleccionar salidas concretas. Ahora mismo esto suena complicado, pero es un simple puerto de salida de 16 bits. La mayoría de las veces sólo utilizaremos unos pocos bits de este puerto.  
 
 Ya conocemos dos instrucciones (salto directo y termporizador), vamos a poner un ejemplo de uso de "out port" (8B) estilo "hola mundo". Observa este circuito y además mira el código que se le ha cargado:  
 
@@ -53,7 +53,7 @@ Ya conocemos dos instrucciones (salto directo y termporizador), vamos a poner un
 
 Sólo has de fijarte en "dout" (es el puerto de salida) y en el programa, todo lo demás ahora no nos interesa. A través de "dout[15:0]" hará un "blink" en los leds de la Alhambra II FPGA. Como son 8 leds, hemos de elegir el byte alto o bajo de esa salida (porque son 16 bits) y he escogido el byte bajo. El programa, al ejecutarse (es decir, cuando subas este circuito), lo que hará será hacer parpadear los 8 leds de la Alhambra II FPGA.  
 
-Este circuito se encuentra en la carpeta "Examples" como "**Example_1-blink.ice**", o lo puedes descargar haciendo [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_1-blink.ice), luego con el botón derecho del ratón pinchas sobre el botón "Raw", y después escoges la opción "Guardar contenido del enlace como" (o algo parecido a eso).  
+Este circuito se encuentra en la carpeta "Examples" como "**Example_1-blink.ice**", o lo puedes descargar haciendo [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_1-blink.ice), luego con el botón derecho del ratón pinchas sobre el botón "Raw", y después escoges la opción "Guardar contenido del enlace como" (o algo parecido a eso, depende del browser que utilices).  
 
 Ahora, como ejercicio para practicar un poco, te propongo dos ejercicios muy sencillos:  
 
@@ -73,7 +73,7 @@ La instrución "01" (Return / ret) sólo mide un byte.
 
 Veamos un ejemplo:  
 
-En el ejercicio anterior se repite la temporización dos veces, ahora vamos a colocar un sólo temporizador al final del programa y la llamaremos cuando la necesitemos. Hará exactamente lo mismo, parpadear todos los leds de la Alhambra II FPGA, pero sin necesidad de repetir el temporizador como código.  
+En el ejemplo anterior se repite la temporización dos veces, ahora vamos a colocar un sólo temporizador al final del programa y la llamaremos cuando la necesitemos. Hará exactamente lo mismo, parpadear todos los leds de la Alhambra II FPGA, pero sin necesidad de repetir el temporizador como código.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-Return.png)  
 
@@ -91,7 +91,7 @@ Si has tenido problemas en resolver este ejercicio, lo puedes ver [**aquí resue
 
 ### C3 // Guarda en un registro de 16 bits un valor concreto que puede ser utilizado por varias instrucciones:  
 
-"C3" es una instrucción que lo único que hace es guardar un dato de 16 bits en un registro interno dentro de ATTO. Este registro interno sólo aporta información (el valor o dato que guarda), y será utilizado por tres instrucciones que veremos más adelante. Nos servirá por ejemplo para comparar, para indicar cuántos bytes vamos a leer (sólo para el I2C), o cuántos bytes queremos pasar de la memoria al exterior (ya sea I2C o SPI). Tres instrucciones usan este registro, y antes de ejecutar cualquiera de esas tres instrucciones le tendremos que dar un valor a ese registro. No te preocupes si esto suena extraño, cuando veamos las instrucciones que lo utiliza es cuando adquiere sentido.  
+"C3" guardar un dato de 16 bits en un registro interno dentro de ATTO. Este registro interno sólo aporta información (el valor o dato que guarda), y será utilizado por tres instrucciones que veremos más adelante. Nos servirá por ejemplo para comparar, para indicar cuántos bytes vamos a leer (sólo para el I2C), o cuántos bytes queremos pasar de la memoria al exterior (ya sea I2C o SPI). Tres instrucciones usan este registro, y antes de ejecutar cualquiera de esas tres instrucciones le tendremos que dar un valor a este registro. No te preocupes si esto suena extraño, cuando veamos las instrucciones que lo utiliza es cuando adquiere sentido.  
 
 "C3" lo único que hace es cargar un valor (desde el propio programa) a un registro interno dentro de ATTO, eso es todo. El valor que guarda siempre estará ahí, sólo otro "C3" puede modificarlo.  
 
@@ -103,11 +103,11 @@ Observa la siguiente imagen.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Comparator%20input.png)  
 
-Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación (en este caso "E3") siempre hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ATTO ejecute "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.  
+Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ATTO ejecute "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Diagrama%20de%20decision%20C3%20y%20E3.png)
 
-El valor que cargamos con "C3" es un valor de 16 bits, sin embargo, para comparar lo hace siempre con el byte bajo, el byte alto queda descartado y tampoco nos importará el valor de ese byte alto si tuviera almacenado alguno.  
+El valor que cargamos con "C3" es un valor de 16 bits, sin embargo, para comparar lo hace con el byte bajo, el byte alto queda descartado y tampoco nos importará el valor de ese byte alto si tuviera almacenado alguno.  
 
 De manera coloquial "E3" funciona así: << Estoy esperando que "cmp" tenga X valor, y si no es ese valor (X), te lanzo a otra parte. >> Donde ese "X" es cargado antes por la instrucción "C3".
 

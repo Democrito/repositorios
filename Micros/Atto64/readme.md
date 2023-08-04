@@ -71,7 +71,7 @@ Veamos un ejemplo:
 
 En el ejercicio anterior se repite la temporización dos veces, ahora vamos a colocar un sólo temporizador al final del programa y la llamaremos cuando la necesitemos. Hará exactamente lo mismo, parpadear todos los leds de la Alhambra II FPGA, pero sin necesidad de repetir el temporizador como código.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-return.png)  
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-Return.png)  
 
 En este caso el código es ineficiente (pasamos de 15 a 18 líneas de código), pero ejemplifica el funcionamiento de la instrucción "01" (return). Cuando haya algo que se repita mucho y ocupe más de 3 bytes en la memoria, es cuando se le puede sacar partido a esta instrucción.  
 

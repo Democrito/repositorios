@@ -101,6 +101,8 @@ Observa la siguiente imagen.
 
 Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación (en este caso "E3") siempre hay que cargar antes el valor que queramos comparar mediante "C3". Entonces, cuando ATTO ejecute "E3", -si NO es igual- el valor que hemos cargado con "C3" con el valor de la entrada "cmp", saltará a una posición concreta de la memoria.  
 
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/diagrama%20de%20decision%20C3%20y%20E3.png)
+
 El valor que cargamos con "C3" es un valor de 16 bits, sin embargo, para comparar lo hace siempre con el byte bajo, el byte alto queda descartado y tampoco nos importará el valor de ese byte alto si tuviera almacenado alguno.  
 
 "E3" está compuesto por tres bytes, el primero es la instrucción y los dos siguientes es la dirección de memoria a la que salta si no es igual. Recuerda que, antes de usar "E3" hay que cargar un valor con "C3", ambas instrucciones siempre van en pareja.  

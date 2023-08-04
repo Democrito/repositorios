@@ -127,4 +127,24 @@ Te propongo un ejercicio muy sencillo. En vez de usar los valores 0 y 255, susti
 
 La solución a este ejercicio la puedes encontrar [**aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/GRwr8Vz2DQAJ). Muchas gracias @Flip!  
 
+### 83 // Salto condicional -----> Si es igual, saltar:  
+
+Esta instrucción es la lógica inversa de "E3", en todo lo demás tiene las mismas características. Si el byte bajo cargado con "C3" es igual a la entrada "cmp", entonces salta a la dirección de memoria que hayamos definido después de esta instrucción (83, byte alto y byte bajo a la que salta).  
+
+Creo que no es necesario explicar más sobre ella, porque es lo mismo que "[E3](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64#e3--salto-condicional-------si-no-es-igual-saltar)" pero con lógica inversa a ésta y comparten las mismas características como instrucción.  
+
+Veamos un ejemplo de funcionamiento. Ves a la carpeta "Examples" y descarga el ejercicio "[Example_4-JE.ice](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_4-JE.ice)".  
+
+Cuando lo abras comprobarás que usamos el mismo circuito que el anterior. Para simplificar al máximo la comprensión del funcionamiento de la instrucción "83" he eliminado los parpadeos, así se verá todo más claro. Simplemente cuando NO pulses "SW1" veremos por los leds el valor hexadecimal 55, y cuando mantengas pulsado "SW1", entonces veremos a través de los leds el valor hexadecimal AA.
+
+Este es el código.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ejemplo%20JE.png)  
+
+Es mucho más sencillo que el anterior, ya que si comprendiste "E3", "83" es evidente.  
+
+Te propongo un ejercicio en el que te explico un detalle y tú haces el cambio que propongo:  
+
+Justo al comenzar el programa "C3" carga el registro que luego será comparado con la entrada "cmp". Como ese valor (cargado con "C3") nunca se modifica (siempre tiene el mismo valor), entonces no es necesario que los saltos vayan a la posición 0x0000. Haz que todos los saltos vayan a donde le corresponde, además esto hará que el código corra más rápido.
+
 # Continuará

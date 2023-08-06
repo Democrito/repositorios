@@ -4,11 +4,7 @@ El nRF24L01+ es un módulo de radio de bajo consumo de energía, diseñado para 
 
 Cuando envía o recibe información lo hace en el modo "Half-duplex", esto significa que puede enviar y recibir, pero no al mismo tiempo, en este sentido es como un "Walkie Talkie". Para que dos nRF24L01 puedan enviar y recibir información se necesita un protocolo y de esto será responsable el diseñador que le va a dar uso. Inicialmente en este proyecto sólo vamos a hacer funcionar estos transceptores exclusivamente emisor o exclusivamente receptor, por lo tanto, no necesitaremos protocolos.
 
-Este transceptor tiene capacidad para enviar y recibir 32 bytes y los vamos a aprovechar todos, los bytes que no necesites simplemente no se usarán, quedando como entradas o salidas al aire.
-
-En teoría tiene 126 canales y vamos a usar el canal 0x4C (76 en decimal), porque es el canal por defecto que usa la biblioteca que instalaremos.
-
-Para que puedan establecer comunicación ambos transceptores necesitamos que estén en el mismo canal y dirección. El canal ya lo tenemos, y la dirección que usaremos son 5 bytes, en nuestro caso será en ASCII "00001", o bien 0x30, 0x30, 0x30, 0x30, 0x31 en hexadecimal. En realidad la dirección la marca el último byte, el que está más a la derecha.
+Este transceptor tiene capacidad para enviar y recibir 32 bytes y los vamos a aprovechar todos, los bytes que no necesites simplemente no se usarán, quedando como entradas nulas o salidas al aire.  
 
 El pin IRQ no se utiliza en este proyecto. Ese pin sirve para crear una interrupción en el microcontrolador o FPGA y avisar de que han llegado datos. En la FPGA (RX), se comprueba continuamente si han llegado datos a través del SPI.
 
@@ -58,46 +54,91 @@ Ha de ser esa biblioteca en concreto y no otra.
 
 Ves a esa página de GitHub y haces clic en el botón verde que pone "<>Code" y luego eliges la opción "Download ZIP". Una vez descargada, desde el IDE de Arduino añades la biblioteca.
 
-# Puesta en marcha
+# Configuraciones
 
-Ya lo tenemos todo preparado y conectado, sólo nos falta subir el programa de Arduino al Arduino y el circuito a la FPGA a través de Icestudio.
+## Una breve introducción a la configuración básica y que es común al Arduino y FPGA.
 
-Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que hace cada uno.
+### Channel:  
+El nRF24L01+ usa la banda de frecuencias comprendidas entre 2.4GHz y 2.5GHz. De esa banda se toma un rango de frecuencias lo suficientemente ancho como para poder enviar hasta 2Mb/s. Al troceo de esta banda se le llama "canal". La biblioteca que uso con Arduino usa por defecto el canal 76 (en hexadecimal sería "0x4C"), y es la que propongo en este proyecto. Normalmente no hace falta tocar esto, pero si da la casualidad de que en este canal hay mucho ruido, puedes cambiarlo a otro.  
 
-### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_leds.zip):
+### Address:  
+Para que dos transceptores puedan establecer comunicación, necesitan estar en el mismo canal y tener la misma dirección. Si estuvieran en el mismo canal pero tuvieran diferentes direcciones, el receptor podría escuchar la información, pero sabría que esos datos no son para él. Este proyecto sólo usa un emisor (Arduino TX) y un receptor (FPGA RX), es decir, que no hay más receptores, por tanto, tanto el emisor como el receptor han de tener la misma dirección. Mi consejo es que esta opción no la modifiques (por innecesario).  
 
-En este proyecto el emisor (Arduino TX) envía una cuenta que va del 0 al 255 y vuelta comenzar. Lo hace en los 32 bytes que envía, es decir, que en cada uno de esos 32 bytes envía la misma cuenta numérica.
+### Speed + PA:  
+En la configuración de este transceptor hay un registro de 8 bits en el que se puede modificar dos parámetros, que son: la tasa de transferencia y la potencia de transmisión. Esta es la parte que más te puede interesar modificar, porque cuánto menor es la tasa de transferencia de datos, mayor alcance tiene.  
+Para simplificar la configuración de esta opción siempre voy a utilizar la potencia máxima. Te dejo el valor en hexadecimal que le corresponde a las tres tasa de transferencia que se puede configurar y a máxima potencia.  
 
-El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32 bytes de salida, y en este proyecto se repite la misma cuenta numérica en todos, no importa si cogemos el byte más alto, el más bajo o intermedios, todos te darán la misma salida. En este proyecto tomo uno de ellos, no importa cuál. Observa en el esquema que la salida queda registrada con un registro de 8 bits y se valida con el pin "done". Es necesario registrar las salidas, porque si conectaras los leds directamente a la salida verías cosas extrañas, y es debido a que en el interior del circuito los bytes son desplazados a modo de registro de desplazamiento.
+**Valores de configuración para Arduino versus Valores de configuración para la FPGA**  
 
-Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM 
-(aunque en el vídeo el transceptor sale sin capacitor electrolítico, por favor, no lo hagas funcionar así, pónselo.)
+250Kb/s: 'h27 (por defecto y con mayor alcance y a máxima potencia)  
+1Mb/s:   'h07  
+2Mb/s:   'h0F (cubre poca distancia en comparación a los anteriores, aún usando potencia máxima)  
 
-### [RF24_test_Serial.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_test_Serial.zip):
+Arduino y FPGA han de estar en el mismo canal, tener la misma dirección y usar la misma tasa de transferencia de datos, de otro modo no habría comunicación.  
 
-El emisor (Arduino TX) envía una frase en latín ("Per aspera ad astra") junto con una cuenta numérica.
-El receptor (FPGA RX) toma lo que recibe del emisor y lo muestra en un terminal serie. Se vería, en el terminal serie de Icestudio, esto:
+## Configuración software de Arduino (TX) :  
 
-![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/test_text_serial_nrf24l01_RX.png)
+Veamos la configuración del Arduino Nano o Arduino UNO, ya que tienen el mismo patillaje y mismo microcontrolador. Cuando abras el programa para Arduino verás esto en la configuración.  
 
-La velocidad en baudios por defecto es de 115200.
+![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/arduino%20config%20nrf24l01.png)  
 
-En este caso no se necesita registrar las salidas porque el tiempo de envío a la terminal serie es muy amplio (cada 500ms), pero si fuese a toda velocidad, entonces habría que registrar todas las salidas validándolas con el pin "done".
+Pasamos a ver e identificar en el programa de Arduino todo lo explicado anteriormente por si necesitas modificar algún detalle:  
 
-Tienes un ejemplo igual a este para una Icestick si cliqueas [**aquí**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01/Icestick)
+****const byte pipe[] = "00001";****  
+Para establecer comunicación ambos transceptores tienen que estar en el mismo canal y tener misma dirección. Utiliza 5 bytes para configurar la dirección, en nuestro caso será en ASCII "00001", o bien 0x30, 0x30, 0x30, 0x30, 0x31 en hexadecimal. En realidad la dirección la marca el último byte, el que está más a la derecha (el '1'). Recomiendo no tocar esto, porque es innecesario, vamos a usar sólo dos transceptores y ambos han de tener los mismos datos de configuración. Si quieres cambiar esta parte por alguna extraña razón, cambia sólo el byte que está más a la derecha (el '1'), si modificas los '0's, dejará de funcionar.  
+
+****radio.setChannel(0x4C);****  
+Por defecto usaremos el canal 0x4C (76 en decimal), porque es el canal por defecto que usa la biblioteca que instalaremos. Tampoco tiene mucho sentido cambiar este parámetro, a no ser que diese la casualidad que donde estén los transceptores haya mucho ruido en ese canal.  
+
+****radio.setDataRate(RF24_250KBPS);****  
+Esta parte sí que puede interesarte modificar según las necesidades que tengas. Tienes la opción de 250Kb/s, 1Mb/s y 2Mb/s. Como ya comenté antes, cuanto mayor es la tasa de transferencia, menos distancia cubre.  
+
+## Configuración de la FPGA (RX) :  
+
+![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/configuracion%20FPGA%20nrf24l01.png)  
+
+En la FPGA hay 3 cajas para hacer las modificaciones pertinentes. En "chn" definimos el canal, en "adr" la dirección y en "frq" la tasa de transferencia. Al igual que comenté en la configuración software para el Arduino, es mejor no tocar el canal ni la dirección.  
+
+Para simplificar la configuración de la dirección del transceptor, sólo se modifica el último byte, dejando un "1" en ASCCI, para hacerlo coincidir con el "1" (de "00001") que está definido en la configuración para Arduino. Es mejor no tocar esto, además de que es innecesario.  
+
+Lo que sí es interesante es modificar la tasa de transferencia + PA, y como daba muchas posibles combinaciones, sólo considero la máxima potencia (PA) junto a las tres posibles tasas de transferencia. Vuelvo a repetir estos datos que puse más arriba:  
+
+250Kb/s: 'h27 (por defecto y con mayor alcance y a máxima potencia)  
+1Mb/s:   'h07 (cubre una distancia media en comparación, a máxima potencia)  
+2Mb/s:   'h0F (cubre poca distancia en comparación a los anteriores, aún usando la potencia máxima)  
+
+Si conoces bien esta parte de la configuración del transceptor (registo de configuración 0x26), no te será difícil modificarlo para otras potencias medias o mínima; son 4 niveles en total.  
+
+Para terminar quiero hacer énfasis en que estos tres datos de configuración han de ser iguales en Arduino y en la FPGA. Lo que modifiques en uno, lo has de hacer igual en el otro, de otro modo no habrá comunicación.  
+
+# Puesta en marcha  
+
+Ya lo tenemos todo preparado y conectado, sólo nos falta subir el programa de Arduino al Arduino y el circuito a la FPGA a través de Icestudio.  
+
+Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que hace cada uno.  
+
+### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_leds.zip):  
+
+**Este primer ZIP te permitirá hacer pruebas de distancia, alimentando el Arduino y la FPGA con una power bank; se entiende que cada uno con la suya.**  
+
+En este proyecto el emisor (Arduino TX) envía una cuenta que va del 0 al 255 y vuelta comenzar. Lo hace en los 32 bytes que envía, es decir, que en cada uno de esos 32 bytes envía la misma cuenta numérica.  
+
+El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32 bytes de salida, y en este proyecto se repite la misma cuenta numérica en todos, no importa si cogemos el byte más alto, el más bajo o intermedios, todos te darán la misma salida. En este proyecto tomo uno de ellos, no importa cuál.  
+
+Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM  
+(aunque en el vídeo el transceptor sale sin capacitor electrolítico, por favor, no lo hagas funcionar así, pónselo.)  
+
+### [RF24_test_Serial.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_test_Serial.zip):  
+
+**Este segundo ZIP, te servirá de ejemplo para luego modificarlo y enviar/recibir los datos que quieras con el formato que necesites.**
+
+El emisor (Arduino TX) envía una frase en latín ("Per aspera ad astra") junto con una cuenta numérica.  
+El receptor (FPGA RX) toma lo que recibe del emisor y lo muestra en un terminal serie. Se vería esto en el terminal serie de Icestudio:  
+
+![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/test_text_serial_nrf24l01_RX.png)  
+
+La velocidad en baudios por defecto es de 115200.  
+
+Tienes un ejemplo igual a este para una Icestick si cliqueas [**aquí**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01/Icestick)  
 
 # Fin.
-### Nota:
-Todo este trabajo es preliminar, esto significa que estoy subiendo todo en plan sucio, pero esto no afecta al funcionamiento, sino a la estética y comentarios que hay en los programas y circuitos. Muchos de los comentarios que hago dentro de Icestudio están desfasados o no son correctos porque iba modificando sobre la marcha.
-
-Con tiempo iré mejorando tanto la estética como fijar comentarios y hacerlo lo más comprensible posible para saber de dónde viene cada cosa o qué significan.
-
-
-
-
-
-
-
-
-
-

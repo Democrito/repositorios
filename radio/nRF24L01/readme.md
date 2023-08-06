@@ -85,12 +85,15 @@ Veamos la configuración del Arduino Nano o Arduino UNO, ya que tienen el mismo 
 Pasamos a ver e identificar en el programa de Arduino todo lo explicado anteriormente por si necesitas modificar algún detalle:  
 
 ****const byte pipe[] = "00001";****  
+
 Para establecer comunicación ambos transceptores tienen que estar en el mismo canal y tener misma dirección. Utiliza 5 bytes para configurar la dirección, en nuestro caso será en ASCII "00001", o bien 0x30, 0x30, 0x30, 0x30, 0x31 en hexadecimal. En realidad la dirección la marca el último byte, el que está más a la derecha (el '1'). Recomiendo no tocar esto, porque es innecesario, vamos a usar sólo dos transceptores y ambos han de tener los mismos datos de configuración. Si quieres cambiar esta parte por alguna extraña razón, cambia sólo el byte que está más a la derecha (el '1'), si modificas los '0's, dejará de funcionar.  
 
 ****radio.setChannel(0x4C);****  
+
 Por defecto usaremos el canal 0x4C (76 en decimal), porque es el canal por defecto que usa la biblioteca que instalaremos. Tampoco tiene mucho sentido cambiar este parámetro, a no ser que diese la casualidad que donde estén los transceptores haya mucho ruido en ese canal.  
 
 ****radio.setDataRate(RF24_250KBPS);****  
+
 Esta parte sí que puede interesarte modificar según las necesidades que tengas. Tienes la opción de 250Kb/s, 1Mb/s y 2Mb/s. Como ya comenté antes, cuanto mayor es la tasa de transferencia, menos distancia cubre.  
 
 ## Configuración de la FPGA (RX) :  
@@ -139,6 +142,8 @@ El receptor (FPGA RX) toma lo que recibe del emisor y lo muestra en un terminal 
 
 La velocidad en baudios por defecto es de 115200.  
 
-Tienes un ejemplo igual a este para una Icestick si cliqueas [**aquí**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01/Icestick)  
+Tienes un ejemplo igual a este para una Icestick cliqueando [**aquí**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01/Icestick)  
 
-# Fin.
+# Atto
+
+Si sientes curiosidad sobre el pequeño microcontrolador que lleva incorporado, [**cliquea aquí**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64)  

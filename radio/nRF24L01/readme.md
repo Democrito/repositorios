@@ -117,7 +117,7 @@ Ya lo tenemos todo preparado y conectado, sólo nos falta subir el programa de A
 
 Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que hace cada uno.  
 
-### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_leds.zip):  
+### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_Leds.zip):  
 
 **Este primer ZIP te permitirá hacer pruebas de distancia, alimentando el Arduino y la FPGA con una power bank; se entiende que cada uno con la suya.**  
 
@@ -128,7 +128,7 @@ El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32
 Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM  
 (aunque en el vídeo el transceptor sale sin capacitor electrolítico, por favor, no lo hagas funcionar así, pónselo.)  
 
-### [RF24_test_Serial.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_test_Serial.zip):  
+### [https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_Serial.zip):  
 
 **Este segundo ZIP, te servirá de ejemplo para luego modificarlo y enviar/recibir los datos que quieras con el formato que necesites.**
 

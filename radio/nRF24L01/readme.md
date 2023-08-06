@@ -102,7 +102,7 @@ Esta parte sí que puede interesarte modificar según las necesidades que tengas
 
 En la FPGA hay 3 cajas para hacer las modificaciones pertinentes. En "chn" definimos el canal, en "adr" la dirección y en "frq" la tasa de transferencia. Al igual que comenté en la configuración software para el Arduino, es mejor no tocar el canal ni la dirección.  
 
-Para simplificar la configuración de la dirección del transceptor, sólo se modifica el último byte, dejando un "1" en ASCCI, para hacerlo coincidir con el "1" (de "00001") que está definido en la configuración para Arduino. Es mejor no tocar esto, además de que es innecesario.  
+Para simplificar la configuración de la dirección del transceptor, sólo se modifica el último byte, dejando un "1" en ASCII, para hacerlo coincidir con el "1" (de "00001") que está definido en la configuración para Arduino. Es mejor no tocar esto, además de que es innecesario.  
 
 Lo que sí es interesante es modificar la tasa de transferencia + PA, y como daba muchas posibles combinaciones, sólo considero la máxima potencia (PA) junto a las tres posibles tasas de transferencia. Vuelvo a repetir estos datos que puse más arriba:  
 

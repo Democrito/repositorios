@@ -147,3 +147,7 @@ Tienes un ejemplo igual a este para una Icestick cliqueando [**aquí**](https://
 # Atto
 
 Si sientes curiosidad sobre el pequeño microcontrolador que lleva incorporado, [**cliquea aquí**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64)  
+
+# Dudas y sugerencias  
+
+[**Haz clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/NzmKzrn2Dck) si tienes alguna duda o sugerencia, te llevará al foro de [**#FPGAwars**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre).  

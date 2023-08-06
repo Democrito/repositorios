@@ -52,7 +52,7 @@ El programa utiliza una biblioteca que nos permitirá configurar y comunicarnos 
 
 Ha de ser esa biblioteca en concreto y no otra.
 
-Ves a esa página de GitHub y haces clic en el botón verde que pone "<>Code" y luego eliges la opción "Download ZIP". Una vez descargada, desde el IDE de Arduino añades la biblioteca.
+Ves a esa página de GitHub y haces clic en el botón verde que pone "**<>Code**" y luego eliges la opción "**Download ZIP**". Una vez descargada, desde el IDE de Arduino añades la biblioteca.
 
 # Configuraciones
 

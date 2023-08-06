@@ -128,7 +128,7 @@ El receptor (FPGA RX) muestra lo que recibe a través de 8 leds. Como tenemos 32
 Te dejo un vídeo para ver lo que verías en la vida real: https://www.youtube.com/watch?v=GdLhohr6IJM  
 (aunque en el vídeo el transceptor sale sin capacitor electrolítico, por favor, no lo hagas funcionar así, pónselo.)  
 
-### [https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_Serial.zip):  
+### [RF24_Serial.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_Serial.zip):  
 
 **Este segundo ZIP, te servirá de ejemplo para luego modificarlo y enviar/recibir los datos que quieras con el formato que necesites.**
 

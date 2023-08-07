@@ -146,7 +146,7 @@ Tienes un ejemplo igual a este para una Icestick cliqueando [**aquí**](https://
 
 # Atto
 
-Si sientes curiosidad sobre el pequeño microcontrolador que lleva incorporado, [**cliquea aquí**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64)  
+El driver controlador del nRF24L01+ de la FPGA contiene un pequeño microcontrolador. Si sientes curiosidad por este pequeño micro [**cliquea aquí**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64)  
 
 # Dudas y sugerencias  
 

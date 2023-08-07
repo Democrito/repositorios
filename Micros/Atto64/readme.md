@@ -135,7 +135,7 @@ Creo que no es necesario explicar más sobre ella, porque es lo mismo que "[E3](
 
 Veamos un ejemplo de funcionamiento. Ves a la carpeta "Examples" y descarga el ejercicio "[Example_4-JE.ice](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_4-JE.ice)".  
 
-Cuando lo abras comprobarás que es el mismo circuito que el anterior. Para simplificar al máximo la comprensión del funcionamiento de la instrucción "83" he eliminado los parpadeos, así se verá todo más claro. Simplemente cuando NO pulses "SW1" veremos por los leds el valor hexadecimal 55, y cuando mantengas pulsado "SW1", entonces veremos a través de los leds el valor hexadecimal AA.
+Cuando lo abras comprobarás que es el mismo circuito que el anterior. Para simplificar al máximo la comprensión del funcionamiento de la instrucción "83" he eliminado los parpadeos, así se verá todo más claro. Simplemente cuando NO pulses "SW1" veremos por los leds el valor hexadecimal 55, y cuando mantengas pulsado "SW1", entonces veremos a través de los leds el valor hexadecimal AA.  
 
 Este es el código.  
 
@@ -145,8 +145,33 @@ Es mucho más sencillo que el anterior, ya que si comprendiste "E3", "83" es evi
 
 Ejercicio:  
 
-Justo al comienzo del programa, "C3" carga el registro que luego será comparado con la entrada "cmp". Como ese valor (cargado con "C3") nunca se modifica (siempre tiene el mismo valor), entonces no es necesario que los saltos vayan a la posición 0x0000. Haz que todos los saltos vayan a donde le corresponde, además esto hará que el código corra un poquito más rápido.
+Justo al comienzo del programa, "C3" carga el registro que luego será comparado con la entrada "cmp". Como ese valor (cargado con "C3") nunca se modifica (siempre tiene el mismo valor), entonces no es necesario que los saltos vayan a la posición 0x0000. Haz que todos los saltos vayan a donde le corresponde, además esto hará que el código corra un poquito más rápido.  
 
-Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/PGp-WtBpDgAJ) para ver la solución.
+Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/PGp-WtBpDgAJ) para ver la solución.  
+
+### A3 & D3 // Ejecutar otras instrucciones un número de veces determinado.  
+
+Atto no tiene ALU, entonces creé una instrucción que equivaliese al bucle "for" para repetir la ejecución de otras instrucciones un número concreto de veces. He nombrado el bucle "for" y no "while" o "until", porque en la ortodoxia de la programación se dice que el bucle "for" sólo -se debería- de usar cuando se conoce el número de veces a repetir un bucle, en los demás casos, cuando no se sabe y depende de alguna condición, es cuando -se debería- usar los bucles "while" o "until".  
+
+Estamos con código máquina, veamos cómo se define un bucle tipo "for" máquina para Atto, es decir, algo que se repite una cantidad de veces concreta.  
+
+Usaremos las instrucciones "A3" y "D3", ambas miden 3 bytes. Estas dos instrucciones siempre van en pareja.  
+
+En "A3" pondremos la cantidad de veces que queramos repetir el bucle. El número de veces mínimo es 1 (poner 0 sería absurdo) y el máximo es 65535.  
+En "D3" pondremos la dirección de memoria a la que ha de saltar para que se repita, y esa dirección será la siguiente instrucciónque que haya después de A3.  
+
+De forma esquemática sería así:  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/bucle%20for%20atto.png)  
+
+Vemos que "A3" lo debemos de poner una línea antes de comenzar el bucle. Y "D3" está donde termina el bucle. El "(JNZ)" es un descontador interno de esta instrucción, porque lo que hace es descontar el número definido con A3, hasta llegar a 0.  
+
+Veamos un programa que ejemplifique estas dos instrucciones. Como es un poco largo, descárgalo, ábrelo con Icestudio y desde ahí lo verás en grande. Haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_5-Bucle_For.ice) para descargar el ejemplo, o si lo prefieres, toma el ejemplo "Example_5-Bucle_For.ice" que está en la carpeta "Examples".  
+
+El programa hace parpadear dos veces los leds de la Alhambra II FPGA, y luego repite tres veces la alternancia de leds (55..AA..), y después vuelve a repetirlo todo otra vez.  
+
+Ejercicio:  
+
+Haz que se repita 5 veces el encendido y apagado de los leds y 2 veces la alternancia de los leds (55..AA..).  
 
 # Continuará

@@ -8,6 +8,8 @@ Este pequeño micro ocupa menos de 450 LCs, pero puede aumentar en las adaptacio
 
 Permite direccionar hasta 64KB, y está compuesto por 13 instrucciones básicas, la mayoría de las veces sólo se usan unas pocas, como por ejemplo, envíar paquetes de datos, salto condicional y salto directo a una zona de la memoria. No tiene ALU porque no está diseñado para calcular, sólo para enviar y recibir información.  
 
+Pertenece a la categoría de 8 bits, porque maneja la memoria byte a byte.  
+
 ## Instrucciones máquina:  
 
 Las instrucciones máquina miden un byte, y de este byte los dos bits más bajos (LSB) indican cuántos bytes compone la instrucción completa. Por ejemplo "F3" significa salto directo y se compone de 3 bytes. El primer byte es la instrucción en sí de salto directo, y los dos bytes siguientes es la dirección de memoria a la que ha de saltar.  

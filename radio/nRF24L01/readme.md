@@ -120,7 +120,7 @@ Ya lo tenemos todo preparado y conectado, sólo nos falta subir el programa de A
 
 Arriba del todo de esta página verás dos ZIP, son dos proyectos. Veamos lo que hace cada uno.  
 
-### [RF24_leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_Leds.zip):  
+### [RF24_Leds.zip](https://github.com/Democrito/repositorios/raw/master/radio/nRF24L01/RF24_Leds.zip):  
 
 **Este primer ZIP te permitirá hacer pruebas de distancia, alimentando el Arduino y la FPGA con una power bank; se entiende que cada uno con la suya.**  
 

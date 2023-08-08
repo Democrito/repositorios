@@ -237,7 +237,7 @@ Como son valores fijos lo que habrá en la entrada "din", una vez que carguemos 
 
 Te propongo un ejercicio sencillo y otro complicado.  
 
-**Sencillo:**  En vez de usar los valores "0F" y "F0", sustitúyelos por "55" y "AA".
-**Complicado:** En vez de usar registros de desplazamiento usa un multiplexor. Tendrás que modificar el circuito y el código.
+**Sencillo:**  En vez de usar los valores "0F" y "F0", sustitúyelos por "55" y "AA".  
+**Complicado:** En vez de usar registros de desplazamiento usa un multiplexor. Tendrás que modificar el circuito y el código.  
 
-# Continuará
+# Continuará  

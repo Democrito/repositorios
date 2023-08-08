@@ -24,21 +24,31 @@ Por otra parte hay que descargar el programa PulseView. Ves a este enlace direct
 
 Cada columna representa una plataforma de SO, yo soy usuario de Windows, y he señalado en rojo dónde le doy a descargar. Pincho en el botón que pone "PulseView 0.4.2 (64bits)" porque mi PC es de 64bits.  
 
-Ahora, antes de pasar a ver cómo se configura para ver y analizar señales SPI e I2C, mira este vídeo de mi Maestro Maker "Obijuan", es una introducción a esta herramienta:  
+Ahora, antes de pasar a ver cómo se configura para ver y analizar señales SPI e I2C, mira este vídeo de mi Maestro Maker [**Obijuan**](https://www.youtube.com/watch?v=R59Q-MwFbM8&list=PLf-63rsbF9BsNeFj-j0THAPd3K_KoJDs3), es una introducción a esta herramienta:  
 
 https://www.youtube.com/watch?v=ZPh1Goh93lk  
 
-### Configuración para analizar señales SPI:
+### Configuración general:  
 
-Antes de abrir el programa PulseView has de tener conectado el analizdor lógico para que te lo reconozca, esto es importante. No necesitas instalar nada, el propio programa reconoce el analizador.
+En este apartado veremos la configuración general, que es común para analizar cualquier tipo de señal o protocolo.  
 
-Abres PulseView y aparecerá esta imagen:
+Antes de abrir el programa PulseView (en adelante **PV**) has de tener conectado el analizdor lógico para que te lo reconozca, esto es importante. No necesitas instalar nada, el propio programa reconoce el analizador.  
+
+Abres PV y aparecerá esta imagen:  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Pantalla%20inicial%20PV.png)  
 
-He señalado con un cuadro en rojo (arriba) un lugar que pone "**Saleae Logic**". Te ha de salir eso, si te pone otra cosa significa que no te ha reconocido el analizador lógico, y no podrás hacer nada. Quizás una mala conexión USB... a saber.
+He señalado con un cuadro en rojo (arriba) un lugar que pone "**Saleae Logic**". Te ha de salir eso, si te pone otra cosa significa que no te ha reconocido el analizador lógico, y no podrás hacer nada. Quizás una mala conexión USB... a saber..., evita que se mueva el cable USB.  
 
-Y si todo ha ido bien, ya podemos comenzar a configurar PV (PulseView) para analizar señales SPI. Muchos de estos pasos los va a tener que hacer casi siempre porque PV sólo guarda parte de estas configuraciones entre una sensión y otra. Con el uso te irás acostumbrado a todo esto de forma rutinaria.
+Y si todo ha ido bien, ya podemos comenzar a configurar PV (PulseView). Muchos de estos pasos los va a tener que hacer casi siempre porque PV sólo guarda parte de estas configuraciones entre una sensión y otra. Con el uso te irás acostumbrado a todo esto de forma rutinaria.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV.gif)  
+
+
+
+### Configuración para analizar señales SPI:
+
+
 
 El protocolo SPI tiene algunas variantes, pero el más básico es de 4 cables: CS (o CSN), CLK, MOSI y MISO. 
 

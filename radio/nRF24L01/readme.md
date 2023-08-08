@@ -144,6 +144,28 @@ La velocidad en baudios por defecto es de 115200.
 
 Tienes un ejemplo igual a este para una Icestick cliqueando [**aquí**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01/Icestick)  
 
+# Datos avanzados  
+
+## Sobre el registro de configururación 0x26:  
+
+Dentro del nRF24L01 hay unos registros de configuración. El registro 0x26 tiene dos bits para configurar la potencia, y en ese mismo registro también se configura la tasa de transferencia vía radio (250Kb/s, 1Mb/s y 2Mb/s). Este es el registro:  
+
+![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/config_reg_0x26.jpg)  
+
+Los bits **2:1** se encargan de la potencia.  
+Los bits (por separado) **bit3 y bit5**, se encargan de la tasa de transferencia. Tal que así:  
+
+bit5 = 0; bit3 = 0  ------------------> 1Mb/s  
+bit5 = 0; bit3= 1   ------------------> 2Mb/s  
+bit5 = 1; bit3 = 0  ------------------> 250Kb/s  
+
+El bit0, aunque ponga "Obsolete" en realidad tiene uso. Sirve para activar los "nRF24L01+PA+LNA", es decir, los que llevan la extensión en el PCB para darle más potencia y sensibilidad. Por tanto, siempre ha de estar a 1, ya que los transceptores menos potentes, les da igual esa parte (siemplemente no la tienen).  
+
+En Arduino, estas dos instrucciones manejan el mismo registro (0x26) :  
+
+radio.setDataRate(RF24_250KBPS);  // Como ejemplo está aquí a 250Kb/s, pero puede ser 1Mb/s ó 2Mb/s.  
+radio.setPALevel(RF24_PA_MAX);    // En este proyecto la potencia siempre es máxima.  
+
 # Atto
 
 El driver controlador del nRF24L01+ de la FPGA contiene un pequeño microcontrolador. Si sientes curiosidad por este pequeño micro [**cliquea aquí**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64)  

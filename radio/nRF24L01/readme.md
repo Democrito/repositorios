@@ -146,9 +146,9 @@ Tienes un ejemplo igual a este para una Icestick cliqueando [**aquí**](https://
 
 # Datos avanzados  
 
-## Sobre el registro de configururación 0x26:  
+## Sobre el registro de configuración 0x26:  
 
-Dentro del nRF24L01 hay unos registros de configuración. El registro 0x26 tiene dos bits para configurar la potencia, y en ese mismo registro también se configura la tasa de transferencia vía radio (250Kb/s, 1Mb/s y 2Mb/s). Este es el registro:  
+Dentro del nRF24L01 hay unos registros de configuración. El registro 0x26 tiene dos bits para configurar la potencia, y en ese mismo registro también se configura la tasa de transferencia vía radio (250Kb/s, 1Mb/s y 2Mb/s) :  
 
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/config_reg_0x26.jpg)  
 
@@ -156,7 +156,7 @@ Los bits **2:1** se encargan de la potencia.
 Los bits (por separado) **bit3 y bit5**, se encargan de la tasa de transferencia. Tal que así:  
 
 bit5 = 0; bit3 = 0  ------------------> 1Mb/s  
-bit5 = 0; bit3= 1   ------------------> 2Mb/s  
+bit5 = 0; bit3= 1    ------------------> 2Mb/s  
 bit5 = 1; bit3 = 0  ------------------> 250Kb/s  
 
 El bit0, aunque ponga "Obsolete" en realidad tiene uso. Sirve para activar los "nRF24L01+PA+LNA", es decir, los que llevan la extensión en el PCB para darle más potencia y sensibilidad. Por tanto, siempre ha de estar a 1, ya que los transceptores menos potentes, les da igual esa parte (siemplemente no la tienen).  

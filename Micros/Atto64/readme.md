@@ -151,7 +151,7 @@ Justo al comienzo del programa, "C3" carga el registro que luego será comparado
 
 Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/PGp-WtBpDgAJ) para ver la solución.  
 
-### A3 & D3 // Ejecutar instrucciones un número de veces determinado.  
+### A3 & D3 // Ejecutar instrucciones un número de veces determinado:  
 
 Atto no tiene ALU, entonces creé una instrucción que equivaliese al bucle "for" para repetir la ejecución de otras instrucciones un número concreto de veces. He nombrado el bucle "for" y no "while" o "until", porque en la ortodoxia de la programación se dice que el bucle "for" sólo -se debería- de usar cuando se conoce el número de veces a repetir un bucle, en los demás casos, cuando no se sabe y depende de alguna condición, es cuando -se debería- usar los bucles "while" o "until".  
 
@@ -178,7 +178,7 @@ Haz que se repita 5 veces el encendido y apagado de los leds y 2 veces la altern
 
 Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/zJIQZ4sbDwAJ) para ver la solución.  
 
-### F1 // "Return" de la interrupción hardware externa.  
+### F1 // "Return" de la interrupción hardware externa:  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Interrupcion%20hardware.PNG)  
 
@@ -194,6 +194,50 @@ Descarga el circuito de ejemplo de interrupción [**desde aquí**](https://githu
 
 Cuando subas el circuito a la FPGA (equivale a decir: ejecutar el programa), verás parpadear todos los leds, y cuando pulse el pulsador "SW1", entonces, en vez de parpadear lo que hará será alternarse los leds (55..AA) una sola vez. Aunque si pulsas repetidamente, mientras pulses rápido, se quedaría en la alternancia de los leds hasta que dejaras de pulsar repetidamente rápido.  
 
-Te propongo un ejercicio muy sencillo, simplemente cambia la posición de memoria donde se ejecutará la interrupción, para ello tendrás que poner el programa de la interrupción en esa posición de la memoria. 
+Te propongo un ejercicio muy sencillo, simplemente cambia la posición de memoria donde se ejecutará la interrupción, para ello tendrás que poner el programa de la interrupción en esa posición de la memoria.  
+
+### B3 // Guardar un valor externo dentro de la memoria:  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/entrada%20-din-%20para%20cargar%20un%20valor%20en%20la%20memoria.png) 
+
+
+La instrucción "B3" toma el valor de la entrada "din" (de 8 bits) y lo guarda en la dirección de memoria que le indiquemos. Por ejemplo:  
+
+B3  
+03  
+BF  
+
+Lo que hará será tomar el valor que hay en la entrada "din" y ese valor lo guardará en la dirección de memoria 0x03BF. No tiene más misterio. El valor que antes tuviera ese byte en la memoria es "aplastado" (o sustituido) por el nuevo.  
+
+Como puedes comprobar, mide 3 bytes.  
+
+Y ahora vienen las curvas, así que agárrate fuerte (esto significa poner mucha atención). Esta instrucción la necesitamos cuando un periférico necesita ser configurado de forma externa, porque puede tener varias configuraciones aparte de la de por defecto, y rara vez sólo tendrás que carga un sólo byte en la memoria. Entonces nos la hemos de ingeniar para cargar todos los bytes que necesitemos dentro de la memoria y para ello nos haremos servir de la salida "dout".  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/carga%20de%20dos%20bytes%20en%20la%20memoria.png)  
+
+Cuando tengamos que meter varios bytes en la memoria, una forma de hacerlo es usar registros de desplazamiento, en este caso serán de 8 bits. Además, esta construcción entra la información de forma secuencial, al igual que la programación, que funciona de forma secuencial. Otro forma de entrar los datos hubiera sido utilizar un multiplexor.  
+
+En la última imagen se puede apreciar dos registros de 8 bits, puestos en modo de desplazamiento porque comparten la patilla "load". En esos dos registros guardamos un valor inicial para cada registro que son "0F" y "F0". Para no perder esos valores, realimentamos la salida con la entrada. Si sólo se usa una sola vez, no hace falta realimentar la salida con la entrada, pero si se carga más de una vez, entonces hay que ponerlos en "realimentación" (suele ser lo aconsejable y no cuesta nada). Para poder hacer los desplazamientos, necesitamos algo que lo haga en el momento que lo necesitemos, y para ello nos serviremos del byte alto de la salida "dout". A través de programación en el bit0 del byte alto de "dout" crearemos un pulso. Este pulso lo haremos con la instrucción "8B". Estando inicialmente a 0 ese bit, pondremos ese bit en alto y luego lo devolvemos a bajo. Esto consume ciclos de reloj, y necesitamos un *tic* para el desplazamiento, por eso se le añade un **detector de flanco de subida** antes de "atacar" la entrada "load" de los registros.  
+
+Como ejemplo, usaremos la interrupción externa cuando queramos cargar esos dos valores en una zona determinada de la memoria. Usando la interrupción se verá todo más claro porque quedará separado los valores de, un antes y un después, de la interrupción.  
+
+Descarga este ejemplo para ver el código en grande [**cliqueando aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_7-cargar_externa_a_memoria.ice), o yendo a la carpeta "Examples", y tomar el ejemplo "Example_7-cargar_externa_a_memoria.ice". Y después ejecuta el programa, es decir, subes el circuito a la FPGA y lo pruebas.  
+
+Verás que todos los leds estarán parpadeando, pero si pulsas sobre el pulsador "SW1", se alternarán encendiéndose y apagándose los 4 leds de un lado con los 4 del otro.  
+
+Dentro del circuito verás este código:  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/instruccion%20B3.png)  
+
+Podemos ver a través de las flechas en rojo lo que hace la instrucción "B3", es decir, toma lo que haya en la entrada "din" y lo guarda en la posición de memoria que le indiquemos.  
+
+Por otra parte están los "8B" para crear el pulso. Primero lo ponemos en alto y luego en bajo. Esto hará que los registros desplacen el valor hacia la entrada de "din".  
+
+Como son valores fijos lo que habrá en la entrada "din", una vez que carguemos los nuevos valores, al pulsar otra vez "SW1" se volvería a ver lo que ya hay, es decir, no veremos cambios. Para volver a repetir la prueba has de hacer "reset" al reset de la FPGA.  
+
+Te propongo un ejercicio sencillo y otro complicado.  
+
+**Sencillo:**  En vez de usar los valores "0F" y "F0", sustitúyelos por "55" y "AA".
+**Complicado:** En vez de usar registros de desplazamiento usa un multiplexor. Tendrás que modificar el circuito y el código.
 
 # Continuará

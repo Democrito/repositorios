@@ -176,6 +176,24 @@ Ejercicio:
 
 Haz que se repita 5 veces el encendido y apagado de los leds y 2 veces la alternancia de los leds (55..AA..).  
 
-Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/zJIQZ4sbDwAJ) para ver la solución. 
+Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/zJIQZ4sbDwAJ) para ver la solución.  
+
+### F1 // "Return" de la interrupción hardware externa.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Interrupcion%20hardware.PNG)  
+
+Atto tiene una entrada para hacer interrupción externa. Es la entrada "int" y funciona con *tic*, es decir, un pulso de reloj.  
+
+En el programa, está el programa convencional de hacer parpadear todos los leds (encender y apagar, encender...) pero al recibir un *tic* en la entrada "int" dejará de ejecutar el programa principal y saltará a la dirección de memoria que le hayamos puesto en la caja "dirInt". Entonces, ejecutará las instrucciones que se encuentre a partir de ahí, hasta que se encuentre con la instrucción "F1".  
+
+"F1" es un "return", pero en vez de un return de salto (01), es de interrupción. Ambos tipos de return funcionan exactamente igual, y también mide un sólo byte. "F1" hará que el contador de programa vuelva al programa principal, a la posición +3 desde donde se produjo la interrupción en el programa principal.  
+
+Durante la ejecución de interrupción externa no permite otra interrupción externa, esto significa que si volvemos a darle a la entrada "int" mientras ejecuta una interrupción, no producirá otra interrupción, sólo se podrá volver a hacer interrupción a partir de que encuentre la instrucción "F1", que es el retorno de interrupción.  
+
+Descarga el circuito de ejemplo de interrupción [**desde aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_6-Interrupcion_externa.ice), o ves la carpeta "Examples" y coges el archivo "**Example_6-Interrupcion_externa.ice**".  
+
+Cuando subas el circuito a la FPGA (equivale a decir: ejecutar el programa), verás parpadear todos los leds, y cuando pulse el pulsador "SW1", entonces, en vez de parpadear lo que hará será alternarse los leds (55..AA) una sola vez. Aunque si pulsas repetidamente, mientras pulses rápido, se quedaría en la alternancia de los leds hasta que dejaras de pulsar repetidamente rápido.  
+
+Te propongo un ejercicio muy sencillo, simplemente cambia la posición de memoria donde se ejecutará la interrupción, para ello tendrás que poner el programa de la interrupción en esa posición de la memoria. 
 
 # Continuará

@@ -122,7 +122,7 @@ Subes el circuito y se ejecutará el programa. Nos vamos a PulseView, y como ya 
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20test%202.png)  
 
-En esta ocasión el programa envía continuamente un paquete de 7 bytes, distanciados por 50us, tal como está programado, con el valor de 0x55AA0FF01100.
+En esta ocasión el programa envía continuamente un paquete de 7 bytes, distanciados por 50us, tal como está programado, con el valor de 0x55AA0FF0FF1100.
 
 Si intuyes el funcionamiento del programa, trata de variar la anchura del paquete de datos y enviando otros valores. Y no te preocupes, que si te falla no se estropeará nada.
 

@@ -32,7 +32,7 @@ https://www.youtube.com/watch?v=ZPh1Goh93lk
 
 En este apartado veremos la configuración general, que es común para analizar cualquier tipo de señal o protocolo.  
 
-Antes de abrir el programa PulseView (en adelante **PV**) has de tener conectado el analizdor lógico para que te lo reconozca, esto es importante. No necesitas instalar nada, el propio programa reconoce el analizador.  
+Antes de abrir el programa PulseView (en adelante **PV**) has de tener conectado el analizador lógico para que te lo reconozca, esto es importante. No necesitas instalar nada, el propio programa reconoce el analizador.  
 
 Abres PV y aparecerá esta imagen:  
 

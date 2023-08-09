@@ -87,7 +87,7 @@ Y nos queda medio paso para terminar de configurar.
 
 Ahora volvemos a hacer clic en el hilo "CSN" y vamos a seleccionar cuándo queremos que comience a grabar la señal. Puede ser cuando detecte un flanco de subida o de bajada, o de nivel alto o bajo, o de cambio. El punto "." anula esta opción.  
 
-Esta opción va junto con la opción de "%" (pusimos un 10%) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) ya antes estará tomando muestras y ese 10% lo tomará del antes de darle a "Run" y lo hará a partir de notar un flanco descendente en CSN.
+Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) ya antes estará tomando muestras y ese 10% lo tomará del antes de darle a "Run" y lo hará a partir de notar un flanco descendente en CSN. Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.
 
 La configuración de a partir de qué momento ha de comenzar a tomar muestras es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte. 
 

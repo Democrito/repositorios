@@ -10,6 +10,7 @@ El pin IRQ no se utiliza en este proyecto. Ese pin sirve para crear una interrup
 
 Hay dos versiones de este transceptor, el "nRF24L01" (es una versión antigua) y el "nRF24L01+", sólo ese plus (+) los diferencia. Lo más importante es que el que no tiene el plus (+) no tiene la opción de poder ir a 250KB/s. Con una lupa de muchos aumentos se puede leer el nombre en el chip y averiguar este detalle. De todas formas a día de hoy creo que ya está descatalogado.
 
+Para este proyecto he utilizado una [Alhambra II FPGA](https://alhambrabits.com/alhambra/), y también lo he probado en la pequeña pero famosa [Icestick](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01/Icestick). Esto significa que cualquier FPGA que tenga un reloj de 12MHz, no debería de tener problemas. Y el diseño electrónico lo hice con [Icestudio](https://icestudio.io/), un programa gráfico para diseñar circuitos digitales y que pertenece al proyecto [#FPGAwars](http://fpgawars.github.io/).
 
 # Alimentación
 

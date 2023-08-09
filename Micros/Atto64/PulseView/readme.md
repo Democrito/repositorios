@@ -75,7 +75,21 @@ El siguiente paso es poner nombre a los hilos "Dn".
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20cambiar%20nombre%20al%20hilo.png)  
 
-Haces simplemente clic al Dn que quieres ponerle nombre, y eliminas el nombre que tiene por defecto, y lo cambiar por el que le corresponde a ese hilo. El orden normal es este: CSN, SCK, MOSI y MISO, tal como está en la imagen. Normalmente te lo vas a encontrar ese orden en casi todas partes.  
+Haces simplemente clic al Dn que quieres ponerle nombre, y eliminas el nombre que tiene por defecto, y lo cambiar por el que le corresponde a ese hilo. El orden normal es este: CSN, SCK, MOSI y MISO, tal como está en la imagen. Normalmente te lo vas a encontrar en ese orden en casi todas partes (menos en PV, jejeje).  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20SPI%20Config.png)  
+
+Ahora haces un clic en el hilo "SPI" (en verde) y te saldrá esas opciones que ves. Y has de ir añadiendo la identificación de cada uno de los hilos. En la imagen ya están identificados todos. Todo lo demás no hay que tocarlo, pero viene a describir que el primer bit es el más alto y que trabaja en "Mode 0", que es como normalmente funciona la mayoría de los SPI.  
+
+Y nos queda medio paso para terminar de configurar.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20seleccion%20de%20flanco.png)  
+
+Ahora volvemos a hacer clic en el hilo "CSN" y vamos a seleccionar cuándo queremos que comience a grabar la señal. Puede ser cuando detecte un flanco de subida o de bajada, o de nivel alto o bajo, o de cambio. El punto "." anula esta opción.  
+
+Esta opción va junto con la opción de "%" (pusimos un 10%) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) ya antes estará tomando muestras y ese 10% lo tomará del antes de darle a "Run" y lo hará a partir de notar un flanco descendente en CSN.
+
+La configuración de a partir de qué momento ha de comenzar a tomar muestras es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte. 
 
 Ya sólo nos falta hacer una prueba real y ver las señales.
 

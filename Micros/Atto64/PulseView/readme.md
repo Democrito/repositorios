@@ -48,7 +48,7 @@ Donde señalo con una línea roja pon esos valores que propongo. No es necesario
 
 Lo de "5M samples" es tomar en la línea de tiempo a 4Mhz una muestra de la señal, es decir, que depende del valor que pongamos ahí, medirá más tiempo o menos. Por ejemplo, con resolución de 4MHz y 5M de muestras, nos da un poco más de un segundo de tiempo de muestreo. Si eres nuevo todo esto ahora parece confuso, pero con el tiempo le irás viendo la lógica.  
 
-La opción en donde ponemos un tanto por ciento (%), es para otra opción que veremos más adelante y es necesario activar para que esto funcione. Se trata de configurar una de las señales (D0, D1, D2...) para detectar flanco de subida o de bajada o de cambio, entonces PV estará tomando muestras continuamente, en el sentido de que cuando le des a "Run" tomará incluso (en este caso) un 10% de la señal que había antes de darle al "Run".  
+La opción en donde ponemos un tanto por ciento (%), es para otra opción que veremos más adelante y es necesario activar (en uno de los hilos) para que esto funcione. Se trata de configurar uno de los hilos (D0, D1, D2...) detectar flanco de subida o de bajada o de cambio, y cuando le das a "Run"  comienza internamente a leer lo que sucede por los hilos, y espera que haya el cambio de señal que le hemos configurado (un flanco de bajada por ejemplo). Ese 10% significa que guarda a partir de que le hemos dado al "Run" toma una muestra de lo ocurrido en el tiempo antes de ocurrir el cambio de la señal.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20seleccion%20de%20pines..png)  
 
@@ -59,7 +59,7 @@ Para el SPI necesitamos 4 hilos, y para el I2C sólo necesitamos 2. Según el pr
 **Código de colores:**  
 Para identificar los hilos sigo el código de color que ves en D0, D1, D2... D7. Es el mismo código que se usa para las resistencias. Entonces, para la masa o GND del analizador, no uso el negro, sino el blanco. De esta manera sé que el negro es D0, el marrón es D1, el rojo es D2... etc.  
 
-Un consejillo: Los cables del analizador viene en bus plano y son unos 9 cables de colores. Yo al comienzo evitaba separarlos, pero trabajar así es un rollo, separa los cables con los que vas a trabajar (que estén sueltos) y conecta al analizador sólo los cables con los que vas a trabajar (si son 4, pues ten conectado sólo 4 cables, si son 2, pues sólo 2, etc), es muchísimo más cómodo trabajar así.  
+Un consejillo: Los cables del analizador viene en bus plano y son unos 10 cables de colores. Yo al comienzo evitaba separarlos, pero trabajar así es un rollo, separa los cables con los que vas a trabajar (que estén sueltos) y conecta al analizador sólo los cables con los que vas a trabajar (si son 4, pues ten conectado sólo 4 cables, si son 2, pues sólo 2, etc), es muchísimo más cómodo trabajar así.  
 
 Y ahora ya pasamos a ver cómo invocar un protocolo de comunicación.  
 
@@ -69,27 +69,27 @@ Y ahora ya pasamos a ver cómo invocar un protocolo de comunicación.
 
 He señalado y enumerado los pasos en la imagen. Le has de dar primero al icono con forma de onda envolvente. Luego, en la lupa (buscar) escribes "SPI" y finalmente eliges la opción que señalo. Te aparecerá debajo de D7 la señal "SPI".  
 
-Ahora lo que has de hacer es eliminar los hilos que no vas a usar. SPI usa 4 cables, entonces nos quedamos sólo con D0, D1, D2 y D3, los demás los eliminas. Para eliminarlos tienes dos opciones, dándole en en el icono de la sonda, o bien haciendo clic con el botón derecho del ratón a los "Dn" que quieres eliminar y te saldrá la opción "Del" de delete, es decir, borrar. Si por accidente borras alguno de los que tienes que usar, entonces dale al icono de la sonda para volver a hacerlo aparecer.  
+Ahora lo que has de hacer es eliminar los hilos que no vas a usar. SPI usa 4 cables, entonces nos quedamos sólo con D0, D1, D2 y D3, los demás los eliminas. Para eliminarlos tienes dos opciones, dándole en en el icono de la sonda, o bien haciendo clic con el botón derecho del ratón a los "Dn" que quieras eliminar y te saldrá la opción "Del" de delete, es decir, borrar. Si por accidente borras alguno de los que tienes que usar, entonces dale al icono de la sonda para volver a hacerlo aparecer.  
 
 El siguiente paso es poner nombre a los hilos "Dn".  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20cambiar%20nombre%20al%20hilo.png)  
 
-Haces simplemente clic al Dn que quieres ponerle nombre, y eliminas el nombre que tiene por defecto, y lo cambiar por el que le corresponde a ese hilo. El orden normal es este: CSN, SCK, MOSI y MISO, tal como está en la imagen. Normalmente te lo vas a encontrar en ese orden en casi todas partes (menos en PV, jejeje).  
+Haces simplemente clic al Dn que quieres ponerle nombre, y eliminas el nombre que tiene por defecto, y lo cambiar por el que le corresponde a ese hilo. El orden normal es este: CSN, SCK, MOSI y MISO, tal como está en la imagen. Normalmente te lo vas a encontrar en ese orden de pines en casi todas partes.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20SPI%20Config.png)  
 
-Ahora haces un clic en el hilo "SPI" (en verde) y te saldrá esas opciones que ves. Y has de ir añadiendo la identificación de cada uno de los hilos. En la imagen ya están identificados todos. Todo lo demás no hay que tocarlo, pero viene a describir que el primer bit es el más alto y que trabaja en "Mode 0", que es como normalmente funciona la mayoría de los SPI.  
+Ahora haces un clic en el hilo "SPI" (en verde) y te saldrá esas opciones que ves. Y has de ir añadiendo la identificación de cada uno de los hilos. En la imagen ya están identificados todos. Todo lo demás no hay que tocarlo, pero viene a describir que el primer bit del byte SPI que se envía o recibe es el más alto (bit7 del byte spi) y que trabaja en "Mode 0", que es como normalmente funciona la mayoría de los SPI.  
 
 Y nos queda medio paso para terminar de configurar.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20seleccion%20de%20flanco.png)  
 
-Ahora volvemos a hacer clic en el hilo "CSN" y vamos a seleccionar cuándo queremos que comience a grabar la señal. Puede ser cuando detecte un flanco de subida o de bajada, o de nivel alto o bajo, o de cambio. El punto "." anula esta opción.  
+Ahora volvemos a hacer clic en el hilo "CSN" y vamos a seleccionar cuándo queremos que comience a grabar la señal. Puede ser cuando detecte un flanco de subida o de bajada, o de nivel alto o bajo, o de cambio. El punto "." anula las opciones anteriores.  
 
-Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) ya antes estará tomando muestras y ese 10% lo tomará del antes de darle a "Run" y lo hará a partir de notar un flanco descendente en CSN. Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.  
+Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) se pondrá a tomar muestras y ese 10% lo tomará del antes de ocurrir el cambio de señal (flanco de bajada por ejemplo). Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.  
 
-La configuración de a partir de qué momento ha de comenzar a tomar muestras es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte.  
+La configuración de, a partir de qué momento ha de comenzar a tomar muestras, es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte (un poco confusa, lo sé).  
 
 Ya sólo nos falta hacer una prueba real y ver las señales.  
 

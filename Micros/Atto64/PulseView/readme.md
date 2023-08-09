@@ -101,9 +101,31 @@ Una vez que lo tengas en tu disco duro, extraes del ZIP el ICE. Lo abres y verá
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Icestudio%20test%20atto%201%20y%202.png)  
 
-He modificado la velocidad SPI a sólo 545KHz para que no haya problemas en el análisis de las señales con PV. A mí me sucede que para ver correctamente las señales a 3MHz necesito una frecuencia de muestreo de 12Mhz, y según como configuro me ocurren problemas, supongo que se debe a que no tengo mucha memoria en el PC. Este Atto es sólo para hacer test y aprender las dos últimas instrucciones que nos faltan (AB y AF).  
+He modificado la velocidad SPI a sólo 545KHz para que no haya problemas en el análisis de las señales. En muestreo a baja frecuencia no hay problemas, sin embargo en muestro a mucha frecuencia nos podríamos encontrar alguno, y para asegurar de que eso no pase, he bajado la velocidad SPI. Este Atto es sólo para hacer test y aprender las dos últimas instrucciones que nos faltan (instrucciones AB y AF).  
 
-Las conexiones de la FPGA al analizador lógico, son las mismas que puse arriba: CSN(D0), SCK(D1) y MOSI(D2). En estos dos primeros ejemplos sólo vamos a escribir a través del SPI, nunca leer, entonces no nos hace falta la entrada MISO.
+Las conexiones de la FPGA al analizador lógico, son las mismas que puse arriba: CSN(D0 de la FPGA), SCK(D1 de la FPGA) y MOSI(D2 de la FPGA). En estos dos primeros ejemplos sólo vamos a escribir a través del SPI, nunca leer, entonces no nos hace falta la entrada MISO.  
 
+Subes el circuito y se ejecutará el programa nada más esté cargado. Luego nos vamos a PV, y como es una señal que se repite y es muy corta, no necesita de ningún requerimiento especial. Lo más importante aquí es que para que se vea clara la señal y nos de datos fiables, le pones lo que he señalado en rojo de la siguiente imagen. Le das a "Run" y aparecerá esto.  
 
-Continuará.
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20test1.png)  
+
+Vemos que lo que hemos programado es lo que sale. Te has de fijas en la señal MOSI, que son los datos de salida.  
+El programa lo único que hace es enviar un paquete de dos bytes con el valor 0x0FF0 continuamente y espaciados por 50us, para distinguir un paquete de otro.  
+
+### Test_2:  
+
+Ahora te vas a Icestudio, eliminas la conexión del programa "Test_1" y conectas el programa "Test_2" que está a la derecha.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Icestudio%20test%20atto%202.png)  
+
+Subes el circuito y se ejecutará el programa. Nos vamos a PulseView, y como ya está configurado, le damos a "Run", y aparecerá lo siguiente.
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20test%202.png)  
+
+En esta ocasión el programa envía continuamente un paquete de 7 bytes, distanciados por 50us, tal como está programado, con el valor de 0x55AA0FF01100.
+
+Si intuyes el funcionamiento del programa, trata de variar la anchura del paquete de datos y enviando otros valores. Y no te preocupes, que si te falla no se estropeará nada.
+
+### Final
+
+La configuración I2C es muy similar a lo que hemos visto aquí, pero sólo utiliza dos cables. Lo voy a dejar para más adelantes. Ahora de lo que se trata es de mostrar el funcionamiento de cada instrucción de Atto. Volvemos al tutorial para terminar de explicar las dos última instrucciones.  

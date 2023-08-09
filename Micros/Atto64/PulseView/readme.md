@@ -128,4 +128,4 @@ Si intuyes el funcionamiento del programa, trata de variar la anchura del paquet
 
 ### Final
 
-La configuración I2C es muy similar a lo que hemos visto aquí, pero sólo utiliza dos cables. Lo voy a dejar para más adelantes. Ahora de lo que se trata es de mostrar el funcionamiento de cada instrucción de Atto. Volvemos al tutorial para terminar de explicar las dos última instrucciones.  
+La configuración I2C es muy similar a lo que hemos visto aquí, pero sólo utiliza dos cables. Lo voy a dejar para más adelantes. Ahora de lo que se trata es de mostrar el funcionamiento de cada instrucción de Atto. Volvemos al [tutorial de Atto](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64) para terminar de explicar las dos última instrucciones.  

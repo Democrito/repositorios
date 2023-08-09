@@ -56,7 +56,7 @@ En esta imagen he señalado en rojo el icono de la punta de una sonda, si le das
 
 Para el SPI necesitamos 4 hilos, y para el I2C sólo necesitamos 2. Según el protocolo que vayas a utilizar has de dejar esa cantidad de hilos.  
 
-**Código de colores:***  
+**Código de colores:**  
 Para identificar los hilos sigo el código de color que ves en D0, D1, D2... D7. Es el mismo código que se usa para las resistencias. Entonces, para la masa o GND del analizador, no uso el negro, sino el blanco. De esta manera sé que el negro es D0, el marrón es D1, el rojo es D2... etc.  
 
 Un consejillo: Los cables del analizado viene en bus y son unos 9 cables de colores. Yo al comienzo evitaba separarlos, pero trabajar así es un rollo, separa los cables con los que vas a trabajar, es mucho más cómodo.  

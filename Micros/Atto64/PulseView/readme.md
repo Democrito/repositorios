@@ -87,10 +87,23 @@ Y nos queda medio paso para terminar de configurar.
 
 Ahora volvemos a hacer clic en el hilo "CSN" y vamos a seleccionar cuándo queremos que comience a grabar la señal. Puede ser cuando detecte un flanco de subida o de bajada, o de nivel alto o bajo, o de cambio. El punto "." anula esta opción.  
 
-Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) ya antes estará tomando muestras y ese 10% lo tomará del antes de darle a "Run" y lo hará a partir de notar un flanco descendente en CSN. Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.
+Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) ya antes estará tomando muestras y ese 10% lo tomará del antes de darle a "Run" y lo hará a partir de notar un flanco descendente en CSN. Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.  
 
-La configuración de a partir de qué momento ha de comenzar a tomar muestras es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte. 
+La configuración de a partir de qué momento ha de comenzar a tomar muestras es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte.  
 
-Ya sólo nos falta hacer una prueba real y ver las señales.
+Ya sólo nos falta hacer una prueba real y ver las señales.  
+
+### Test 1:  
+
+Descarga el archivo que verás arriba llamado "**Atto_SPI_test.zip**", o bien dale en [**este enlace**](https://github.com/Democrito/repositorios/raw/master/Micros/Atto64/PulseView/Atto_SPI_test.zip).  
+
+Una vez que lo tengas en tu disco duro, extraes del ZIP el ICE. Lo abres y verás esto:  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Icestudio%20test%20atto%201%20y%202.png)  
+
+He modificado la velocidad SPI a sólo 545KHz para que no haya problemas en el análisis de las señales con PV. A mí me sucede que para ver correctamente las señales a 3MHz necesito una frecuencia de muestreo de 12Mhz, y según como configuro me ocurren problemas, supongo que se debe a que no tengo mucha memoria en el PC. Este Atto es sólo para hacer test y aprender las dos últimas instrucciones que nos faltan (AB y AF).  
+
+Las conexiones de la FPGA al analizador lógico, son las mismas que puse arriba: CSN(D0), SCK(D1) y MOSI(D2). En estos dos primeros ejemplos sólo vamos a escribir a través del SPI, nunca leer, entonces no nos hace falta la entrada MISO.
+
 
 Continuará.

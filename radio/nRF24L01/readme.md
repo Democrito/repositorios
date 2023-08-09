@@ -45,7 +45,7 @@ De momento sólo tengo diseñado el receptor para FPGA, entonces usaremos un Ard
 
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/Pinout_nRF24L01_Nano.png)
 
-Las patillas MOSI, MISO y SCK son fijas y no se pueden cambiar de lugar, el hardware SPI del Arduino Nano o UNO funcionan en esos pines fijos. Las patillas CE y CSN sí las puedes modificar de lugar desde el programa. En esta imagen CE y CSN están en el lugar tal y como lo tengo configurado en el programa de Arduino.
+Los pines MOSI, MISO y SCK son fijos y no se pueden cambiar de lugar, el hardware SPI del Arduino Nano o UNO funcionan en esos pines y no en otros. Los pines CE y CSN sí los puedes cambiar a otros pines, y si lo haces recuerda modificar esto en el programa. En esa imagen los pines CE y CSN están en el lugar tal y como lo tengo configurado en el programa de Arduino, de otro modo no podría funcionar.  
 
 El programa utiliza una biblioteca que nos permitirá configurar y comunicarnos con el transceptor y la puedes descargar desde aquí: 
 

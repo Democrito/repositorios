@@ -81,21 +81,57 @@ Haces simplemente clic al Dn que quieres ponerle nombre, y eliminas el nombre qu
 
 Ahora haces un clic en el hilo "SPI" (en verde) y te saldrá esas opciones que ves. Y has de ir añadiendo la identificación de cada uno de los hilos. En la imagen ya están identificados todos. Todo lo demás no hay que tocarlo, pero viene a describir que el primer bit del byte SPI que se envía o recibe es el más alto (bit7 del byte spi) y que trabaja en "Mode 0", que es como normalmente funciona la mayoría de los SPI.  
 
-Y nos queda medio paso para terminar de configurar.  
+En el protocolo SPI la señal de reloj, en vez de llamarse "CLK" suele cambiar de nombre y lo puedes encontrar como "SCK" (Serial cloCK).  
+La señal "CSN" (Chip Select Negated) la puedes encontrar como "CS", sin la N. De todas formas, esa señal, y hasta donde yo he visto, siempre funciona con lógica inversa.  
+La señal MOSI es la salida serie de datos, y la señal MISO es la entrada serie de datos. Esto has de verlo como un registro de desplazamiento. Para distinguir una de la otra yo me fijo en la primera vocal. Si la primera vocal es una 'O' sé que es "output", y si la primera vocal es una 'I' sé que es "input".  
+
+Nos queda medio paso para terminar de configurar PV para SPI.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20seleccion%20de%20flanco.png)  
 
 Ahora volvemos a hacer clic en el hilo "CSN" y vamos a seleccionar cuándo queremos que comience a grabar la señal. Puede ser cuando detecte un flanco de subida o de bajada, o de nivel alto o bajo, o de cambio. El punto "." anula las opciones anteriores.  
 
-Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" (todavía no lo hagas) se pondrá a tomar muestras y ese 10% lo tomará del antes de ocurrir el cambio de señal (flanco de bajada por ejemplo). Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.  
+Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" se pondrá a tomar muestras y ese 10% lo tomará del tiempo de antes de ocurrir el cambio de señal (flanco de bajada por ejemplo). Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.  
 
 La configuración de, a partir de qué momento ha de comenzar a tomar muestras, es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte (un poco confusa, lo sé).  
 
-Ya sólo nos falta hacer una prueba real y ver las señales.  
+Hasta aquí la configuración SPI.  
+
+### Configuración I2C (IIC)  
+
+Configurar PV para que configure señales I2C se procede de la misma manera a como lo hicimos con SPI.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20config%20I2C.png)  
+
+Pinchas en el icono de la onda envolvente. Te saldrá la opción de buscar (lupa). Escribes ahí "I2C", y eliges la opción que ves marcada en la imagen en rojo. Hecho esto, puedes cerrar el buscador. Debajo del hilo D7 aparece un nuevo hilo llamado "I2C".  
+
+El siguiente paso es eliminar todos los hilos que no vamos a usar. I2C sólo utiliza dos hilos, pues nos quedamos con sólo dos hilos. Nos quedamos sólo con D0, D1, los demás los eliminas. Para eliminarlos tienes dos opciones, dándole en en el icono de la sonda, o bien haciendo clic con el botón derecho del ratón a los "Dn" que quieras eliminar y te saldrá la opción "Del" de delete, es decir, borrar. Si por accidente borras alguno de los que tienes que usar, entonces dale al icono de la sonda para volver a hacerlo aparecer.  
+
+Ahora renombraremos los dos hilos a la función I2C que desempeña.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20nombre%20hilos%20i2c.png)  
+
+Antes de ponerles el nombre con la función que desempeña, tienes que saber si en tu circuito está la señal SCL conectada en D0 y la señal SDA en D1, esto es importante. Porque si las pones al revés, cuando PV trate de darte los datos hexadecimales, no podrá hacerlo o te saldrá datos que no tienen sentido. Si alguna vez te sucede, no es porque no funcione, sino que has puesto al revés la asignación de pines.  
+
+En el protocolo I2C, la señal de reloj "CLK" se le suele llamar "SCL" (Serial CLock) y a la señal de datos se llama "SDA" (Serial DAta).  
+
+Nos queda medio paso para terminar de configurar PV para I2C. Es el mismo paso explicado para SPI, es común a ambos, pero lo pongo aquí también por si has venido directamente aquí.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20flancos%20i2c.png)  
+
+Haz clic en el hilo "SDA" y vamos a seleccionar cuándo queremos que comience a grabar la señal. Puede ser cuando detecte un flanco de subida o de bajada, o de nivel alto o bajo, o de cambio. El punto "." anula las opciones anteriores.  
+
+Esta opción va junto con la opción de "%" (pusimos un 10%, en el icono de la llave inglesa cruzada con un atornillador) que vimos al comienzo de este tutorial. Cuando le demos a "Run" se pondrá a tomar muestras y ese 10% lo tomará del tiempo de antes de ocurrir el cambio de señal (flanco de bajada por ejemplo). Lo hará en flanco descendente porque así es como lo he configurado aquí y aparece en la imagen de arriba.  
+
+La configuración de, a partir de qué momento ha de comenzar a tomar muestras, es ahora mismo opcional, pero con el tiempo verás que es muy útil y era necesario explicar esta parte (un poco confusa, lo sé).  
+
+Hasta aquí la configuración I2C.  
+
+Ya sólo nos falta hacer una prueba real y ver las señales.  Para no extenderme lo haré con el protocolo SPI  
 
 ### Test 1:  
 
-Descarga el archivo que verás arriba llamado "**Atto_SPI_test.zip**", o bien dale en [**este enlace**](https://github.com/Democrito/repositorios/raw/master/Micros/Atto64/PulseView/Atto_SPI_test.zip).  
+Descarga el archivo que verás arriba llamado "**Atto_SPI_test_PV.zip**", o bien dale en [**este enlace**](https://github.com/Democrito/repositorios/raw/master/Micros/Atto64/PulseView/Atto_SPI_test_PV.zip).  
 
 Una vez que lo tengas en tu disco duro, extraes del ZIP el ICE. Lo abres y verás esto:  
 
@@ -118,14 +154,12 @@ Ahora te vas a Icestudio, eliminas la conexión del programa "Test_1" y conectas
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Icestudio%20test%20atto%202.png)  
 
-Subes el circuito y se ejecutará el programa. Nos vamos a PulseView, y como ya está configurado, le damos a "Run", y aparecerá lo siguiente.
+Subes el circuito y se ejecutará el programa. Nos vamos a PulseView, y como ya está configurado, le damos a "Run", y aparecerá lo siguiente.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20test%202.png)  
 
-En esta ocasión el programa envía continuamente un paquete de 7 bytes, distanciados por 50us, tal como está programado, con el valor de 0x55AA0FF0FF1100.
+En esta ocasión el programa envía continuamente un paquete de 7 bytes, distanciados por 50us, tal como está programado, con el valor de 0x55AA0FF0FF1100.  
 
-Si intuyes el funcionamiento del programa, trata de variar la anchura del paquete de datos y enviando otros valores. Y no te preocupes, que si te falla no se estropeará nada.
+Si intuyes el funcionamiento del programa, trata de variar la anchura del paquete de datos y enviando otros valores. Y no te preocupes, que si te falla no se estropeará nada.  
 
-### Final
-
-La configuración I2C es muy similar a lo que hemos visto aquí, pero sólo utiliza dos cables. Lo voy a dejar para más adelantes. Ahora de lo que se trata es de mostrar el funcionamiento de cada instrucción de Atto. Volvemos al [tutorial de Atto](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64) para terminar de explicar las dos última instrucciones.  
+### Fin  

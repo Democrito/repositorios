@@ -99,7 +99,7 @@ Hasta aquí la configuración SPI.
 
 ### Configuración I2C (IIC)  
 
-Configurar PV para que configure señales I2C se procede de la misma manera a como lo hicimos con SPI.  
+Configurar PV para ver las señales I2C se procede de la misma manera a cómo lo hicimos con SPI.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20config%20I2C.png)  
 

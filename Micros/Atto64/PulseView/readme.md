@@ -127,21 +127,21 @@ La configuración de, a partir de qué momento ha de comenzar a tomar muestras, 
 
 Hasta aquí la configuración I2C.  
 
-Ya sólo nos falta hacer una prueba real y ver las señales.  Para no extenderme lo haré con el protocolo SPI  
+Ya sólo nos falta hacer una prueba real y ver las señales. Para no extenderme lo haré con el protocolo SPI. No vas a necesitar de ningún circuito externo, lo que nos interesa ahora es ver el funcionamiento de PulseView. Atto se encargará de generar esas señales, en este caso, señales SPI. 
 
 ### Test 1:  
 
-Descarga el archivo que verás arriba llamado "**Atto_SPI_test_PV.zip**", o bien dale en [**este enlace**](https://github.com/Democrito/repositorios/raw/master/Micros/Atto64/PulseView/Atto_SPI_test_PV.zip).  
+Descarga el archivo que verás arriba llamado "**Atto_SPI_test_PV.zip**", o bien cliquea en [**este enlace**](https://github.com/Democrito/repositorios/raw/master/Micros/Atto64/PulseView/Atto_SPI_test_PV.zip).  
 
-Una vez que lo tengas en tu disco duro, extraes del ZIP el ICE. Lo abres y verás esto:  
+Una vez que lo tengas en tu disco duro, extraes el ICE del ZIP. Lo abres y verás esto:  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Icestudio%20test%20atto%201%20y%202.png)  
 
-He modificado la velocidad SPI a sólo 545KHz para que no haya problemas en el análisis de las señales. En muestreo a baja frecuencia no hay problemas, sin embargo en muestro a mucha frecuencia nos podríamos encontrar alguno, y para asegurar de que eso no pase, he bajado la velocidad SPI. Este Atto es sólo para hacer test y aprender las dos últimas instrucciones que nos faltan (instrucciones AB y AF).  
+He modificado la velocidad SPI a sólo 545KHz para que no haya problemas en el análisis de las señales. En muestreo a baja frecuencia no hay problemas, sin embargo en muestro a alta frecuencia nos podríamos encontrar alguno, y para evitarlo he bajado la velocidad SPI (de 3MHz a 545KHz). Este Atto es sólo para hacer test y aprender las dos últimas instrucciones que nos faltan (instrucciones AB y AF).  
 
-Las conexiones de la FPGA al analizador lógico, son las mismas que puse arriba: CSN(D0 de la FPGA), SCK(D1 de la FPGA) y MOSI(D2 de la FPGA). En estos dos primeros ejemplos sólo vamos a escribir a través del SPI, nunca leer, entonces no nos hace falta la entrada MISO.  
+Las conexiones de la FPGA al analizador lógico son las mismas que puse arriba: CSN(D0 de la FPGA), SCK(D1 de la FPGA) y MOSI(D2 de la FPGA). En estos dos primeros ejemplos sólo vamos a escribir a través del SPI, nunca leer, entonces no nos hace falta la entrada MISO.  
 
-Subes el circuito y se ejecutará el programa nada más esté cargado. Luego nos vamos a PV, y como es una señal que se repite y es muy corta, no necesita de ningún requerimiento especial. Lo más importante aquí es que para que se vea clara la señal y nos de datos fiables, le pones lo que he señalado en rojo de la siguiente imagen. Le das a "Run" y aparecerá esto.  
+Subes el circuito y se ejecutará el programa automáticamente nada más esté cargado (no has de hacer nada por tu parte, sólo subir el circuito). Luego nos vamos a PV, y como es una señal que se repite y es muy corta, no necesita de ningún requerimiento especial. Lo más importante aquí es que para que se vea clara la señal y nos de datos fiables, le pones lo que he señalado en rojo de la siguiente imagen. Le das al "Run" del programa PulseView y aparecerá esto.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20test1.png)  
 
@@ -154,12 +154,12 @@ Ahora te vas a Icestudio, eliminas la conexión del programa "Test_1" y conectas
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Icestudio%20test%20atto%202.png)  
 
-Subes el circuito y se ejecutará el programa. Nos vamos a PulseView, y como ya está configurado, le damos a "Run", y aparecerá lo siguiente.  
+Subes el circuito y se ejecutará el programa. Nos vamos a PulseView, y como ya está configurado, le damos a "Run" directamente, y aparecerá lo siguiente.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20test%202.png)  
 
 En esta ocasión el programa envía continuamente un paquete de 7 bytes, distanciados por 50us, tal como está programado, con el valor de 0x55AA0FF0FF1100.  
 
-Si intuyes el funcionamiento del programa, trata de variar la anchura del paquete de datos y enviando otros valores. Y no te preocupes, que si te falla no se estropeará nada.  
+Si intuyes el funcionamiento del programa, trata de variar la anchura del paquete de datos (en bytes) y enviando otros valores. Y no te preocupes, que si te falla no se estropeará nada.  
 
 ### Fin  

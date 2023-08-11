@@ -268,7 +268,7 @@ AB // Enviar datos en serie.
 
 Como podemos comprobar, esta instrucción nos permite enviar un paquete de datos con los bytes que necesitemos, es decir, que el paquete de datos (en bytes) puede ser variable, desde 0 hasta 65535 bytes de un golpe.  
 
-Teniendo esto claro, ahora viene una aclaración. En realidad hay dos Attos, uno para SPI y otro para I2C. El protocolo I2C maneja toda la información (salida o entrada) por un mismo hilo (SDA); y el protocolo SPI, tienen un hilo separado para cada función de salida y entrada (MOSI y MISO). Esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se maneje. Luego veremos esto más en detalle.  
+Teniendo esto claro, ahora viene una aclaración. En realidad hay dos Attos, uno para SPI y otro para I2C. El protocolo I2C maneja toda la información (salida o entrada) por un mismo hilo (SDA); y el protocolo SPI, tiene los hilos separados para cada función de salida y entrada (MOSI y MISO). Esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se maneje. Luego veremos esto con más detalle.  
 
 Primero conozcamos Atto-SPI y Atto-I2C.  
  

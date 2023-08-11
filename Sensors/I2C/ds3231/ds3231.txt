@@ -1,5 +1,8 @@
 // ---------------------- This is a sample of the internal code that runs a special small microcontroller for I2C. ----------------------
 // -------(If someone is interested in knowing what you put in the comments (in spanish), please use the google translator.) ------------
+
+************** Nota Importante: los tiempos del temporizador son en milisegundos! ****************
+
 8b // Saca un valor externo que selecciona la entrada de los registros de desplazamiento.
 00
 04 // el valor es 'h04.

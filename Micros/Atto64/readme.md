@@ -242,5 +242,35 @@ Te propongo un ejercicio sencillo y otro complicado.
 
 La solución completa la puedes ver [**aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/AGguC2JLDQAJ)  
 
+### Preámbulo a dos instrucciones serie  
 
-# Continuará  
+Hasta ahora para testear los programas en código máquina nos sevíamos de 8 leds y han hecho muy bien su función. A partir de este momento vamos a enviar datos serie, ya sea por SPI o I2C, que es para lo que realmente utilizaremos Atto. Para poder visualizar estas señales necesitamos un analizador lógico y un programa que visualice esas señales y además nos aporte información hexadecimal de cada byte de información.
+
+Para este menester he creado un tutorial donde recomiendo un analizador lógico muy barato y un programa de código abierto llamado "**PulseView**". Una vez que sepas mínimamente hacerlo funcionar, te vienes aquí y continúas con el tutorial de Atto. Haz clic en el siguiente enlace para ir al tutorial de PulseView:
+
+ [****Tutorial PulseView****](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView)  
+
+ 
+### AB // Envío y recepción de datos serie (SPI e I2C)
+
+La instrucción completa "AB" está compuesta por 3 bytes y luego le sigue una ristra de datos. El primer byte es la instrucción que define la función de enviar datos en serie, luego viene dos bytes más que define la cantidad total de bytes que se quiere enviar, y luego le sigue esa cantidad de datos (máximo 65535 bytes). Ejemplo:  
+  
+AB // Enviar datos en serie.  
+  
+00 // Cantidad total de datos que se va a enviar: 0x0005, es decir 5 bytes.  
+05  
+  
+01 // Esos 5 bytes son: 0x0102030405  
+02  
+03  
+04  
+05  
+
+Como podemos comprobar, esta instrucción nos permite enviar un paquete de datos con los bytes que necesitemos, es decir, que el paquete de datos (en bytes) puede ser variable, desde 0 hasta 65535 bytes de un golpe.  
+
+Teniendo esto claro, ahora viene una aclaración. En realidad hay dos Attos, uno para SPI y otro para I2C. El protocolo I2C maneja toda la información (salida o entrada) por un mismo hilo (SDA); y el protocolo SPI, tienen un hilo separado para cada función de salida y entrada (MOSI y MISO). Esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se maneje. Luego veremos esto más en detalle.  
+
+Primero conozcamos Atto-SPI y Atto-I2C.  
+ 
+
+ 

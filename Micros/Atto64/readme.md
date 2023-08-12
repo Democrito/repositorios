@@ -277,9 +277,15 @@ Atto, interiormente está modificado para adaptarse a uno de los dos protocolos 
 
 Como ves en la imagen, a Atto le salen una señales específicas para manejar el módulo SPI. Esto significa que para este circuito Atto está modificado interiormente para funcionar con SPI.  
 
+Cuando quieras ver las señales que produce a través de PulseView, puedes conectar directamente los hilos SPI del analizador lógico a los pines SPI del circuito.  
+
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Atto_interior_conecta_modulo_i2c.png)  
 
 Y aquí podemos ver lo mismo, pero modificado interiormente para funcionar con el protocolo I2C.  
+
+En I2C no se puede conectar directamente los hilos del analizador lógico a los pines SDA y SCL, porque ambos tienen la propiedad triestado. De hacerlo lo que ocurriría es que el sintetizador del circuito te daría un error. Por ello, he sacado líneas desde donde se puede testear estos hilos, y son los pines "sda_test" y "scl_test". Esos pines sólo tienen como función opcional ver esas señales a través de PulseView.  
+
+En los pines físicos "sda" y "scl" es donde se conecta físicamente al periférico que quieras controlar. Si el periférico no lleva resistencia de polarización en pull-up, se las de poner tú, el valor típico es de 5K, pero esto no es nada crítico. Por otra parte, si vas a mirar las señales I2C de Atto sin ningún periférico, es decir, en vacío, para hacer pruebas de escritura programando Atto-I2C, obligatoriamente le has de colocar las resistencias en pull-up a los pines físicos SDA y SCL.  
 
 Todo esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se emplee, y es lo que vamos a ver a continuación.  
 
@@ -372,6 +378,12 @@ Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseVie
 
 Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales.  
 
-Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C. Ahí se explica por ejemplo, que el valor 90 (dirección I2C), aparezca como 48 en PulseView (por ejemplo).  
+Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C. Ahí se explica por ejemplo, que el valor 90 (dirección I2C), aparezca como 48 en PulseView (por ejemplo). Si no consigues comprender por qué sale con otro valor el primer byte de un paquete, hay un truco: fíjate que además de dar la información en hexadecimal también la da en binario, si traduces ese valor binario a hexadecimal verás que es 90.  
+  
+He creado drivers complejos gracias a Atto, te pongo un ejemplo de ellos: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
+Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
 
-# Continuará
+Y de proyectos SPI con Atto, sólo tengo un único ejemplo donde se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
+
+
+# Continuará (queda la última instrucción y es mucho más sencilla que esta).

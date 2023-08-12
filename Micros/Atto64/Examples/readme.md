@@ -1,1 +1,1 @@
-Examples of programs and hardware adaptations for ATTO.
+Examples of programs and hardware adaptations for Atto64K.

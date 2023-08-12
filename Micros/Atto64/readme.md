@@ -374,7 +374,7 @@ Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseVie
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20señal%20ADC.png)  
 
-(Haz clic con el botón derecho del ratón y escoge la opción "Abrir imagen en una nueva ventana" para ver la imagen un poco más grande)  
+(Haz clic con el botón derecho del ratón y escoge la opción "Abrir imagen en una nueva pestaña" para ver la imagen un poco más grande)  
 
 Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales.  
 

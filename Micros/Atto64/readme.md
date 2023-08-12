@@ -285,7 +285,7 @@ Y aquí podemos ver lo mismo, pero modificado interiormente para funcionar con e
 
 En I2C no se puede conectar directamente los hilos del analizador lógico a los pines SDA y SCL, porque ambos tienen la propiedad triestado. De hacerlo lo que ocurriría es que el sintetizador del circuito te daría un error. Por ello, he sacado líneas desde donde se puede testear estos hilos, y son los pines "sda_test" y "scl_test". Esos pines sólo tienen como función opcional ver esas señales a través de PulseView.  
 
-En los pines físicos "sda" y "scl" es donde se conecta físicamente al periférico que quieras controlar. Si el periférico no lleva resistencia de polarización en pull-up, se las de poner tú, el valor típico es de 5K, pero esto no es nada crítico. Por otra parte, si vas a mirar las señales I2C de Atto sin ningún periférico, es decir, en vacío, para hacer pruebas de escritura programando Atto-I2C, obligatoriamente le has de colocar las resistencias en pull-up a los pines físicos SDA y SCL.  
+En los pines físicos "sda" y "scl" es donde se conecta físicamente al periférico que quieras controlar. Si el periférico no lleva resistencia de polarización en pull-up, se las has de poner tú, el valor típico es de 5K, pero esto no es nada crítico. Por otra parte, si vas a mirar las señales I2C de Atto sin ningún periférico, es decir, en vacío, para hacer pruebas de escritura programando Atto-I2C, obligatoriamente le has de colocar las resistencias en pull-up a los pines físicos SDA y SCL.  
 
 Todo esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se emplee, y es lo que vamos a ver a continuación.  
 

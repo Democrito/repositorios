@@ -25,7 +25,7 @@ Ahora pasamos a ver las 13 instrucciones máquina. No olvides que siempre vamos 
 ### F3 // Salto directo o absoluto:  
 Equivale al "goto" del Basic. Salta directamente a la dirección de memoria que le indiquemos. Escribes "F3" y los dos bytes siguientes es la dirección de memoria a la que ha de saltar. El formato es "**big-endian**", lo diseñé así porque me suponía poco esfuerzo y es más intuitivo. Es decir, que después de escribir "F3" pones el byte alto primero, y luego el byte bajo.  
 
-Ejemplo.  
+* Ejemplo  
 
 Quiero saltar a la dirección 0x01BC, entonces escribimos:  
 
@@ -244,12 +244,13 @@ La solución completa la puedes ver [**aquí**](https://groups.google.com/g/fpga
 
 ### Preámbulo a dos instrucciones serie  
 
-Hasta ahora para testear los programas en código máquina nos sevíamos de 8 leds y han hecho muy bien su función. A partir de este momento vamos a enviar datos serie, ya sea por SPI o I2C, que es para lo que realmente utilizaremos Atto. Para poder visualizar estas señales necesitamos un analizador lógico y un programa que visualice esas señales y además nos aporte información hexadecimal de cada byte de información.
+Hasta ahora para testear los programas en código máquina nos sevíamos de 8 leds y han hecho muy bien su función. A partir de este momento vamos a enviar datos serie, ya sea por SPI o I2C, que es para lo que realmente utilizaremos Atto. Para visualizar estas señales necesitamos un analizador lógico y un programa que (además de visualizar las señales en el tiempo) nos aporte información hexadecimal de cada byte de información que envía o recibe.  
 
-Para este menester he creado un tutorial donde recomiendo un analizador lógico muy barato y un programa de código abierto llamado "**PulseView**". Una vez que sepas mínimamente hacerlo funcionar, te vienes aquí y continúas con el tutorial de Atto. Haz clic en el siguiente enlace para ir al tutorial de PulseView:
+Para este menester he creado un tutorial donde recomiendo un analizador lógico muy barato y un programa de código abierto llamado "**PulseView**". Una vez que sepas mínimamente hacerlo funcionar, te vienes aquí y continúas con el tutorial de Atto. Haz clic en el siguiente enlace para ir al tutorial de PulseView:  
 
  [****Tutorial PulseView****](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView)  
 
+Ternimado de leer y practicar un poco con **PulseView** continuamos con las instrucciones.
  
 ### AB // Envío y recepción de datos serie (SPI e I2C)
 
@@ -265,12 +266,94 @@ AB // Enviar datos en serie.
 03  
 04  
 05  
-
+  
 Como podemos comprobar, esta instrucción nos permite enviar un paquete de datos con los bytes que necesitemos, es decir, que el paquete de datos (en bytes) puede ser variable, desde 1 hasta 65535 bytes de un golpe.  
 
-Teniendo esto claro, ahora viene una aclaración. En realidad hay dos Attos, uno para SPI y otro para I2C. El protocolo I2C maneja toda la información (salida o entrada) por un mismo hilo de datos (SDA); y el protocolo SPI, tiene los hilos de datos separados para cada función de salida y entrada (MOSI y MISO). Esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se maneje. Luego veremos esto con más detalle.  
+Teniendo esto claro, ahora viene una aclaración. En realidad hay dos Attos, uno para SPI y otro para I2C. El protocolo I2C maneja toda la información (salida o entrada) por un mismo hilo de datos (SDA); y el protocolo SPI, tiene los hilos de datos separados para cada función de salida y entrada (MOSI y MISO).  
 
-Primero conozcamos Atto-SPI y Atto-I2C.  
- 
+Atto, interiormente está modificado para adaptarse a uno de los dos protocolos en específico, y luego además, le acompaña el módulo SPI o I2C que manejan ese tipo de señales.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Atto_interior_conecta_modulo_spi.png)  
+
+Como ves en la imagen, a Atto le salen una señales específicas para manejar el módulo SPI. Esto significa que para este circuito Atto está modificado interiormente para funcionar con SPI.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Atto_interior_conecta_modulo_i2c.png)  
+
+Y aquí podemos ver lo mismo, pero modificado interiormente para funcionar con el protocolo I2C.  
+
+Todo esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se emplee, y es lo que vamos a ver a continuación.  
+
+**Instrucción "AB" en SPI:**  
+
+La instrucción "AB" en SPI funciona tal y como se ha explicado al comienzo. Escribes "AB" luego pones la cantidad total a enviar, y después viene el grupo de bytes que serán enviados, y son tantos bytes como hayamos definido en la cantidad total.  
+
+Esto es para escribir por SPI, pero entonces, ¿cómo leer uno o un grupo de datos SPI?: Se hace "empujando" con bytes vacíos, tantos como necesitemos leer.  
+
+Veamos cómo es en escritura y lectura.  
+
+Ejemplo de escritura:  
+
+AB // Enviar (en este caso) por el puerto SPI:  
+
+00 // Cantidad 0x0003, es decir, 3 bytes.  
+03  
+
+01 // Y estos son los 3 bytes que se envía a través del SPI.  
+02 // 0x010203  
+03  
+
+Ejemplo de lectura:  
+
+AB // Enviar (en este caso) por el puerto SPI:  
+
+00 // Cantidad total de escritura y lectura  
+02 // 0x0002, es decir, 2 bytes.  
+
+F5 // Vamos a imaginar que "F5" significa que preguntamos al periférico SPI qué valor tiene el registo "x", y nos responderá en el byte siguiente.  
+FF // Empujamos con un byte arbitario (suele ser 00 ó FF) para extraer ese byte como respuesta.  
+
+**Instrucción "AB" en I2C:**  
+
+En I2C a la instrucción "AB" se le tiene que añadir otra instrucción y es "C3". En "C3" pondremos cuántos bytes queremos leer, y en "AB" pondremos cuántos bytes queremos escribir. El total de datos serán los que se leen más los que se escriben. Y los que se leen son datos que "empujamos" añadiendo bytes arbitrarios, que normalmente los haremos valer como 00 o bien FF. En realidad no importa estos valores cuando tratamos de leer porque no tendrán significado, sólo están para cumplir la función de "empujar", pero han de estar ahí.  
+  
+Cuando manejemos Atto I2C, siempre-siempre han de estar asociadas las instrucciones "C3" y "AB", nunca se debe de poner "AB" sola.  
+  
+Ejemplo de escritura:  
+  
+C3 // Cargamos en un registro interno de propósito general el valor 0x0000.  
+00 // Como sólo vamos a escribir, y no leer, el valor que carga "C3" ha de ser siempre 0.  
+00  
+  
+AB // Sacar datos en serie (en este caso) por I2C.  
+00 // Esta cantidad de bytes: 0x0003, es decir, 3 bytes.  
+03  
+  
+01 // Esos tres bytes de escritura tienen estos valores:  
+02 // 0x010203  
+03  
+  
+Ejemplo de lectura:  
+  
+C3 // Cargamos en un registro interno de propósito general el valor 0x0004.  
+00 // Como vamos a usar la instrucción "AB" para I2C adquiere el significado de  
+04 // cuántos bytes va a leer.  
+  
+AB // Sacar datos en serie (en este caso) por I2C.  
+00 // Cantidad de bytes que escribirá: 0x0001 (sólo uno, que será la dirección I2C de lectura).  
+01  
+  
+3D // Este primer byte de dato es la dirección I2C de lectura (siempre es un número impar en lectura, si fuera par sería de escritura).  
+FF // "Empuja" con con 4 bytes arbitrarios los 4 bytes que queremos leer.  
+FF  
+FF  
+FF  
+  
+En fin, sé que todo esto suena a mucho lío la primera vez, pero cuando te concentras en un sólo protocolo en concreto y has de hacer repetidamente escritura y lectura de datos, todo esto se comprende a la perfección. Dicho de otra manera, en la práctica es mucho más sencillo de lo que parece, pero al explicar las reglas de funcionamiento y las excepciones, es lo que hace que parezca complejo.  
+
+Vamos a ver un ejemplo práctico muy simple, aprovechando que la Alhambra II FPGA tiene un ADC en la propia placa que se maneja con el protocolo I2C.
+
+# Continuará.
+
+Descárgate de la carpeta "Example" el archivo llamado "    .ice", o bien haz [**clic aquí**]() para llevarte directamente.
 
  

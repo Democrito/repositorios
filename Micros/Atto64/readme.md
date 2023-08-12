@@ -350,10 +350,28 @@ FF
   
 En fin, sé que todo esto suena a mucho lío la primera vez, pero cuando te concentras en un sólo protocolo en concreto y has de hacer repetidamente escritura y lectura de datos, todo esto se comprende a la perfección. Dicho de otra manera, en la práctica es mucho más sencillo de lo que parece, pero al explicar las reglas de funcionamiento y las excepciones, es lo que hace que parezca complejo.  
 
-Vamos a ver un ejemplo práctico muy simple, aprovechando que la Alhambra II FPGA tiene un ADC en la propia placa que se maneja con el protocolo I2C.
+Vamos a ver un ejemplo práctico aprovechando que la Alhambra II FPGA tiene un ADC (ADS7924) en la propia placa que se maneja con el protocolo I2C.  
+  
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ADC%20ejercicio%208%201.png)  
+  
+Descárgate de la carpeta "Example" dos archivo llamados "[**Example_8_1-ADS7924.ice**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_8_1-ADS7924.ice)" y otro un poco más avanzado llamado "[**Example_8_2-ADS7924.ice**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_8_2-ADS7924.ice)".  
 
-# Continuará.
+El valor del potenciómetro se recomienda que no sea excesivamente elevado porque cuanto mayor es el valor óhmico mayor será el ruido a partir de cierto nivel resistivo. Un valor recomendado podría ser de 5K.  
 
-Descárgate de la carpeta "Example" el archivo llamado "    .ice", o bien haz [**clic aquí**]() para llevarte directamente.
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Alhambra%20channels%20ADC.png)  
 
- 
+Los canales en la Alhambra II FPGA se encuentran ahí, como puedes ver en la imagen. Has de conectar el potenciómetro al canal 0 para el primer ejemplo que puse, y en el segundo ejemplo puedes conectar dos potenciómetros (canal 0 y 1; tiene 4 canales pero en este último ejemplo sólo lee 2) y se verá en los leds el valor binario de ambos potenciómetros pulsando o no el pulsador SW1.  
+
+Subes el primer circuito y se pondrá inmediatamente en marcha, viendo en los leds el valor binario. Ahora toca mirar el código y comprender qué es lo que hace. Opcionalmente tienes un segundo ejemplo un poco más complicado, que permite seleccionar dos canales.  
+
+Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseView**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView). Esta parte es muy importante, porque nos permite ver lo que realmente sucede a nivel de señales.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20señal%20ADC.png)  
+
+(Haz clic con el botón derecho del ratón y escoge la opción "Abrir imagen en una nueva ventana" para ver la imagen un poco más grande)  
+
+Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales.  
+
+Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C. Ahí se explica por ejemplo, que el valor 90 (dirección I2C), aparezca como 48 en PulseView (por ejemplo).  
+
+# Continuará

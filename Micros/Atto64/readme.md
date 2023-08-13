@@ -349,7 +349,7 @@ AB // Sacar datos en serie (en este caso) por I2C.
 01  
   
 3D // Este primer byte de dato es la dirección I2C de lectura (siempre es un número impar en lectura, si fuera par sería de escritura).  
-FF // "Empuja" con con 4 bytes arbitrarios los 4 bytes que queremos leer.  
+FF // "Empuja" con 4 bytes arbitrarios los 4 bytes que queremos leer.  
 FF  
 FF  
 FF  
@@ -385,5 +385,5 @@ Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en vers
 
 Y de proyectos SPI con Atto, sólo tengo un único ejemplo donde se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
 
+### Este tutorial será reestructurado en breve. Habrá cambios importantes. Todas las instrucciones explicadas hasta ahora seguirán funcionando igual, excepto AB, que funcionará igual que en I2C en la versión moderna que sacaré pronto
 
-# Continuará (queda la última instrucción y es mucho más sencilla que esta).

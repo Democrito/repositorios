@@ -385,5 +385,5 @@ Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en vers
 
 Y de proyectos SPI con Atto, sólo tengo un único ejemplo donde se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
 
-### Este tutorial será reestructurado en breve. Habrá cambios importantes. Todas las instrucciones explicadas hasta ahora seguirán funcionando igual, excepto AB, que funcionará igual que en I2C en la versión moderna que sacaré pronto
+### Este tutorial será reestructurado en breve. Habrá cambios importantes. Todas las instrucciones explicadas hasta ahora seguirán funcionando igual, excepto AB, que funcionará igual que en I2C en la versión moderna que sacaré pronto. He creado un Atto nuevo, eso significa que sustituiré todos los ejemplos de los tutoriales, y aparte he de explicar cómo se estructura interiormente el nuevo atto. Además, será compatible con otros protocolos, como el rs232. Queda el tutorial en pausa, a fecha de hoy 13 de agosto de 2023, hasta nuevo aviso. Gracias por la paciencia a los que estén siguiendo este tutorial.
 

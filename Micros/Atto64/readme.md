@@ -25,7 +25,7 @@ Ahora pasamos a ver las 13 instrucciones máquina. No olvides que siempre vamos 
 ### F3 // Salto directo o absoluto:  
 Equivale al "goto" del Basic. Salta directamente a la dirección de memoria que le indiquemos. Escribes "F3" y los dos bytes siguientes es la dirección de memoria a la que ha de saltar. El formato es "**big-endian**", lo diseñé así porque me suponía poco esfuerzo y es más intuitivo. Es decir, que después de escribir "F3" pones el byte alto primero, y luego el byte bajo.  
 
-* Ejemplo  
+Ejemplo  
 
 Quiero saltar a la dirección 0x01BC, entonces escribimos:  
 

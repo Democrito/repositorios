@@ -388,7 +388,7 @@ Cuando uses Atto para comunicarte con un periférico I2C, haz este truco para co
 
 Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits y en hexadecimal), lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
 
-Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
+Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
   
 He creado drivers complejos dentro de una FPGA gracias a Atto, te pongo un ejemplo: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  

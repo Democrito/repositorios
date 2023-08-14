@@ -160,13 +160,13 @@ Estamos con código máquina, veamos cómo se define un bucle tipo "for" máquin
 Usaremos las instrucciones "A3" y "D3", ambas miden 3 bytes. Estas dos instrucciones siempre van en pareja.  
 
 En "A3" pondremos la cantidad de veces que queramos repetir el bucle. El número de veces mínimo es 1 (poner 0 sería absurdo) y el máximo es 65535.  
-En "D3" pondremos la dirección de memoria a la que ha de saltar para que se repita, y esa dirección será la siguiente instrucciónque que haya después de A3.  
+En "D3" pondremos la dirección de memoria a la que ha de saltar para que se repita, y esa dirección será la siguiente instrucción que haya después de A3.  
 
 De forma esquemática sería así:  
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/bucle%20for%20atto.png)  
 
-Vemos que "A3" lo debemos de poner una línea antes de comenzar el bucle. Y "D3" está donde termina el bucle. El "(JNZ)" es un descontador interno de esta instrucción, porque lo que hace es descontar el número definido con A3, hasta llegar a 0.  
+"A3" se ha de colocar una línea antes de comenzar el bucle. Y "D3" donde termina el bucle. El "(JNZ)" es un descontador interno de esta instrucción, porque lo que hace es descontar el número definido con A3, hasta llegar a 0.  
 
 Veamos un programa que ejemplifique estas dos instrucciones. Como es un poco largo, descárgalo, ábrelo con Icestudio y desde ahí lo verás en grande. Haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_5-Bucle_For.ice) para descargar el ejemplo, o si lo prefieres, toma el ejemplo "Example_5-Bucle_For.ice" que está en la carpeta "Examples".  
 
@@ -194,7 +194,7 @@ Descarga el circuito de ejemplo de interrupción [**desde aquí**](https://githu
 
 Cuando subas el circuito a la FPGA (equivale a decir: ejecutar el programa), verás parpadear todos los leds, y cuando pulse el pulsador "SW1", entonces, en vez de parpadear lo que hará será alternarse los leds (55..AA) una sola vez. Aunque si pulsas repetidamente, mientras pulses rápido, se quedaría en la alternancia de los leds hasta que dejaras de pulsar repetidamente rápido.  
 
-Te propongo un ejercicio muy sencillo, simplemente cambia la posición de memoria donde se ejecutará la interrupción, para ello tendrás que poner el programa de la interrupción en esa posición de la memoria.  
+Te propongo un ejercicio muy sencillo, simplemente cambia la posición de memoria de la interrupción y lo especificas en la caja "DirInt".
 
 ### B3 // Guardar un valor externo dentro de la memoria:  
 
@@ -313,10 +313,10 @@ Ejemplo de lectura:
 AB // Enviar (en este caso) por el puerto SPI:  
 
 00 // Cantidad total de escritura y lectura  
-02 // 0x0002, es decir, 2 bytes.  
+02 // 0x0002, es decir, 2 bytes. Uno para escribir y otra para leer. 
 
-F5 // Vamos a imaginar que "F5" significa que preguntamos al periférico SPI qué valor tiene el registo "x", y nos responderá en el byte siguiente.  
-FF // Empujamos con un byte arbitario (suele ser 00 ó FF) para extraer ese byte como respuesta.  
+F5 // Vamos a imaginar que "F5" es un registro del periférico SPI, le indicamos el registro a leer, y nos responderá en el byte siguiente.  
+FF // Empujamos con un byte arbitario (suele ser 00 ó FF) para extraer ese byte como respuesta. Entrará esos 8 bits por MISO.  
 
 **Instrucción "AB" en I2C:**  
 
@@ -334,9 +334,9 @@ AB // Sacar datos en serie (en este caso) por I2C.
 00 // Esta cantidad de bytes: 0x0003, es decir, 3 bytes.  
 03  
   
-01 // Esos tres bytes de escritura tienen estos valores:  
-02 // 0x010203  
-03  
+02 // Esos tres bytes de escritura tienen estos valores:  
+04 // 0x020408  
+08  
   
 Ejemplo de lectura:  
   
@@ -348,15 +348,15 @@ AB // Sacar datos en serie (en este caso) por I2C.
 00 // Cantidad de bytes que escribirá: 0x0001 (sólo uno, que será la dirección I2C de lectura).  
 01  
   
-3D // Este primer byte de dato es la dirección I2C de lectura (siempre es un número impar en lectura, si fuera par sería de escritura).  
+3D // Este primer byte de dato es la dirección I2C de lectura (siempre es un número impar en lectura, si fuese par sería de escritura).  
 FF // "Empuja" con 4 bytes arbitrarios los 4 bytes que queremos leer.  
 FF  
 FF  
 FF  
   
-En fin, sé que todo esto suena a mucho lío la primera vez, pero cuando te concentras en un sólo protocolo en concreto y has de hacer repetidamente escritura y lectura de datos, todo esto se comprende a la perfección. Dicho de otra manera, en la práctica es mucho más sencillo de lo que parece, pero al explicar las reglas de funcionamiento y las excepciones, es lo que hace que parezca complejo.  
+En fin, sé que todo esto suena a mucho lío la primera vez, pero cuando te concentras en un sólo protocolo en concreto y has de hacer repetidamente escritura y lectura de datos, todo esto se comprende a la perfección. Dicho de otra manera, en la práctica es mucho más sencillo de lo que parece, pero al explicar las reglas de funcionamiento y las excepciones, es lo que hace que parezca complicado.  
 
-Vamos a ver un ejemplo práctico aprovechando que la Alhambra II FPGA tiene un ADC (ADS7924) en la propia placa que se maneja con el protocolo I2C.  
+Vamos a ver un ejemplo práctico aprovechando que la Alhambra II FPGA tiene un ADC (ADS7924) en la propia placa y se maneja con el protocolo I2C.  
   
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ADC%20ejercicio%208%201.png)  
   
@@ -366,9 +366,9 @@ El valor del potenciómetro se recomienda que no sea excesivamente elevado porqu
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Alhambra%20channels%20ADC.png)  
 
-Los canales en la Alhambra II FPGA se encuentran ahí, como puedes ver en la imagen. Has de conectar el potenciómetro al canal 0 para el primer ejemplo que puse, y en el segundo ejemplo puedes conectar dos potenciómetros (canal 0 y 1; tiene 4 canales pero en este último ejemplo sólo lee 2) y se verá en los leds el valor binario de ambos potenciómetros pulsando o no el pulsador SW1.  
+Los canales en la Alhambra II FPGA se encuentran ahí, como puedes ver en la imagen. Has de conectar el potenciómetro al canal 0 para el primer ejemplo que puse, y en el segundo ejemplo puedes conectar dos potenciómetros (canal 0 y 1; tiene 4 canales pero en este último ejemplo sólo lee 2) y se verá en los leds el valor binario de ambos potenciómetros pulsando o no el pulsador SW1. Si no pulsas, leerás el canal 0, y si pulsas leerás el canal 1.  
 
-Subes el primer circuito y se pondrá inmediatamente en marcha, viendo en los leds el valor binario. Ahora toca mirar el código y comprender qué es lo que hace. Opcionalmente tienes un segundo ejemplo un poco más complicado, que permite seleccionar dos canales.  
+Subes el primer circuito y se pondrá inmediatamente en marcha, viendo en los leds el valor binario. Ahora toca mirar el código y comprender qué es lo que hace. Opcionalmente tienes el segundo ejemplo un poco más complicado, que permite seleccionar dos canales.  
 
 Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseView**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView). Esta parte es muy importante, porque nos permite ver lo que realmente sucede a nivel de señales.  
 
@@ -376,13 +376,21 @@ Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseVie
 
 (Haz clic con el botón derecho del ratón y escoge la opción "Abrir imagen en una nueva pestaña" para ver la imagen un poco más grande)  
 
-Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales.  
+Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales. Observa que se envía primero un paquete de 3 bytes (configuración), luego otro de dos bytes (selección del canal donde el byte "02" es el canal 0), y finalmente otro paquete de dos bytes. En éste último, el último byte es el byte de lectura, es decir, el valor del potenciómetro en hexadecimal (F3). Justo por arriba del valor hexadecimal tienes el mismo valor pero en binario.  
 
-Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C. Ahí se explica por ejemplo, que el valor 90 (dirección I2C), aparezca como 48 en PulseView (por ejemplo). Si no consigues comprender por qué sale con otro valor el primer byte de un paquete, hay un truco: fíjate que además de dar la información en hexadecimal también la da en binario, si traduces ese valor binario a hexadecimal verás que es 90.  
+Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C. Ahí se explica por ejemplo, que el valor 90 (dirección I2C), aparezca como 48 en PulseView (por ejemplo). Si no consigues comprender por qué sale con otro valor el primer byte de un paquete, hay un truco: fíjate que además de dar la información en hexadecimal también la da en binario, si traduces ese valor binario a hexadecimal verás que es 90 y no 48.  
+
+![](https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG)
+
+El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48). El bit más bajo (el octavo, o el que nos falta para completar un byte) ese bit indica escritura (si está a 0) o lectura (si está a 1).  
+
+Cuando uses Atto para comunicarte con un periférico I2C, haz este truco para convertir la dirección de 7 bits a 8 bits (un byte) y teclearlo en el programa para Atto:  
+
+Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits y en hexadecimal), lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
   
 He creado drivers complejos gracias a Atto, te pongo un ejemplo de ellos: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
-
+  
 Y de proyectos SPI con Atto, sólo tengo un único ejemplo donde se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
 
 ### Este tutorial será reestructurado en breve. Habrá cambios importantes. Todas las instrucciones explicadas hasta ahora seguirán funcionando igual, excepto AB, que funcionará igual que en I2C en la versión moderna que sacaré pronto. He creado un Atto nuevo, eso significa que sustituiré todos los ejemplos de los tutoriales, y aparte he de explicar cómo se estructura interiormente el nuevo atto. Además, será compatible con otros protocolos, como el rs232. Queda el tutorial en pausa, a fecha de hoy 13 de agosto de 2023, hasta nuevo aviso. Gracias por la paciencia a los que estén siguiendo este tutorial.

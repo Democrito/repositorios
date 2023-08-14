@@ -378,7 +378,7 @@ Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseVie
 
 Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales. Observa que se envía primero un paquete de 3 bytes (configuración), luego otro de dos bytes (selección del canal donde el byte "02" es el canal 0), y finalmente otro paquete de dos bytes. En éste último, el último byte es el byte de lectura, es decir, el valor del potenciómetro en hexadecimal (F3). Justo por arriba del valor hexadecimal tienes el mismo valor pero en binario.  
 
-Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C. Ahí se explica por ejemplo, que el valor 90 (dirección I2C), aparezca como 48 en PulseView (por ejemplo). Si no consigues comprender por qué sale con otro valor el primer byte de un paquete, hay un truco: fíjate que además de dar la información en hexadecimal también la da en binario, si traduces ese valor binario a hexadecimal verás que es 90 y no 48.  
+Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C.  
 
 ![](https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG)
 

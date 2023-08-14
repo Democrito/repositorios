@@ -382,13 +382,15 @@ Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeñ
 
 ![](https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG)
 
-El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48). El bit más bajo (el octavo, o el que nos falta para completar un byte) ese bit indica escritura (si está a 0) o lectura (si está a 1).  
+El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48). El bit más bajo (el octavo, o el que nos falta para completar un byte) ese bit indica escritura (si está a 0) o lectura (si está a 1). El bit ACK es de confirmación, y el driver I2C lo gestiona internamente, tú haz como si no existiese, a no ser que vayas a diseñar un driver I2C por tu cuenta. 
 
 Cuando uses Atto para comunicarte con un periférico I2C, haz este truco para convertir la dirección de 7 bits a 8 bits (un byte) y teclearlo en el programa para Atto:  
 
 Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits y en hexadecimal), lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
+
+Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
   
-He creado drivers complejos gracias a Atto, te pongo un ejemplo de ellos: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
+He creado drivers complejos dentro de una FPGA gracias a Atto, te pongo un ejemplo: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   
 Y de proyectos SPI con Atto, sólo tengo un único ejemplo donde se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  

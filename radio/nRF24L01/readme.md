@@ -170,6 +170,10 @@ En Arduino, estas dos instrucciones manejan el mismo registro (0x26) :
 radio.setDataRate(RF24_250KBPS);  // Como ejemplo está aquí a 250Kb/s, pero puede ser 1Mb/s ó 2Mb/s.  
 radio.setPALevel(RF24_PA_MAX);    // En este proyecto la potencia siempre es máxima.  
   
+# Otros  
+
+Echa un ojo a [**este vídeo**](https://www.youtube.com/watch?v=8YIy0IyV4c4) si todo lo tienes bien montado y comprobado, sin embargo hace cosas muy extrañas.
+
 # Atto  
   
 El driver controlador del nRF24L01+ de la FPGA contiene un pequeño microcontrolador. Si sientes curiosidad por este pequeño micro [**cliquea aquí**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64)  

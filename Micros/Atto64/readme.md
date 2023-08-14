@@ -250,7 +250,7 @@ Para este menester he creado un tutorial donde recomiendo un analizador lógico 
 
  [****Tutorial PulseView****](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView)  
 
-Ternimado de leer y practicar un poco con **PulseView** continuamos con las instrucciones.
+Cuando lo hayas leído y practicado un poco el uso de **PulseView** continuamos con las instrucciones.
  
 ### AB // Envío y recepción de datos serie (SPI e I2C)
 

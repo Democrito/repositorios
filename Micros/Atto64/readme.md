@@ -251,6 +251,89 @@ Para este menester he creado un tutorial donde recomiendo un analizador lógico 
  [****Tutorial PulseView****](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView)  
 
 Cuando lo hayas leído y practicado un poco el uso de **PulseView** continuamos con las instrucciones.  
+
+### AF // Leer la memoria y sacar una cantidad de datos por SPI o I2C  
+  
+Esta instrucción es utilizada para sacar un volumen de datos alojados dentro de la memoria y enviarlos a través del I2C o del SPI.  
+
+Se compone de 3 bytes y siempre va acompañada de la instrucción "C3".  
+
+Con "C3" ponemos la cantidad de bytes que queramos leer de la memoria, y con "AF" ponemos la dirección de memoria a la que ha de ir y leer tantos bytes como hayamos indicado con "C3". Leerá esa cantidad de datos y lo sacará por el I2C o por el SPI.  
+  
+Ejemplo:  
+  
+C3 // Cantidad de datos para leer:  
+00 // ha de leer 10 bytes.  
+0A  
+  
+AF // Ir a la dirección de memoria:  
+02 // 0x02DA y extraer tantos bytes como haya indicado "C3", en este caso son 10 bytes, y  
+DA // sacarlo por SPI ó I2C como un paquete de datos.  
+...  
+...  
+...  
+...  
+01 // Imagina que la dirección donde se encuntra el byte 01 es la dirección 0x02DA, leerá desde el 01 hasta el 0A y  
+02 // lo irá sacando por el I2C o el SPI.  
+03  
+04  
+05  
+06  
+07  
+08  
+09  
+0A  
+...  
+...  
+...  
+  
+Veamos un ejemplo práctico para SPI y otro para I2C.  
+
+
+
+**Ejemplo SPI:**  
+  
+Este primer ejemplo lo vamos a hacer con el SPI. Ves a la carpeta "Examples" y te descargas "Example_9-instruccion_AF_SPI.ice" o bien haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_9-instruccion_AF_SPI.ice).  
+  
+Lo abres con Icestudio y verás esto:  
+  
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20Ejemplo_9-instruccion_AF.png)  
+  
+Conecta los cables del analizador lógico, tal como está en el esquema (imagen de arriba) y lo subes a la FPGA. Acto seguido ves a PulseView y lo ejecutas.  
+  
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20AF%20spi.png)  
+  
+Configuras PulseView tal como lo he marcado arriba en rojo (no hace falta tocar nada más) y le das a "Run". Te ha de aparecer lo mismo que a mí.  
+  
+Se puede observar que lo que se ha programado es lo que sale por pantalla. Se repite el paquete de dato "AABBCCDDEEFF" de forma indefinida.  
+
+Ahora te toca a ti experimentar un poco, cambiando los datos, tomando un grupo más grande o pequeño de datos, etc.
+
+
+  
+**Ejemplo I2C:**  
+
+Ves a la carpeta "Examples" y te descargas "Example_9-instruccion_AF_I2C.ice" o bien haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_9-instruccion_AF_I2C.ice).  
+  
+Lo abres con Icestudio y te aparerá esto:  
+  
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20ejercicio%209%20I2C.png)  
+  
+Los pines físicos "SDA" y "SCL" necesitan resistencias en configuración pull-up para polarizar positivamente esos pines. Aquí uso un truco para ahorrarme esas resistencias y lo que hago es conectarlo a un periférico I2C que tiene la Alhmabra II FPGA, que ya las lleva incluidas. En el caso de que no puedas hacer esto, es obligatorio conectar dos resistencias en pull-up en esos pines.  
+
+Los pines "sda_test" y "scl_test" son para conectarlos al analizador lógico, sólo tienen esa función. Desde esos pines se analizarán las señales, ya que de otro modo no se podría por ser pines triestados, es decir, que no se puede medir las señales directamente en los pines "SDA" y "SCL".  
+
+Conectas los dos cables al analizador lógico, como dije antes, y configuras PulseView para leer datos I2C.  
+
+![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20AF%20ex9%20I2C.png)  
+
+Le das a "Run" y debe de aparecer esta imagen de arriba. Vemos que funciona bien, se repiten los datos que le hemos programado.  
+
+Pero has observado un dato extraño, verdad? En vez de salir "AA" al comienzo del paquete de datos, sale "55". Esto no es un error. Se debe a que el primer byte de un paquete lo interpreta como paquete de dirección I2C. Si amplías la imagen que te da PulseView observarás que arriba de la información en hexadecimal también la da en binario. En binario pone "10101010", que es "AA". Todo está correcto. Más adelante hablo de esto otra vez y con más detalle.
+
+Ahora te toca a ti experimentar un poco, cambiando los datos, tomando un grupo más grande o pequeño de datos, etc.
+
+
   
 ### AB // Envío y recepción de datos serie (SPI e I2C)  
 
@@ -264,9 +347,9 @@ Está compuesta por 3 bytes y luego le sigue una ristra de datos. **"AB" y "C3" 
   
 Con "C3" indicaremos cuántos bytes queremos leer y con "AB" indicaremos cuántos bytes queremos escribir.  
   
-Al igual que "C3", "AB" está compuesta por tres bytes, y en ambos casos la cantidad máxima de bytes que podremos enviar y/o recibir es de 65535 bytes.  
+La cantidad máxima de bytes que podremos enviar y/o recibir es de 65535 bytes.  
   
-Voy a poner un ejemplo de sólo-envío y después otro de envío y recepción. Se trata de ver la mecánica, luego profundizaremos.  
+Voy a poner un ejemplo de sólo-envío y después otro de envío y recepción. Se trata de ver la mecánica.  
   
 Usaré las palabras "enviar" y "escribir" como sinónimas; por otra parte las palabras "recibir" y "leer" también son sinónimas.  
   
@@ -289,7 +372,7 @@ AB // Cantidad de datos a escribir:
 Ejemplo de enviar y recibir:  
   
 C3 // Cantidad de datos que vamos a leer:  
-00 // Leeremos 4 bytes, 0x0004. 
+00 // Leeremos 4 bytes, 0x0004.  
 04  
   
 AB // Cantidad de datos a escribir:  
@@ -300,8 +383,8 @@ AB // Cantidad de datos a escribir:
 FF // Y ahora leerá los 4 bytes.  
 FF // Lo hace "empujando" con bytes arbitrarios.  
 FF // Irán saliendo los bytes leídos por el bus correspondiente (esto lo veremos más adelante).  
-FF
-
+FF  
+  
 Vemos que en el grupo de datos hay 5 bytes, uno para escribir, y el resto (los otros 4 bytes) para leer. El total ha de coincidir con la suma de lo que escribe y de lo que lee.
   
 De lo que se trata ahora es de ver la mecánica de funcionamiento, luego veremos cómo se consiguen esos bytes leídos.  
@@ -323,12 +406,13 @@ No puedo poner ejemplos de funcionamiento como estábamos haciendo anteriormente
 
 # Fin  
 
-### Sobre el protocolo I2C, con un ejemplo:  
+### Proyectos I2C:  
+
+Con tiempo iré añadiendo proyectos I2C con Atto aquí.  
   
 En I2C no se puede conectar directamente los hilos del analizador lógico a los pines SDA y SCL, porque ambos tienen la propiedad triestado. De hacerlo lo que ocurriría es que el sintetizador del circuito te daría un error. Por ello, he sacado líneas desde donde se puede testear estos hilos, y son los pines "sda_test" y "scl_test". Esos pines sólo tienen como función opcional ver esas señales a través de PulseView.  
 
 En los pines físicos "sda" y "scl" es donde se conecta físicamente al periférico que quieras controlar. Si el periférico no lleva resistencia de polarización en pull-up, se las has de poner tú, el valor típico es de 5K, pero esto no es nada crítico. Por otra parte, si vas a mirar las señales I2C de Atto sin ningún periférico, es decir, en vacío, para hacer pruebas de escritura programando Atto-I2C, obligatoriamente le has de colocar las resistencias en pull-up a los pines físicos SDA y SCL.  
-
 
 Vamos a ver un ejemplo práctico aprovechando que la Alhambra II FPGA tiene un ADC (ADS7924) en la propia placa y se maneja con el protocolo I2C.  
   
@@ -367,6 +451,11 @@ Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y 
 He creado drivers complejos dentro de una FPGA gracias a Atto, te pongo un ejemplo: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   
-De proyectos SPI con Atto, sólo tengo un único ejemplo, el problema es que lo tengo modificado interiormente para que en la instrucción "AB" no necesite de la instrucción "C3". En este proyecto se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
+### Proyectos SPI  
+  
+Con tiempo iré añadiendo proyectos SPI con Atto aquí.  
+  
+**nRF24L01:**  
+  
+El problema con este proyecto es que modifiqué Atto interiormente para que en la instrucción "AB" no necesite ir acompañada de la instrucción "C3". En este proyecto se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
 
-# Este tutorial se está actualizando continuamente. Cuando dé por finalizado todo lo que es importante, avisaré por el foro.

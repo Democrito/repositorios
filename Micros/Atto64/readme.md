@@ -250,111 +250,85 @@ Para este menester he creado un tutorial donde recomiendo un analizador lógico 
 
  [****Tutorial PulseView****](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView)  
 
-Cuando lo hayas leído y practicado un poco el uso de **PulseView** continuamos con las instrucciones.
- 
-### AB // Envío y recepción de datos serie (SPI e I2C)
+Cuando lo hayas leído y practicado un poco el uso de **PulseView** continuamos con las instrucciones.  
+  
+### AB // Envío y recepción de datos serie (SPI e I2C)  
 
-La instrucción completa "AB" está compuesta por 3 bytes y luego le sigue una ristra de datos. El primer byte es la instrucción que define la función de enviar datos en serie, luego viene dos bytes más que define la cantidad total de bytes que se quiere enviar, y luego le sigue esa cantidad de datos (máximo 65535 bytes). Ejemplo:  
+Antes de comenzar a definir esta instrucción quiero darte dos recomendaciones:  
+* La primera es que te decantes por uno de los dos protocolos, o te concentras en SPI, o te concentras en I2C. Voy a explicar el funcionamiento de la instrucción en ambos protocolos, pero es mejor que te decantes sólo por uno de ellos.
+* La segunda es que sería muy bueno que conocieses el protocolo que vayas a utilizar. Habrá muchas "sutilezas" hardware que se entienden mejor si conoces la filosofía de funcionamiento del I2C y/o del SPI.
+
+Esta es la instrucción más utilizada cuando queramos enviar y recibir datos serie, ya sea utilizando I2C o SPI, incluso otros protocolos seriales.  
   
-AB // Enviar datos en serie.  
+Está compuesta por 3 bytes y luego le sigue una ristra de datos. **"AB" y "C3" siempre van juntas**.  
   
-00 // Cantidad total de datos que se va a enviar: 0x0005, es decir 5 bytes.  
+Con "C3" indicaremos cuántos bytes queremos leer y con "AB" indicaremos cuántos bytes queremos escribir.  
+  
+Al igual que "C3", "AB" está compuesta por tres bytes, y en ambos casos la cantidad máxima de bytes que podremos enviar y/o recibir es de 65535 bytes.  
+  
+Voy a poner un ejemplo de sólo-envío y después otro de envío y recepción. Se trata de ver la mecánica, luego profundizaremos.  
+  
+Usaré las palabras "enviar" y "escribir" como sinónimas; por otra parte las palabras "recibir" y "leer" también son sinónimas.  
+  
+Ejemplo de sólo enviar/escribir:  
+  
+C3 // Cantidad de datos que vamos a leer:  
+00 // La cantidad es nula, por tanto 0x0000. Sólo vamos a escribir/enviar, no hay lectura.  
+00  
+
+AB // Cantidad de datos a escribir:  
+00 // Cantidad 0x0005, es decir, 5 bytes.  
 05  
-  
-01 // Esos 5 bytes son: 0x0102030405  
-02  
+
+01 // Y estos son los 5 bytes que se enviarán:  
+02 // 0x0102030405  
 03  
 04  
 05  
   
-Como podemos comprobar, esta instrucción nos permite enviar un paquete de datos con los bytes que necesitemos, es decir, que el paquete de datos (en bytes) puede ser variable, desde 1 hasta 65535 bytes de un golpe.  
+Ejemplo de enviar y recibir:  
+  
+C3 // Cantidad de datos que vamos a leer:  
+00 // Leeremos 4 bytes, 0x0004. 
+04  
+  
+AB // Cantidad de datos a escribir:  
+00 // Cantidad 0x0001. Sólo un byte.  
+01  
+  
+3D // Escribe el byte "3D".  
+FF // Y ahora leerá los 4 bytes.  
+FF // Lo hace "empujando" con bytes arbitrarios.  
+FF // Irán saliendo los bytes leídos por el bus correspondiente (esto lo veremos más adelante).  
+FF
 
-Teniendo esto claro, ahora viene una aclaración. En realidad hay dos Attos, uno para SPI y otro para I2C. El protocolo I2C maneja toda la información (salida o entrada) por un mismo hilo de datos (SDA); y el protocolo SPI, tiene los hilos de datos separados para cada función de salida y entrada (MOSI y MISO).  
+Vemos que en el grupo de datos hay 5 bytes, uno para escribir, y el resto (los otros 4 bytes) para leer. El total ha de coincidir con la suma de lo que escribe y de lo que lee.
+  
+De lo que se trata ahora es de ver la mecánica de funcionamiento, luego veremos cómo se consiguen esos bytes leídos.  
+  
+Los protocolos SPI e I2C tienen un funcionamiento interno muy distinto. SPI es capaz de escribir y leer al mismo tiempo, sin embargo I2C no puede hacer eso, porque utiliza el mismo hilo de dato (SDA) tanto para escribir como para leer. Con esto quiero decir que en realidad en SPI nunca ocurre de forma separada la lectura. En SPI se escribe y lee al mismo tiempo. Esto, a nivel interno de Atto significa que siempre vamos a escribir (porque la lectura ocurre al mismo tiempo).  
+  
+Para que los protocolos SPI e I2C sean compatibles con todas las instrucciones, en el caso del **SPI**, como en realidad siempre vamos a escribir (la lectura ocurre al mismo tiempo), en la instrucción "C3" (antes de poner "AB") siempre le pondremos 0x0000, porque no leerá nada, sucede cuando escribe. Recuerda que esto sucederá siempre en SPI.  
+  
+En cambio, el protocolo **I2C**, si hay datos para leer, definimos esa cantidad con "C3".  
+  
+En resumen:  
+  
+* En el protocolo SPI, la instrucción "C3" será acompañada siempre de 0x0000 (nada que leer, porque al escribir también lee).
+* En el protocolo I2C, la instrucción "C3" será acompañada de la cantidad de datos que tenga que leerse, si los hay. Si no hay datos para leer, ese valor siempre será 0x0000, y si los hay, ponemos la cantidad que tenga que leer.  
 
-Atto, interiormente está modificado para adaptarse a uno de los dos protocolos en específico, y luego además, le acompaña el módulo SPI o I2C que manejan ese tipo de señales.  
+La instrucción "AB" junto a "C3" no tienen en sí ningún misterio, hacen exactamente lo que le pedimos, siguiendo las reglas que se han descrito.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Atto_interior_conecta_modulo_spi.png)  
+No puedo poner ejemplos de funcionamiento como estábamos haciendo anteriormente, porque esta instrucción requiere de un periférico en concreto (ya sean teclados, sensores, pantallas, etc). Sin embargo a modo de anexos, pondré proyectos en donde he usado Atto y dentro del programa podrás ver el uso de la instrucción "AB".
 
-Como ves en la imagen, a Atto le salen una señales específicas para manejar el módulo SPI. Esto significa que para este circuito Atto está modificado interiormente para funcionar con SPI.  
+# Fin  
 
-Cuando quieras ver las señales que produce a través de PulseView, puedes conectar directamente los hilos SPI del analizador lógico a los pines SPI del circuito.  
-
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Atto_interior_conecta_modulo_i2c.png)  
-
-Y aquí podemos ver lo mismo, pero modificado interiormente para funcionar con el protocolo I2C.  
-
+### Sobre el protocolo I2C, con un ejemplo:  
+  
 En I2C no se puede conectar directamente los hilos del analizador lógico a los pines SDA y SCL, porque ambos tienen la propiedad triestado. De hacerlo lo que ocurriría es que el sintetizador del circuito te daría un error. Por ello, he sacado líneas desde donde se puede testear estos hilos, y son los pines "sda_test" y "scl_test". Esos pines sólo tienen como función opcional ver esas señales a través de PulseView.  
 
 En los pines físicos "sda" y "scl" es donde se conecta físicamente al periférico que quieras controlar. Si el periférico no lleva resistencia de polarización en pull-up, se las has de poner tú, el valor típico es de 5K, pero esto no es nada crítico. Por otra parte, si vas a mirar las señales I2C de Atto sin ningún periférico, es decir, en vacío, para hacer pruebas de escritura programando Atto-I2C, obligatoriamente le has de colocar las resistencias en pull-up a los pines físicos SDA y SCL.  
 
-Todo esto significa que la instrucción "AB" va a funcionar un poco diferente según el protocolo que se emplee, y es lo que vamos a ver a continuación.  
-
-**Instrucción "AB" en SPI:**  
-
-La instrucción "AB" en SPI funciona tal y como se ha explicado al comienzo. Escribes "AB" luego pones la cantidad total a enviar, y después viene el grupo de bytes que serán enviados, y son tantos bytes como hayamos definido en la cantidad total.  
-
-Esto es para escribir por SPI, pero entonces, ¿cómo leer uno o un grupo de datos SPI?: Se hace "empujando" con bytes vacíos, tantos como necesitemos leer.  
-
-Veamos cómo es en escritura y lectura.  
-
-Ejemplo de escritura:  
-
-AB // Enviar (en este caso) por el puerto SPI:  
-
-00 // Cantidad 0x0003, es decir, 3 bytes.  
-03  
-
-01 // Y estos son los 3 bytes que se envía a través del SPI.  
-02 // 0x010203  
-03  
-
-Ejemplo de lectura:  
-
-AB // Enviar (en este caso) por el puerto SPI:  
-
-00 // Cantidad total de escritura y lectura  
-02 // 0x0002, es decir, 2 bytes. Uno para escribir y otra para leer. 
-
-F5 // Vamos a imaginar que "F5" es un registro del periférico SPI, le indicamos el registro a leer, y nos responderá en el byte siguiente.  
-FF // Empujamos con un byte arbitario (suele ser 00 ó FF) para extraer ese byte como respuesta. Entrará esos 8 bits por MISO.  
-
-**Instrucción "AB" en I2C:**  
-
-En I2C a la instrucción "AB" se le tiene que añadir otra instrucción y es "C3". En "C3" pondremos cuántos bytes queremos leer, y en "AB" pondremos cuántos bytes queremos escribir. El total de datos serán los que se leen más los que se escriben. Y los que se leen son datos que "empujamos" añadiendo bytes arbitrarios, que normalmente los haremos valer como 00 o bien FF. En realidad no importa estos valores cuando tratamos de leer porque no tendrán significado, sólo están para cumplir la función de "empujar", pero han de estar ahí.  
-  
-Cuando manejemos Atto I2C, siempre-siempre han de estar asociadas las instrucciones "C3" y "AB", nunca se debe de poner "AB" sola.  
-  
-Ejemplo de escritura:  
-  
-C3 // Cargamos en un registro interno de propósito general el valor 0x0000.  
-00 // Como sólo vamos a escribir, y no leer, el valor que carga "C3" ha de ser siempre 0.  
-00  
-  
-AB // Sacar datos en serie (en este caso) por I2C.  
-00 // Esta cantidad de bytes: 0x0003, es decir, 3 bytes.  
-03  
-  
-02 // Esos tres bytes de escritura tienen estos valores:  
-04 // 0x020408  
-08  
-  
-Ejemplo de lectura:  
-  
-C3 // Cargamos en un registro interno de propósito general el valor 0x0004.  
-00 // Como vamos a usar la instrucción "AB" para I2C adquiere el significado de  
-04 // cuántos bytes va a leer.  
-  
-AB // Sacar datos en serie (en este caso) por I2C.  
-00 // Cantidad de bytes que escribirá: 0x0001 (sólo uno, que será la dirección I2C de lectura).  
-01  
-  
-3D // Este primer byte de dato es la dirección I2C de lectura (siempre es un número impar en lectura, si fuese par sería de escritura).  
-FF // "Empuja" con 4 bytes arbitrarios los 4 bytes que queremos leer.  
-FF  
-FF  
-FF  
-  
-En fin, sé que todo esto suena a mucho lío la primera vez, pero cuando te concentras en un sólo protocolo en concreto y has de hacer repetidamente escritura y lectura de datos, todo esto se comprende a la perfección. Dicho de otra manera, en la práctica es mucho más sencillo de lo que parece, pero al explicar las reglas de funcionamiento y las excepciones, es lo que hace que parezca complicado.  
 
 Vamos a ver un ejemplo práctico aprovechando que la Alhambra II FPGA tiene un ADC (ADS7924) en la propia placa y se maneja con el protocolo I2C.  
   
@@ -393,7 +367,6 @@ Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y 
 He creado drivers complejos dentro de una FPGA gracias a Atto, te pongo un ejemplo: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   
-Y de proyectos SPI con Atto, sólo tengo un único ejemplo donde se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
+De proyectos SPI con Atto, sólo tengo un único ejemplo, el problema es que lo tengo modificado interiormente para que en la instrucción "AB" no necesite de la instrucción "C3". En este proyecto se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
 
 ### Este tutorial será reestructurado en breve. Habrá cambios importantes. Todas las instrucciones explicadas hasta ahora seguirán funcionando igual, excepto AB, que funcionará igual que en I2C en la versión moderna que sacaré pronto. He creado un Atto nuevo, eso significa que sustituiré todos los ejemplos de los tutoriales, y aparte he de explicar cómo se estructura interiormente el nuevo atto. Además, será compatible con otros protocolos, como el rs232. Queda el tutorial en pausa, a fecha de hoy 13 de agosto de 2023, hasta nuevo aviso. Gracias por la paciencia a los que estén siguiendo este tutorial.
-

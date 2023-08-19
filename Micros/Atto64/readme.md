@@ -400,15 +400,16 @@ En resumen:
 * En el protocolo SPI, la instrucción "C3" será acompañada siempre de 0x0000 (nada que leer, porque al escribir también lee).
 * En el protocolo I2C, la instrucción "C3" será acompañada de la cantidad de datos que tenga que leerse, si los hay. Si no hay datos para leer, ese valor siempre será 0x0000, y si los hay, ponemos la cantidad que tenga que leer.  
 
-La instrucción "AB" junto a "C3" no tienen en sí ningún misterio, hacen exactamente lo que le pedimos, siguiendo las reglas que se han descrito.  
+La instrucción "AB" junto a "C3" no tienen en sí ningún misterio, hacen exactamente lo que le pedimos, siguiendo las reglas que se han descrito.   
 
-No puedo poner ejemplos de funcionamiento como estábamos haciendo anteriormente, porque esta instrucción requiere de un periférico en concreto (ya sean teclados, sensores, pantallas, etc). Sin embargo a modo de anexos, pondré proyectos en donde he usado Atto y dentro del programa podrás ver el uso de la instrucción "AB".
-
-# Fin  
-
-### Proyectos I2C:  
-
+No puedo poner ejemplos de funcionamiento como estábamos haciendo anteriormente, porque esta instrucción requiere de un periférico en concreto (ya sean teclados, sensores, pantallas, etc). Sin embargo a modo de anexos, pondré proyectos en donde he usado Atto y dentro del programa podrás ver el uso de la instrucción "AB".  
+  
+  
+## Proyectos I2C  
+  
 Con tiempo iré añadiendo proyectos I2C con Atto aquí.  
+  
+### Lectura del ADC de la Alhambra II FPGA  
   
 En I2C no se puede conectar directamente los hilos del analizador lógico a los pines SDA y SCL, porque ambos tienen la propiedad triestado. De hacerlo lo que ocurriría es que el sintetizador del circuito te daría un error. Por ello, he sacado líneas desde donde se puede testear estos hilos, y son los pines "sda_test" y "scl_test". Esos pines sólo tienen como función opcional ver esas señales a través de PulseView.  
 
@@ -447,15 +448,20 @@ Cuando uses Atto para comunicarte con un periférico I2C, haz este truco para co
 Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits y en hexadecimal), lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
 
 Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
+
+### Reloj de tiempo real DS3231  
   
-He creado drivers complejos dentro de una FPGA gracias a Atto, te pongo un ejemplo: [**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
+[**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
+
+Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.
+
 Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   
-### Proyectos SPI  
+## Proyectos SPI  
   
 Con tiempo iré añadiendo proyectos SPI con Atto aquí.  
   
-**nRF24L01:**  
+### Receptor FPGA para el nRF24L01  
   
 El problema con este proyecto es que modifiqué Atto interiormente para que en la instrucción "AB" no necesite ir acompañada de la instrucción "C3". En este proyecto se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
 

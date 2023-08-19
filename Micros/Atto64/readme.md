@@ -159,7 +159,7 @@ Estamos con código máquina, veamos cómo se define un bucle tipo "for" máquin
 
 Usaremos las instrucciones "A3" y "D3", ambas miden 3 bytes. Estas dos instrucciones siempre van en pareja.  
 
-En "A3" pondremos la cantidad de veces que queramos repetir el bucle. El número de veces mínimo es 1 (poner 0 sería absurdo) y el máximo es 65535.  
+En "A3" pondremos la cantidad de veces que queramos repetir el bucle. El número de veces mínimo es 1 y el máximo es 65535.  
 En "D3" pondremos la dirección de memoria a la que ha de saltar para que se repita, y esa dirección será la siguiente instrucción que haya después de A3.  
 
 De forma esquemática sería así:  
@@ -171,6 +171,8 @@ De forma esquemática sería así:
 Veamos un programa que ejemplifique estas dos instrucciones. Como es un poco largo, descárgalo, ábrelo con Icestudio y desde ahí lo verás en grande. Haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_5-Bucle_For.ice) para descargar el ejemplo, o si lo prefieres, toma el ejemplo "Example_5-Bucle_For.ice" que está en la carpeta "Examples".  
 
 El programa hace parpadear dos veces los leds de la Alhambra II FPGA, y luego repite tres veces la alternancia de leds (55..AA..), y después vuelve a repetirlo todo otra vez.  
+
+A3 y D3 pueden tener una segunda utilidad y es crear temporizaciones menores de 10us, incluso, si el temporizador (FB) no te conviene en una interrupción externa (por ejemplo), puedes usar como temporizador estas dos instrucciones, creando ciclos largos.  
 
 Ejercicio:  
 

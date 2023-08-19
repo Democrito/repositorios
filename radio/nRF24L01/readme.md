@@ -172,7 +172,7 @@ radio.setPALevel(RF24_PA_MAX);    // En este proyecto la potencia siempre es má
   
 # Otros  
 
-Echa un ojo a [**este vídeo**](https://www.youtube.com/watch?v=8YIy0IyV4c4) si todo lo tienes bien montado y comprobado, sin embargo hace cosas muy extrañas.
+Echa un ojo a [**este vídeo**](https://www.youtube.com/watch?v=8YIy0IyV4c4). Yo pienso que poniendo el condensador electrolítico y con una buena corriente de alimentación todos los problemas deberían desaparecer. Quizás, si la frecuencia SPI es demasiado elevada entraríamos en la problemática de ruido que se cuela en los cables; en mi caso uso 3MHz para el clock SPI sin problemas. En el vídeo se comenta todos estos detalles y muchos otros.
 
 # Atto  
   

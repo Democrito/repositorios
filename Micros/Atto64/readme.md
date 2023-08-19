@@ -461,11 +461,8 @@ Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de fun
   
 En este proyecto modifiqué a Atto interiormente para que en la instrucción "AB" no necesitase ir acompañada de la instrucción "C3", porque en SPI el valor que acompaña a C3 siempre es 0. Al hacer esto también se sacrificó la instrucción "AF" en este proyecto.  
 
-## Configuracion y adaptaciones Hardware de Atto o distintos protocolos.  
+## Configuracion y adaptaciones Hardware de Atto a distintos protocolos.  
 
 Próximamente tocaré este tema.
-
-
-
 
 

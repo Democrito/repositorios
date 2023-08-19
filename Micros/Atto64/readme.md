@@ -459,7 +459,7 @@ Con tiempo iré añadiendo proyectos SPI con Atto aquí.
   
 ### [Receptor FPGA para el nRF24L01](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
   
-En este proyecto modifiqué a Atto interiormente para que en la instrucción "AB" no necesitase ir acompañada de la instrucción "C3", porque en SPI el valor que acompaña a C3 siempre es 0.  
+En este proyecto modifiqué a Atto interiormente para que en la instrucción "AB" no necesitase ir acompañada de la instrucción "C3", porque en SPI el valor que acompaña a C3 siempre es 0. Al hacer esto también se sacrificó la instrucción "AF" en este proyecto.  
 
 ## Configuracion y adaptaciones Hardware de Atto o distintos protocolos.  
 

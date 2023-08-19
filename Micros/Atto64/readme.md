@@ -407,7 +407,7 @@ No puedo poner ejemplos de funcionamiento como estábamos haciendo anteriormente
   
 ## Proyectos I2C  
   
-Con tiempo iré añadiendo proyectos I2C con Atto aquí.  
+*Con tiempo iré añadiendo proyectos I2C con Atto aquí.*  
   
 ### Lectura del ADC de la Alhambra II FPGA  
 
@@ -455,7 +455,7 @@ Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de fun
   
 ## Proyectos SPI  
   
-Con tiempo iré añadiendo proyectos SPI con Atto aquí.  
+*Con tiempo iré añadiendo proyectos SPI con Atto aquí.*  
   
 ### [Receptor FPGA para el nRF24L01](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
   

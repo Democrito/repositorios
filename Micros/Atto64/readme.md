@@ -410,10 +410,6 @@ No puedo poner ejemplos de funcionamiento como estábamos haciendo anteriormente
 Con tiempo iré añadiendo proyectos I2C con Atto aquí.  
   
 ### Lectura del ADC de la Alhambra II FPGA  
-  
-En I2C no se puede conectar directamente los hilos del analizador lógico a los pines SDA y SCL, porque ambos tienen la propiedad triestado. De hacerlo lo que ocurriría es que el sintetizador del circuito te daría un error. Por ello, he sacado líneas desde donde se puede testear estos hilos, y son los pines "sda_test" y "scl_test". Esos pines sólo tienen como función opcional ver esas señales a través de PulseView.  
-
-En los pines físicos "sda" y "scl" es donde se conecta físicamente al periférico que quieras controlar. Si el periférico no lleva resistencia de polarización en pull-up, se las has de poner tú, el valor típico es de 5K, pero esto no es nada crítico. Por otra parte, si vas a mirar las señales I2C de Atto sin ningún periférico, es decir, en vacío, para hacer pruebas de escritura programando Atto-I2C, obligatoriamente le has de colocar las resistencias en pull-up a los pines físicos SDA y SCL.  
 
 Vamos a ver un ejemplo práctico aprovechando que la Alhambra II FPGA tiene un ADC (ADS7924) en la propia placa y se maneja con el protocolo I2C.  
   
@@ -425,7 +421,7 @@ El valor del potenciómetro se recomienda que no sea excesivamente elevado porqu
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Alhambra%20channels%20ADC.png)  
 
-Los canales en la Alhambra II FPGA se encuentran ahí, como puedes ver en la imagen. Has de conectar el potenciómetro al canal 0 para el primer ejemplo que puse, y en el segundo ejemplo puedes conectar dos potenciómetros (canal 0 y 1; tiene 4 canales pero en este último ejemplo sólo lee 2) y se verá en los leds el valor binario de ambos potenciómetros pulsando o no el pulsador SW1. Si no pulsas, leerás el canal 0, y si pulsas leerás el canal 1.  
+Los canales en la Alhambra II FPGA se encuentran ahí, como puedes ver en la imagen. Has de conectar el potenciómetro al canal 0 para el primer ejemplo que puse, y en el segundo ejemplo puedes conectar dos potenciómetros (canal 0 y 1; tiene 4 canales pero en este último ejemplo sólo lee 2) y se verá en los leds el valor binario de ambos potenciómetros pulsando o no el pulsador SW1. Si no pulsas SW1, leerás el canal 0, y si lo pulsas leerás el canal 1.  
 
 Subes el primer circuito y se pondrá inmediatamente en marcha, viendo en los leds el valor binario. Ahora toca mirar el código y comprender qué es lo que hace. Opcionalmente tienes el segundo ejemplo un poco más complicado, que permite seleccionar dos canales.  
 
@@ -441,17 +437,19 @@ Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeñ
 
 ![](https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG)
 
-El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48). El bit más bajo (el octavo, o el que nos falta para completar un byte) ese bit indica escritura (si está a 0) o lectura (si está a 1). El bit ACK es de confirmación, y el driver I2C lo gestiona internamente, tú haz como si no existiese, a no ser que vayas a diseñar un driver I2C por tu cuenta. 
+El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48 en hexadecimal). Falta un bit para completar un byte y es el bit más bajo. El bit más bajo indica escritura (si está a 0) o lectura (si está a 1). El bit ACK es de confirmación, y el driver I2C lo gestiona internamente, tú haz como si no existiese, a no ser que vayas a diseñar un driver I2C por tu cuenta. 
 
 Cuando uses Atto para comunicarte con un periférico I2C, haz este truco para convertir la dirección de 7 bits a 8 bits (un byte) y teclearlo en el programa para Atto:  
 
-Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits y en hexadecimal), lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
+Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits), lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
 
 Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
 
 ### [Reloj de tiempo real DS3231](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 
-Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.
+Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.  
+
+La mayoría de las veces sólo vas a usar como mucho 5 instrucciones: Salto directo (F3), salto condicional (E3, si no es igual), temporización (FB), guardar un valor para otra instrucción (C3) y lectura/escritura del periférico (AB). Ocasionalmente tendrás que usar C3 y B3 si el periférico necesita de una configuración externa para adaptarlo a diferentes necesidades.
 
 Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   
@@ -459,6 +457,15 @@ Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de fun
   
 Con tiempo iré añadiendo proyectos SPI con Atto aquí.  
   
-### [Receptor FPGA para el nRF24L01](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)    
+### [Receptor FPGA para el nRF24L01](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
   
-El problema con este proyecto es que modifiqué Atto interiormente para que en la instrucción "AB" no necesite ir acompañada de la instrucción "C3". En este proyecto se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el **nRF24L01**.  
+En este proyecto modifiqué a Atto interiormente para que en la instrucción "AB" no necesitase ir acompañada de la instrucción "C3", porque en SPI el valor que acompaña a C3 siempre es 0.  
+
+## Configuracion y adaptaciones Hardware de Atto o distintos protocolos.  
+
+Próximamente tocaré este tema.
+
+
+
+
+

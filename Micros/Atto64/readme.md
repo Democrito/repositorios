@@ -449,19 +449,16 @@ Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits y en hexadecima
 
 Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
 
-### Reloj de tiempo real DS3231  
-  
-[**Reloj de tiempo real**](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
+### [Reloj de tiempo real DS3231](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 
 Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.
 
-Tengo otros, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
+Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   
 ## Proyectos SPI  
   
 Con tiempo iré añadiendo proyectos SPI con Atto aquí.  
   
-### Receptor FPGA para el nRF24L01  
+### [Receptor FPGA para el nRF24L01](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)    
   
-El problema con este proyecto es que modifiqué Atto interiormente para que en la instrucción "AB" no necesite ir acompañada de la instrucción "C3". En este proyecto se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el [**nRF24L01**](https://github.com/Democrito/repositorios/tree/master/radio/nRF24L01)  
-
+El problema con este proyecto es que modifiqué Atto interiormente para que en la instrucción "AB" no necesite ir acompañada de la instrucción "C3". En este proyecto se hacen entradas y salidas de datos a través de SPI, es un receptor FPGA para el **nRF24L01**.  

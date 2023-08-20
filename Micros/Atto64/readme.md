@@ -14,7 +14,9 @@ Pertenece a la categoría de 8 bits, porque maneja la memoria byte a byte.
 
 Las instrucciones máquina miden un byte, y de este byte los dos bits más bajos (LSB) indican cuántos bytes compone la instrucción completa. Por ejemplo "F3" significa salto directo y se compone de 3 bytes. El primer byte es la instrucción en sí de salto directo, y los dos bytes siguientes es la dirección de memoria a la que ha de saltar.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Partes%20de%20una%20instrucción.jpg)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Partes%20de%20una%20instrucción.jpg">
+</p>
 
 De la instrucción "F3", la "F" es una letra arbitraria, podría haber sido cualquier otra, pero había que definirla con alguna letra hexadecimal y elegí la "F" para esta instrucción. El "3" significa que esta instrucción está compuesta por la propia instrucción y le acompaña los dos bytes que representan la dirección de memoria a la que hay que saltar.  
 
@@ -51,7 +53,9 @@ ATTO tiene un puerto de salida de 16 bits. Este puerto lo usaremos para que nos 
 
 Ya conocemos dos instrucciones (salto directo y termporizador), vamos a poner un ejemplo de uso de "out port" (8B) estilo "hola mundo". Observa este circuito y además mira el código que se le ha cargado:  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO_blink_8bits.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO_blink_8bits.png">
+</p>
 
 Sólo has de fijarte en "dout" (es el puerto de salida) y en el programa, todo lo demás ahora no nos interesa. A través de "dout[15:0]" hará un "blink" en los leds de la Alhambra II FPGA. Como son 8 leds, hemos de elegir el byte alto o bajo de esa salida (porque son 16 bits) y he escogido el byte bajo. El programa, al ejecutarse (es decir, cuando subas este circuito), lo que hará será hacer parpadear los 8 leds de la Alhambra II FPGA.  
 
@@ -77,7 +81,9 @@ Veamos un ejemplo:
 
 En el ejemplo anterior se repite la temporización dos veces, ahora vamos a colocar un sólo temporizador al final del programa y la llamaremos cuando la necesitemos. Hará exactamente lo mismo, parpadear todos los leds de la Alhambra II FPGA, pero sin necesidad de repetir el temporizador como código.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-Return.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-Return.png">
+</p> 
 
 En este caso el código es ineficiente (pasamos de 15 a 18 líneas de código), pero ejemplifica el funcionamiento de la instrucción "01" (return). Cuando haya algo que se repita mucho y ocupe más de 3 bytes en la memoria, es cuando se le puede sacar partido a esta instrucción.  
 
@@ -103,11 +109,15 @@ Esta instrucción usa 3 bytes.
 
 Observa la siguiente imagen.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Comparator%20input.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Comparator%20input.png">
+</p> 
 
 Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:0]" con el valor que hayamos cargado mediante "C3". Antes de hacer una comparación hay que cargar el valor que queramos comparar mediante "C3". Entonces, cuando ATTO ejecute "E3", -si NO es igual-, la instrucción compara la entrada "cmp" con el valor que hayamos guardado usando "C3", y si no son iguales, saltará a una posición concreta de la memoria.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Diagrama%20de%20decision%20C3%20y%20E3.png)
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Diagrama%20de%20decision%20C3%20y%20E3.png">
+</p>  
 
 El valor que cargamos con "C3" es un valor de 16 bits, sin embargo, para comparar lo hace con el byte bajo, el byte alto queda descartado y tampoco nos importará el valor de ese byte alto si tuviera almacenado alguno.  
 
@@ -119,7 +129,9 @@ Pongo un ejemplo de funcionamiento de esta instrucción que podrás descargar de
 
 Echemos un ojo al circuito de ejemplo.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Circuito%20ejemplo%20JNE.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Circuito%20ejemplo%20JNE.png">
+</p> 
 
 Vemos que un pulsador (SW1) puede seleccionar dos entradas a través de un multiplexor. Si no se pulsa, el multiplexor sacará el valor 0, y si se mantiene pulsado el multiplexor sacará el valor 255. La salida del multiplexor va conectada a la entrada "cmp" de ATTO.  
 
@@ -141,7 +153,9 @@ Cuando lo abras comprobarás que es el mismo circuito que el anterior. Para simp
 
 Este es el código.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ejemplo%20JE.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ejemplo%20JE.png">
+</p> 
 
 Es mucho más sencillo que el anterior, ya que si comprendiste "E3", "83" es evidente.  
 
@@ -164,7 +178,9 @@ En "D3" pondremos la dirección de memoria a la que ha de saltar para que se rep
 
 De forma esquemática sería así:  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/bucle%20for%20atto.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/bucle%20for%20atto.png">
+</p>
 
 "A3" se ha de colocar una línea antes de comenzar el bucle. Y "D3" donde termina el bucle. El "(JNZ)" es un descontador interno de esta instrucción, porque lo que hace es descontar el número definido con A3, hasta llegar a 0.  
 
@@ -182,7 +198,9 @@ Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-li
 
 ### F1 // "Return" de la interrupción hardware externa:  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Interrupcion%20hardware.PNG)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Interrupcion%20hardware.PNG">
+</p> 
 
 Atto tiene una entrada para hacer interrupción externa. Es la entrada "int" y funciona con *tic*, es decir, un pulso de reloj.  
 
@@ -200,8 +218,9 @@ Te propongo un ejercicio muy sencillo, simplemente cambia la posición de memori
 
 ### B3 // Guardar un valor externo dentro de la memoria:  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/entrada%20-din-%20para%20cargar%20un%20valor%20en%20la%20memoria.png) 
-
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/entrada%20-din-%20para%20cargar%20un%20valor%20en%20la%20memoria.png"> 
+</p>
 
 La instrucción "B3" toma el valor de la entrada "din" (de 8 bits) y lo guarda en la dirección de memoria que le indiquemos. Por ejemplo:  
 
@@ -215,7 +234,9 @@ Como puedes comprobar, mide 3 bytes.
 
 Y ahora vienen las curvas, así que agárrate fuerte (esto significa poner mucha atención). Esta instrucción la utilizaremos cuando un periférico necesita ser configurado de forma externa, porque puede tener varias configuraciones aparte de la de por defecto, y rara vez sólo tendrás que carga un sólo byte en la memoria. Entonces nos la hemos de ingeniar para cargar todos los bytes que necesitemos dentro de la memoria y para ello nos haremos servir de la salida "dout".  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/carga%20de%20dos%20bytes%20en%20la%20memoria.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/carga%20de%20dos%20bytes%20en%20la%20memoria.png">
+</p> 
 
 Cuando tengamos que meter varios bytes en la memoria, una forma de hacerlo es usar registros de desplazamiento, en este caso son de 8 bits. Otra forma de entrar los datos hubiera sido a través de un multiplexor.  
 
@@ -229,7 +250,9 @@ Verás que todos los leds estarán parpadeando, pero si pulsas sobre el pulsador
 
 Dentro del circuito verás este código:  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/instruccion%20B3.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/instruccion%20B3.png">
+</p>
 
 Podemos ver a través de las flechas en rojo lo que hace la instrucción "B3", es decir, toma lo que haya en la entrada "din" y lo guarda en la posición de memoria que le indiquemos.  
 
@@ -299,11 +322,15 @@ Este primer ejemplo lo vamos a hacer con el SPI. Ves a la carpeta "Examples" y t
   
 Lo abres con Icestudio y verás esto:  
   
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20Ejemplo_9-instruccion_AF.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20Ejemplo_9-instruccion_AF.png">
+</p> 
   
 Conecta los cables del analizador lógico, tal como está en el esquema (imagen de arriba) y lo subes a la FPGA. Acto seguido ves a PulseView y lo ejecutas.  
   
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20AF%20spi.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20AF%20spi.png">
+</p>
   
 Configuras PulseView tal como lo he marcado arriba en rojo (no hace falta tocar nada más) y le das a "Run". Te ha de aparecer lo mismo que a mí.  
   
@@ -319,7 +346,9 @@ Ves a la carpeta "Examples" y te descargas "Example_9-instruccion_AF_I2C.ice" o 
   
 Lo abres con Icestudio y te aparerá esto:  
   
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20ejercicio%209%20I2C.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20ejercicio%209%20I2C.png">
+</p>
   
 Los pines físicos "SDA" y "SCL" necesitan resistencias en configuración pull-up para polarizar positivamente esos pines. Aquí uso un truco para ahorrarme esas resistencias y lo que hago es conectarlo a un periférico I2C que tiene la Alhmabra II FPGA, que ya las lleva incluidas. En el caso de que no puedas hacer esto, es obligatorio conectar dos resistencias en pull-up en esos pines.  
 
@@ -327,7 +356,9 @@ Los pines "sda_test" y "scl_test" son para conectarlos al analizador lógico, s�
 
 Conectas los dos cables al analizador lógico, como dije antes, y configuras PulseView para leer datos I2C.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20AF%20ex9%20I2C.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20AF%20ex9%20I2C.png">
+</p>
 
 Le das a "Run" y debe de aparecer esta imagen de arriba. Vemos que funciona bien, se repiten los datos que le hemos programado.  
 
@@ -415,13 +446,17 @@ No puedo poner ejemplos de funcionamiento como estábamos haciendo anteriormente
 
 Vamos a ver un ejemplo práctico aprovechando que la Alhambra II FPGA tiene un ADC (ADS7924) en la propia placa y se maneja con el protocolo I2C.  
   
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ADC%20ejercicio%208%201.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ADC%20ejercicio%208%201.png">
+</p>
   
 Descárgate de la carpeta "Example" dos archivo llamados "[**Example_8_1-ADS7924.ice**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_8_1-ADS7924.ice)" y otro un poco más avanzado llamado "[**Example_8_2-ADS7924.ice**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_8_2-ADS7924.ice)".  
 
 El valor del potenciómetro se recomienda que no sea excesivamente elevado porque cuanto mayor es el valor óhmico mayor será el ruido a partir de cierto nivel resistivo. Un valor recomendado podría ser de 5K.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Alhambra%20channels%20ADC.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Alhambra%20channels%20ADC.png">
+</p>
 
 Los canales en la Alhambra II FPGA se encuentran ahí, como puedes ver en la imagen. Has de conectar el potenciómetro al canal 0 para el primer ejemplo que puse, y en el segundo ejemplo puedes conectar dos potenciómetros (canal 0 y 1; tiene 4 canales pero en este último ejemplo sólo lee 2) y se verá en los leds el valor binario de ambos potenciómetros pulsando o no el pulsador SW1. Si no pulsas SW1, leerás el canal 0, y si lo pulsas leerás el canal 1.  
 
@@ -429,7 +464,9 @@ Subes el primer circuito y se pondrá inmediatamente en marcha, viendo en los le
 
 Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseView**](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/PulseView). Esta parte es muy importante, porque nos permite ver lo que realmente sucede a nivel de señales.  
 
-![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20señal%20ADC.png)  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/PV%20señal%20ADC.png">
+</p>
 
 (Haz clic con el botón derecho del ratón y escoge la opción "Abrir imagen en una nueva pestaña" para ver la imagen un poco más grande)  
 
@@ -437,7 +474,9 @@ Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se re
 
 Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C.  
 
-![](https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG)
+<p align="center">
+  <img src="https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG">
+</p>
 
 El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48 en hexadecimal). Falta un bit para completar un byte y es el bit más bajo. El bit más bajo indica escritura (si está a 0) o lectura (si está a 1). El bit ACK es de confirmación, y el driver I2C lo gestiona internamente, tú haz como si no existiese, a no ser que vayas a diseñar un driver I2C por tu cuenta. 
 

@@ -490,7 +490,7 @@ Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y 
 
 Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.  
 
-La mayoría de las veces sólo vas a usar como mucho 5 instrucciones: Salto directo (F3), salto condicional (E3, si no es igual), temporización (FB), guardar un valor para otra instrucción (C3) y lectura/escritura del periférico (AB). Ocasionalmente tendrás que usar C3 y B3 si el periférico necesita de una configuración externa para adaptarlo a diferentes necesidades.
+La mayoría de las veces sólo vas a usar como mucho 5 instrucciones: Salto directo (F3), salto condicional (E3, si no es igual), temporización (FB), guardar un valor para otra instrucción (C3) y lectura/escritura del periférico (AB). Ocasionalmente tendrás que usar C3 y B3 junto con 8B si el periférico necesita de una configuración externa para adaptarlo a diferentes necesidades.
 
 Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   

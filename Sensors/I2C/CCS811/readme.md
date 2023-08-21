@@ -1,5 +1,9 @@
 # CCS811
-
+  
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/CCS811/ccs811-conection.png">
+</p>
+  
 - The board that you see in the image is the same one that I have used and it works at 3.3V. If you have another model, make sure of the supply voltage.  
 - The CSS811 has a pin called **WAK**, this pin must be grounded. This is very important to keep in mind, otherwise it will not work.  
 - When it starts, you have to wait about 10 seconds for the data to start coming out.  

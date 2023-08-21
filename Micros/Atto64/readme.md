@@ -582,6 +582,6 @@ Para comparar conectas "do" del driver SPI directamente a la entrada "cmp" de At
 
 ### Conclusión de este apartado
 
-Si más o menos te haces una idea de todo lo que se ha explicado en este apartado, será poniéndolo en práctica cuando adquirá toda la lógica. Como dije mucho más arriba, concéntrate en un sólo protocolo y experimenta sólo con ese protocolo. Yo al menos aprendí así a comprenderlos. Primero usé periféricos en donde sólo se tenía que escribir, y una vez que lo comprendí, pasé a otros protocolos donde se tenía que escribir y leer. Procura ir paso a paso, desde lo sencillo a lo más complejo yendo en espiral hacia tu objetivo poco a poco.  
+Si más o menos te haces una idea de todo lo que se ha explicado en este apartado, será poniéndolo en práctica cuando adquirá toda la lógica. Como dije mucho más arriba, concéntrate en un sólo protocolo y experimenta sólo con ese protocolo. Yo al menos aprendí así a comprenderlos. Primero usé periféricos donde sólo se tenía que escribir, y una vez que lo comprendí, pasé a otros periféricos donde se tenía que escribir y leer. Procura ir paso a paso, desde lo sencillo a lo más complejo yendo en espiral hacia tu objetivo poco a poco y sin saltarte pasos.  
 
 Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, haz clic en [este enlace](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg). Como todo esto es un diseño personal, las respuestas a ciertas preguntas no estarán en Google o ChatGPT.  

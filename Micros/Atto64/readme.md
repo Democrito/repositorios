@@ -549,7 +549,7 @@ Ahora veamos cómo se conecta estos pines al driver/módulo, según el protocolo
   <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/pinout%20to%20I2C.png">
 </p>
 
-He eliminado el resto de pines de los que no vamos a hablar ahora para conectrarnos en las conexiones de Atto con el módulo I2C. Podemos ver que se conectan todos los pines de salida de Atto, exceptuando "dout".  
+He eliminado el resto de pines de los que no vamos a hablar ahora para concentrarnos en las conexiones de Atto con el módulo I2C. Podemos ver que se conectan todos los pines de salida de Atto, exceptuando "dout".  
 
 Los pines "dser", "send" y "stop" son los encargados de enviar byte a byte al módulo I2C para que lo transforme en datos serie, y se le añade los pines "RW" y "nack" que gestionarán los datos de salida (lectura del I2C) si los hubiera. La patilla "exec" va conectada al módulo I2C (next) para decirle a Atto que ya ha terminado de enviar el byte a través del I2C y que si hay más bytes por enviar, le puede mandar otro.  
 

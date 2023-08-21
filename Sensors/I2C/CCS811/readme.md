@@ -1,11 +1,13 @@
-**CCS811.ice** is the module that controls this circuit.
+# CCS811
 
-**example_CCS811.ice** is an example of working through serial.
-
-**CCS811.txt** It is just a file to conveniently view the code that runs a small internal micro-controller. The code is contained in a preprogrammed internal RAM that behaves as both ROM and RAM.
-
-You will find details about how it works here:
+- The board that you see in the image is the same one that I have used and it works at 3.3V. If you have another model, make sure of the supply voltage.  
+- The CSS811 has a pin called **WAK**, this pin must be grounded. This is very important to keep in mind, otherwise it will not work.  
+- When it starts, you have to wait about 10 seconds for the data to start coming out.  
+- Once data begins to output (CO2 and aromatic compounds), the data will be output every 5 seconds.  
+- If a reset is made to the FPGA, it is convenient to do a long reset (do not make a simple click) It is not for the FPGA but for the sensor.  
+- If we observe the signals with PulseView, when it reads the data, the first two bytes that come out are those of CO2, and the next 2 bytes are those of aromatic compounds. Later others come out that I still don't know what they are but I think the final couple of bytes are for temperature, but I think that a formula must be applied to the latter to convert them to degrees (and it's not because they are in Fahrenheit degrees, but because they have a own formula).  
+- When you see the output data you will see that "00400 00000" is repeated many times and you can spend hours and hours giving the same data. The sensor takes a long time to recalibrate before starting to give reliable data. To check that it really detects, blow close to the sensor, then you will see that the output data varies.  
+  
+You will find details about how it works here:  
 
 https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/zpN-ueBAqHE/m/KRDAu-4_AQAJ
-
-The folder "**CCS811newMicro**" is an experiment where I use a new 16-bit micro with which I am experimenting and validating its proper functioning. I am testing it with different peripherals, including the CCS811. Being 16 bits and with new features it takes up more space.

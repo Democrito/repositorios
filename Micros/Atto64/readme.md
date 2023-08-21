@@ -506,8 +506,82 @@ Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de fun
   
 En este proyecto modifiqué a Atto interiormente para que en la instrucción "AB" no necesitase ir acompañada de la instrucción "C3", porque en SPI el valor que acompaña a C3 siempre es 0. Al hacer esto también se sacrificó la instrucción "AF" en este proyecto.  
 
-## Configuracion y adaptaciones Hardware de Atto a distintos protocolos.  
+## Configuracion y adaptaciones Hardware de Atto a distintos protocolos  
 
-Próximamente tocaré este tema.
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20atto64%20pinout.png">
+</p>
 
+Este es el pinout de Atto64. El "64" viene de que es capaz de direccionar ese tamaño de memoria, 2^16 = 65536 posiciones.  
 
+Los pines de arriba y los de la izquierda ya los conocemos de haberlos usado durante el tutorial de las instrucciones máquina de Atto, pero hagamos un repaso.  
+
+* A través del pin "**prg**" se conecta a una caja de memoria, donde irá el programa que queramos ejecutar.  
+* En "**dirInt**" pondremos la dirección de memoria a la que hay que saltar en caso de que ocurra una interrupción externa.  
+* "**int**" es la patilla para provocar la interrupción externa y funciona con un "tic" (un sólo ciclo de reloj).  
+* "**rst**", con un 1 o un "tic", pone a cero el contador del programa. Reinicia el programa si eso sucede.  
+* "**din**", entrada de datos externa. La instrucción "B3" colocará el dato que haya en "din" en una posición concreta de la memoria.  
+* "**cmp**", será utilizada por las instrucciones "83" y "E3", comparando lo que carguemos en "C3" (byte bajo) con la entrada "cmp", y si se cumple la condición, salta a una zona determinada de la memoria.  
+* "**dout**", es un puerto paralelo de 16 bits. Utilizaremos bits de este puerto para gestionar entradas y salidas de Atto.  
+  
+Nos falta por ver el resto del patillaje:  
+  
+* "**dser**", salida de 8 bits que se transformará en datos en serie cuando le conectemos un driver/módulo SPI, I2C ó serial.  
+* "**send**", este pin producirá un "tic" para decirle al driver/módulo que tome lo que tenga en "dser" y lo convierta en serie al protocolo que le hayamos conectado (SPI, I2C, serial, etc).  
+* "**stop**", es pin producirá un "tic" en el módulo/driver del protocolo que estemos usando para decirle que ha finalizado el paquete de información.  
+* "**RW**" y "**nack**", sólo se usan cuando le conectamos el módulo/driver I2C. En los demás protocolos no se utilizan estos pines.  
+* "**exec**, este pin de entrada recibirá un "tic" por parte del driver/módulo del protocolo que estemos usando, para decirle que puede enviar el siguiente byte.  
+
+Ahora veamos cómo se conecta estos pines al driver/módulo, según el protocolo que usemos.  
+
+### I2C
+
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/pinout%20to%20I2C.png">
+</p>
+
+He eliminado el resto de pines de los que no vamos a hablar ahora para conectrarnos en las conexiones de Atto con el módulo I2C. Podemos ver que se conectan todos los pines de salida de Atto, exceptuando "dout".  
+
+Los pines "dser", "send" y "stop" son los encargados de enviar byte a byte al módulo I2C para que lo transforme en datos serie, y se le añade los pines "RW" y "nack" que gestionarán los datos de salida (lectura del I2C) si los hubiera. La patilla "exec" va conectada al módulo I2C (next) para decirle a Atto que ya ha terminado de enviar el byte a través del I2C y que si hay más bytes por enviar, le puede mandar otro.  
+
+Por otra parte tenemos el módulo I2C con muchos pines. Todos los pines que pongan "*algo*_test" sólo sirven como opción para ver las señales a través de un analizador lógico. No tienen otra función. Si no vas a ver las señales mediante un analizador lógico las puedes dejar al aire.  
+
+Los pines "sda" y "scl" son las que has de conectar físicamente al periférico I2C. En el caso de que no estén conectadas a nada, pero quieras ver las señales que has programado con Atto a través de un analizador lógico, has de colocar dos resistencias en configuración pull-up en estos pines, de otro modo no verías nada. No confundas los pines "sda" y "scl" con "sda_test" y "scl_test", las resistencias en configuración pull-up siempre van a los pines "sda" y "scl", que son por donde realmente va la información; los pines "sda_test" y "scl_test" son pines virtuales de lo que ocurre en los pines "sda" y "scl" reales y son completamente opcionales.  
+
+Existen periféricos I2C en los que sólamente se escribe, y otros en los que se escribe y se lee (siempre se escribe antes de leer, y para leer se envía/escribe bytes arbitrarios, para "empujarlos" al exterior). Cuando queramos sacar un dato de lectura I2C lo haremos a través de los pines "sdata", "shift" y "done". A través de esos pines sacaremos al exterior el dato leído. La salida es serie y lo hemos de convertir en paralelo, entonces hemos de usar un registro de desplazamiento, y para cuando complete los 8 bits, hemos de registar esa salida a un registro de 8 bits. El problema es que no siempre que leamos un dato lo vamos a querer sacar al exterior. Por ejemplo, a veces sucede que necesitas leer un byte, pero no para sacarlo fuera, sino para comparar y tomar decisiones. Entonces lo que hacemos es que en vez de validar el dato leído con el pin "done" lo haremos a través de programación utilizando un bit del puerto de salida "dout".  
+
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/s_i2c%20cmp%20vs%20out.png">
+</p>
+
+Como se aprecia en la imagen, cuando tengamos que comparar un dato I2C conectamos la salida del registro de desplazamiento directamente a "cmp" de Atto, y cuando queramos extraer el dato, entonces lo haremos a través de "dout" (con programación), que en este caso es escogido el bit0 de éste.
+
+Por último, verás que cuando conectemos Atto a cualquier módulo que maneje un protocolo serie, el pin "next" siempre-siempre va conectado al pin "exec". Es decir, que estos dos pines siempre-siempre han de estar unidos. Es el pin que le dice a Atto, "oye! ya te he enviado el byte, mándame otro!". Si no hubiese más bytes para enviar, se activaría el pin "stop" cerrando el paquete de datos.  
+
+### SPI
+
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/pinout%20to%20SPI.png">
+</p>
+
+El protocolo SPI es más sencillo a nivel de conexiones, sólo se conectan los pines de salida de Atto "dser", "send" y "stop" al módulo/driver SPI. Los pines "RW" y "nack" quedan al aire porque en SPI no se necesitan. Por si alguien ha venido directamente aquí, vuelvo a repetir lo que hace cada uno de esos pines.
+
+Los pines "dser", "send" y "stop" son los encargados de enviar byte a byte al módulo SPI para que lo transforme en datos serie. La patilla "exec" va conectada al módulo SPI "next" para decirle a Atto que ya ha terminado de enviar el byte a través del I2C y que si hay más bytes por enviar, le puede mandar otro.  
+
+Por "di" del módulo SPI entra el byte que queremos enviar al bus SPI, y por "do" obtendremos el byte de salida que haya entrado en serie por "miso".  
+
+Cuando quieras ver las señales a través de PulseView o cualquier analizador lógico, puedes conectarlas directamente a "cs", "sck", "mosi" y "miso". Aquí no hay problemas de ese tipo, al menos en esta versión de SPI que diseñé, si esto cambiase avisaría. El módulo SPI está diseñado para controlar un único periférico SPI, si hubiese más de uno y quiéramos selección alguna entrada "miso", entonces entraría en juego la configuración triestado y para ser testeado ese pin por una analizador lógico, se tendría que sacar un pin de test virtual.
+
+Al igual que en I2C, hay periféricos donde sólo se escribe, y otros en los que hay que escribir y leer. Si solamente hay que escribir, todo queda tal como lo ves en la imagen de arriba, pero si vas a leer o comparar un dato, entonces has de hacer lo siguiente:
+
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/spi%20cmp%20vs%20out.png">
+</p>
+
+Para comparar conectas "do" del driver SPI directamente a la entrada "cmp" de Atto. Y cuando nos interese extraer uno o varios datos leídos por el SPI, lo haremos con programación a través de "dout" de Atto. En la imagen, como ejemplo he utilizado el bit0 del puerto "dout", pero podría ser cualquier otro.  
+
+### Conclusión de este apartado
+
+Si más o menos te haces una idea de todo lo que se ha explicado en este apartado, será poniéndolo en práctica cuando adquirá toda la lógica. Como dije mucho más arriba, concéntrate en un sólo protocolo y experimenta sólo con ese protocolo. Yo al menos aprendí así a comprenderlos. Primero usé periféricos en donde sólo se tenía que escribir, y una vez que lo comprendí, pasé a otros protocolos donde se tenía que escribir y leer. Procura ir paso a paso, desde lo sencillo a lo más complejo yendo en espiral hacia tu objetivo poco a poco.  
+
+Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, haz clic en [este enlace](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg). Como todo esto es un diseño personal, las respuestas a ciertas preguntas no estarán en Google o ChatGPT.  

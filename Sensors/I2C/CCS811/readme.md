@@ -1,6 +1,7 @@
 # CCS811
 
-### This project is an example of using the CCS811 sensor through the serial port.
+### This project is an example of using the CCS811 sensor through the serial port.  
+  
 
 <p align="center">
   <img src="https://github.com/Democrito/repositorios/blob/master/Sensors/I2C/CCS811/ccs811-conection.png">

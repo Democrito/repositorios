@@ -490,12 +490,21 @@ Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits), lo has de mul
 
 Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
 
-### [Reloj de tiempo real DS3231](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
+### [DS3231 Reloj de tiempo real](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 
 Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.  
 
-La mayoría de las veces sólo vas a usar como mucho 5 instrucciones: Salto directo (F3), salto condicional (E3, si no es igual), temporización (FB), guardar un valor para otra instrucción (C3) y lectura/escritura del periférico (AB). Ocasionalmente tendrás que usar C3 y B3 junto con 8B si el periférico necesita de una configuración externa para adaptarlo a diferentes necesidades.
+La mayoría de las veces sólo vas a usar como mucho 5 instrucciones: Salto directo (F3), salto condicional (E3, si no es igual), temporización (FB), guardar un valor para otra instrucción (C3) y lectura/escritura del periférico (AB). Ocasionalmente tendrás que usar C3 y B3 junto con 8B si el periférico necesita de una configuración externa para adaptarlo a diferentes necesidades.  
 
+### [CCS811 Medidor de CO2 y compuestos aromáticos](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/CCS811)  
+  
+El CCS811 es un sensor que mide la calidad del aire. Es un sensor multi-gas MOX(Metal-Oxide) que incluye medición de monóxido de carbono (CO) y compuestos volátiles (VOCs) como etanol, aminas, o hidrocarburos aromáticos.  
+  
+El CCS811 puede determinar la cantidad de dióxido de carbono equivalente (eCO2). El rango de medición es de 400 a 8192 ppm en eCO2 y de 0 a 1187 ppb en TVOC (compuestos aromáticos).  
+  
+El CCS811 necesita un precalentador. El fabricante recomienda que el sensor funcione durante 20 minutos para que las mediciones se estabilicen, y durante 48 horas si se cambia de ubicación.  
+  
+  
 Tengo otros proyectos I2C, pero les tengo que corregir una cosa que dejó de funcional en versiones actuales de las toolchain, desde entonces no se permiten entradas al aire, y tengo circuitos con ese defecto, anteriormente se las consideraba 0 a las entradas sin conexión.  
   
 ## Proyectos SPI  

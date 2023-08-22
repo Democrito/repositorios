@@ -591,15 +591,15 @@ Al igual que en I2C, hay periféricos donde sólo se escribe, y otros en los que
 
 Para comparar conectas "do" del driver SPI directamente a la entrada "cmp" de Atto. Y cuando nos interese extraer uno o varios datos leídos por el SPI, lo haremos con programación a través de "dout" de Atto. En la imagen, como ejemplo he utilizado el bit0 del puerto "dout", pero podría ser cualquier otro.  
 
-### Hackear periféricos
-
-Imagina que quiero saber
-
 ### Conclusión de este apartado  
 
 Si más o menos te haces una idea de todo lo que se ha explicado en este apartado, será poniéndolo en práctica cuando adquirá toda la lógica. Como dije mucho más arriba, concéntrate en un sólo protocolo y experimenta sólo con ese protocolo y "empápate" de él. La herramienta __PulseView__ es esencial e indispensable para ver lo que está sucediendo, de otro modo es ir a ciegas. Yo al menos aprendí así a comprender los protocolos seriales. Primero usé periféricos donde sólo se tenía que escribir, y una vez que lo comprendí, pasé a otros periféricos donde se tenía que escribir y leer. Procura ir paso a paso, desde lo sencillo a lo más complejo yendo en espiral hacia tu objetivo poco a poco y sin saltarte pasos. 
-  
+
+Tener la paciencia de leer y comprender lo que estás leyendo requiere tiempo y esfuerzo mental, pero es la única manera de aprender de verdad. Hace muchos años yo iba en plan rápido con todo, queriendo sacar a la primera o a la segunda cualquier cosa. Y sí a veces funcionaba, pero en cuanto se complicaba un poco las cosas me daba contra un muro. Has de tener paciencia contigo mismo y leer todo con atención, no para memorizar, sino para familiarizarte con lo que estés leyendo. En el momento que necesites consultar algo en concreto, te será familiar y sabrás dónde está lo que buscas.
+
 Para conocer un periférico sigo unos pasos muy concretos. Primero me voy a varias webs donde usan ese periférico usando Arduino. Me informo bien, y monto el circuito. Una vez que lo hago funcionar e interactúo un poco (cambiando esto o aquello), lo siguiente que hago es echar un vistazo al Datasheet, no para estudiarlo, sólo le hecho un ojo y trato de buscar cosas claves. Luego cojo el analizador lógico y extraigo las señales y las observo para ver o deducir cosas que pueden ocurrir. Tomo el programa de Arduino y anulo (poniendo "//") casi todo el programa, para ver línea a línea qué es lo que hace a nivel de señales. De este modo voy deduciendo lo que hace. Una vez que lo tengo claro es cuando me voy a la FPGA y hago el diseño. Si hay muchas tomas de decisiones es cuando utilizo Atto. Si veo que es sencillo o no trae demasiada complicación entonces hago un diseño tradicional. Atto es un herramienta, un medio para hacer más fácil el manejo de protocolos seriales.
 
 Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, haz clic en [este enlace](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg). Como todo esto es un diseño personal, las respuestas a ciertas preguntas no estarán en Google o ChatGPT.
+
+# Feliz hackeo de periféricos!
 

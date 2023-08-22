@@ -492,9 +492,11 @@ Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y 
 
 ### [DS3231 Reloj de tiempo real](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 
-Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.  
+El __DS3231__ tiene una precisión muy superior con respecto al DS1307 y puede considerarse su sustituto. En el modelo DS1307 las variaciones de temperatura que afectan a la medición del tiempo de los cristales resonadores se traducen en errores en un desfase acumulado. Esto hace que el DS1307 sufra de un desfase temporal que puede llegar a ser 1 ó 2 minutos al día. Para solucionarlo, el __DS3231__ incorpora medición y compensación de la temperatura garantizando una precisión de al menos 2ppm, lo que equivale a un desfase máximo 172ms/día o un segundo cada 6 días. En el mundo real normalmente consiguen precisiones superiores, equivalente a desfases de 1-2 segundos al mes.  
 
-La mayoría de las veces sólo vas a usar como mucho 5 instrucciones: Salto directo (F3), salto condicional (E3, si no es igual), temporización (FB), guardar un valor para otra instrucción (C3) y lectura/escritura del periférico (AB). Ocasionalmente tendrás que usar C3 y B3 junto con 8B si el periférico necesita de una configuración externa para adaptarlo a diferentes necesidades.  
+La tensión de alimentación es de 2.3 a 5.5V  
+
+Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.  
 
 ### [CCS811 Medidor de CO2 y compuestos aromáticos](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/CCS811)  
   
@@ -600,6 +602,10 @@ Tener la paciencia de leer y comprender lo que estás leyendo requiere tiempo y 
 Para conocer un periférico sigo unos pasos muy concretos. Primero me voy a varias webs donde usan ese periférico usando Arduino. Me informo bien, y monto el circuito. Una vez que lo hago funcionar e interactúo un poco (cambiando esto o aquello), lo siguiente que hago es echar un vistazo al Datasheet, no para estudiarlo, sólo le hecho un ojo y trato de buscar cosas claves. Luego cojo el analizador lógico y extraigo las señales y las observo para ver o deducir cosas que pueden ocurrir. Tomo el programa de Arduino y anulo (poniendo "//") casi todo el programa, para ver línea a línea qué es lo que hace a nivel de señales. De este modo voy deduciendo lo que hace. Una vez que lo tengo claro es cuando me voy a la FPGA y hago el diseño. Si hay muchas tomas de decisiones es cuando utilizo Atto. Si veo que es sencillo o no trae demasiada complicación entonces hago un diseño tradicional. Atto es un herramienta, un medio para hacer más fácil el manejo de protocolos seriales.
 
 Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, haz clic en [este enlace](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg). Como todo esto es un diseño personal, las respuestas a ciertas preguntas no estarán en Google o ChatGPT.
+
+# Actualizaciones
+
+Las actualizaciones de Atto, aplicado a los protocolos SPI ó I2C las encontrarás [__aquí__](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/ICEs)  
 
 # Reconocimientos
 

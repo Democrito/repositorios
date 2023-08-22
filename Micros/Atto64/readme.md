@@ -601,6 +601,19 @@ Para conocer un periférico sigo unos pasos muy concretos. Primero me voy a vari
 
 Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, haz clic en [este enlace](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg). Como todo esto es un diseño personal, las respuestas a ciertas preguntas no estarán en Google o ChatGPT.
 
+# Reconocimientos
+
+* [Juan Gonzalez-Gomez (Obijuan)](https://github.com/Obijuan)  Líder y creador de la comunidad de [#FPGAwars](https://github.com/orgs/FPGAwars/repositories?type=all), tutoriales, módulos para Icestudio y un largísimo etc.
+
+* [Carlos Venegas Arrabé](https://github.com/cavearr)  Líder actual en el desarrollo de [Icestudio](https://icestudio.io/).
+
+* [Jesús Arroyo Torrens](https://github.com/Jesus89)  Fundador del programa [Icestudio](https://icestudio.io/).
+
+* [Eladio Delgado Mingorance](https://github.com/EladioDM)  Creador de la [Alhambra II FPGA](https://alhambrabits.com/), y en este proyecto me he basado en ella.
+
+* [Comunidad FPGAwars](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre)  El resto del mundo colaboramos en esta gran comunidad.
+
+
 # Feliz hackeo de periféricos!
 
 <p align="center">

@@ -603,3 +603,8 @@ Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, 
 
 # Feliz hackeo de periféricos!
 
+<p align="center">
+  <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/open%20hardware.png">
+</p>
+
+

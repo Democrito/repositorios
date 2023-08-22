@@ -354,7 +354,7 @@ Lo abres con Icestudio y te aparerá esto:
   <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/imagen%20ejercicio%209%20I2C.png">
 </p>
   
-Los pines físicos "SDA" y "SCL" necesitan resistencias en configuración pull-up para polarizar positivamente esos pines. Aquí uso un truco para ahorrarme esas resistencias y lo que hago es conectarlo a un periférico I2C que tiene la Alhmabra II FPGA, que ya las lleva incluidas. En el caso de que no puedas hacer esto, es obligatorio conectar dos resistencias en pull-up en esos pines.  
+Los pines físicos "SDA" y "SCL" necesitan resistencias en configuración pull-up para polarizar positivamente esos pines. Aquí uso un truco para ahorrarme esas resistencias y lo que hago es conectarlo a un periférico I2C que tiene la Alhambra II FPGA, que ya las lleva incluidas. En el caso de que no puedas hacer esto, es obligatorio conectar dos resistencias en pull-up en esos pines.  
 
 Los pines "sda_test" y "scl_test" son para conectarlos al analizador lógico, sólo tienen esa función. Desde esos pines se analizarán las señales, ya que de otro modo no se podría por ser pines triestados, es decir, que no se puede medir las señales directamente en los pines "SDA" y "SCL".  
 
@@ -482,7 +482,7 @@ Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeñ
   <img src="https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG">
 </p>
 
-El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48 en hexadecimal). Falta un bit para completar un byte y es el bit más bajo. El bit más bajo indica escritura (si está a 0) o lectura (si está a 1). El bit ACK es de confirmación, y el driver I2C lo gestiona internamente, tú haz como si no existiese, a no ser que vayas a diseñar un driver I2C por tu cuenta. 
+El primer byte de un paquete I2C siempre es la dirección del periférico con el que nos vamos a comunicar. Esa dirección es siempre de 7 bits y es lo que te indica como información PulseView (48 en hexadecimal). Falta un bit para completar un byte y es el bit más bajo (R/W). El bit más bajo indica escritura (si está a 0) o lectura (si está a 1). El bit ACK es de confirmación, y el driver I2C lo gestiona internamente, tú haz como si no existiese, a no ser que vayas a diseñar un driver I2C por tu cuenta. 
 
 Cuando uses Atto para comunicarte con un periférico I2C, haz este truco para convertir la dirección de 7 bits a 8 bits (un byte) y teclearlo en el programa para Atto:  
 

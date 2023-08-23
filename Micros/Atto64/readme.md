@@ -611,13 +611,13 @@ Las actualizaciones de Atto, aplicado a los protocolos SPI ó I2C las encontrar�
 
 * [Clifford Wolf](https://github.com/cliffordwolf) Creador del [proyecto IceStorm](https://github.com/YosysHQ/icestorm) y que gracias él y a su comunidad estamos aquí diseñando hardware para FPGAs libres y de forma gratuita. 
 
-* [Juan Gonzalez-Gomez (Obijuan)](https://github.com/Obijuan)  Líder y creador de la comunidad de [#FPGAwars](https://github.com/orgs/FPGAwars/repositories?type=all), tutoriales, módulos para Icestudio y un largísimo etc.
+* [Juan Gonzalez-Gomez (Obijuan)](https://github.com/Obijuan)  Líder y creador de la comunidad de [#FPGAwars](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre), tutoriales [#1](https://github.com/Obijuan/digital-electronics-with-open-FPGAs-tutorial/wiki) [#2](https://github.com/Obijuan/Cuadernos-tecnicos-FPGAs-libres/wiki) [#3](https://www.youtube.com/watch?v=GYvBAHdkRwk&list=PLmnz0JqIMEzVxJhT6F046jaz7mObMujmx), [módulos para Icestudio](https://github.com/orgs/FPGAwars/repositories?type=all) y un [largísimo etc](https://www.youtube.com/@ObijuanCube/videos).
 
 * [Carlos Venegas Arrabé](https://github.com/cavearr)  Líder actual en el desarrollo de [Icestudio](https://icestudio.io/).
 
 * [Jesús Arroyo Torrens](https://github.com/Jesus89)  Fundador del programa [Icestudio](https://icestudio.io/).
 
-* [Eladio Delgado Mingorance](https://github.com/EladioDM)  Creador de la [Alhambra II FPGA](https://alhambrabits.com/), y en este proyecto me he basado en ella.
+* [Eladio Delgado Mingorance](https://github.com/EladioDM)  Creador de la [Alhambra II FPGA](https://alhambrabits.com/), y en este proyecto/tutorial Atto me he basado en ella.
 
 * [Comunidad FPGAwars](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre)  El resto del mundo colaboramos en esta gran comunidad.
 

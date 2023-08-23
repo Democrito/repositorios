@@ -609,6 +609,8 @@ Las actualizaciones de Atto, aplicado a los protocolos SPI ó I2C las encontrar�
 
 # Reconocimientos
 
+* [Clifford Wolf](https://github.com/cliffordwolf) Creador del proyecto IceStorm y que gracias él y a su comunidad estamos aquí diseñando hardware para FPGAs libres y de forma gratuita. 
+
 * [Juan Gonzalez-Gomez (Obijuan)](https://github.com/Obijuan)  Líder y creador de la comunidad de [#FPGAwars](https://github.com/orgs/FPGAwars/repositories?type=all), tutoriales, módulos para Icestudio y un largísimo etc.
 
 * [Carlos Venegas Arrabé](https://github.com/cavearr)  Líder actual en el desarrollo de [Icestudio](https://icestudio.io/).

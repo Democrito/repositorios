@@ -607,7 +607,7 @@ Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, 
 
 Las actualizaciones de Atto, aplicado a los protocolos SPI ó I2C las encontrarás [__aquí__](https://github.com/Democrito/repositorios/tree/master/Micros/Atto64/ICEs)  
 
-# Reconocimientos
+# Créditos
 
 * [Clifford Wolf](https://github.com/cliffordwolf) Creador del [proyecto IceStorm](https://github.com/YosysHQ/icestorm) y que gracias él y a su comunidad estamos aquí diseñando hardware para FPGAs libres y de forma gratuita. 
 

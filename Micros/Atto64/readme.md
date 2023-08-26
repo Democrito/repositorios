@@ -495,9 +495,7 @@ Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y 
 El __DS3231__ tiene una precisión muy superior con respecto al DS1307 y puede considerarse su sustituto. En el modelo DS1307 las variaciones de temperatura que afectan a la medición del tiempo de los cristales resonadores se traducen en errores en un desfase acumulado. Esto hace que el DS1307 sufra de un desfase temporal que puede llegar a ser 1 ó 2 minutos al día. Para solucionarlo, el __DS3231__ incorpora medición y compensación de la temperatura garantizando una precisión de al menos 2ppm, lo que equivale a un desfase máximo 172ms/día o un segundo cada 6 días. En el mundo real normalmente consiguen precisiones superiores, equivalente a desfases de 1-2 segundos al mes.  
 
 La tensión de alimentación es de 2.3 a 5.5V  
-
-Este es un proyecto antiguo, esto significa que el Atto que lleva dentro no está actualizado. Le falta la instrucción "83", que es la de "saltar si es igual". Hace relativamente poco que le incluí esa instrucción, sin embargo, en este proyecto no la necesita.  
-
+  
 ### [CCS811 Medidor de CO2 y compuestos aromáticos](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/CCS811)  
   
 El CCS811 es un sensor que mide la calidad del aire. Es un sensor multi-gas MOX(Metal-Oxide) que incluye medición de monóxido de carbono (CO) y compuestos volátiles (VOCs) como etanol, aminas, o hidrocarburos aromáticos.  

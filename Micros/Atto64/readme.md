@@ -634,7 +634,5 @@ Entre las disposiciones de la Licencia OHL se incluyen la obligación de compart
 
 En resumen, la Licencia OHL es una licencia de código abierto que brinda a los diseñadores de hardware digital la libertad de compartir y colaborar en sus creaciones, fomentando la innovación y el desarrollo comunitario en el ámbito del hardware.
 
-Puedes hacer lo que quieras con este proyecto, pero siempre se agradece la mención del autor y/o la fuente original.
-
 
 

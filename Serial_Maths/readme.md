@@ -38,5 +38,3 @@ Si dominas el punto fijo, sabrás que de un Qm.n puedes pasar a otro de distinta
 "example_conversion_real_to_Q16_16_to_real.ice" es un ejemplo que sirve para ver el funcionamiento de dos módulos complementarios. Entras un número real y lo convierte a Q16.16, después otro módulo lo vuelve a convertir a serie. De esta manera comprobamos que ambos módulos funcionan bien: la salida es la misma que la entrada.
 
 ![](https://github.com/Democrito/repositorios/blob/master/Serial_Maths/image/serial_conversions_examples_Q16_16_fixed_point.PNG)
-
-También he añadido un módulo que convierte un valor entero binario de 32 bits sin signo a ASCII y lo envía a un terminal serie.

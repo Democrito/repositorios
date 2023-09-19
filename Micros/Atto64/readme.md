@@ -206,6 +206,8 @@ Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-li
   <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Interrupcion%20hardware.PNG">
 </p> 
 
+### Nota importante: Se ha detectado un bug cuando se hace cierto número de interrupciones consecutivas. Al principio funciona, pero cuando se hace sucesivas interrupciones se cuelga el programa. Evita usar la interrupción externa. Este bug está reportado en el apartado [Issues](https://github.com/Democrito/repositorios/issues/13).
+
 Atto tiene una entrada para hacer interrupción externa. Es la entrada "int" y funciona con *tic*, es decir, un pulso de reloj.  
 
 En el programa, está el programa convencional de hacer parpadear todos los leds (encender y apagar, encender...) pero al recibir un *tic* en la entrada "int" dejará de ejecutar el programa principal y saltará a la dirección de memoria que le hayamos puesto en la caja "dirInt". Entonces, ejecutará las instrucciones que se encuentre a partir de ahí, hasta que se encuentre con la instrucción "F1".  

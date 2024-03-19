@@ -180,7 +180,7 @@ Cuando el emisor envía un paquete de información espera una respuesta del rece
 
 En conclusión: Nunca perderás datos, lo peor que te puede suceder es que redunden, pero esa posibilidad sólo sucede si los transceptores están en la distancia máxima (y un poco más) en la que no puedan establecer una comunicación segura.  
 
-### [Arduino_TX--Arduino_RX.zip](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/Arduino_TX--Arduino_RX.zip)  
+### [Arduino_TX-Arduino_RX.zip](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/Arduino_TX-Arduino_RX.zip)  
 
 En este caso son dos Arduinos que se comunican entre ellos. Lo dejo por si alguien estuviera interesado en un ejemplo hecho con sólo Arduinos. El ejemplo que uso en este proyecto está hecho de tal forma que es muy sencillo de modificar a tus necesidades, y tienes pistas de programación para tratar texto y datos numéricos. Recuerda que el cableado del emisor y del receptor a los transceptores son idénticos.  
   

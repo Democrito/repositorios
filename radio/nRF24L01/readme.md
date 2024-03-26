@@ -18,22 +18,22 @@ Este apartado es muy importante y la mayoría de los problemas que te puedan sur
 
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/transceptor%20con%20capacitor.jpg)  
 
-Pese a que en el Datasheet dice que es muy bajo consumo, al parecer tiene picos de consumo elevado de muy corta duración y hace que el transceptor falle. Al poner un electrolítico de más de 10uF (yo les puse 100uF y me va muy bien) es como si tuviera una mini-batería auxiliar para esos momentos de alto consumo (y muy corta duración). Otro punto clave es que el capacitor esté lo más pegado posible al PCB del transceptor para evitar efectos inductivos (esto retrasaría la entrega de corriente).  
+Pese a que en el Datasheet dice que es de muy bajo consumo, al parecer tiene picos de consumo elevados de muy corta duración y hace que el transceptor falle. Hay que añadir un condensador electrolítico de más de 10uF (cuanta más capacidad mejor) es como si tuviera una mini-batería auxiliar para esos momentos de alto consumo y muy corta duración. Otro punto clave es que el capacitor esté lo más pegado posible al PCB del transceptor para evitar efectos inductivos (esto retrasaría la entrega de corriente). Lo explicado hasta ahora fue para el transceptor común y corriente. Si usas los que tienen amplificador de emisión y recepción (PA+LNA) entonces procura que los condensadores electrolíticos sean igual o mayor de 470uF. Yo por defecto, sin importar el nRF24L01+ que use, les pongo 470uF y me funcionan muy bien.
 
-Las placas Arduino Nano y UNO, y algunas FPGAs, tienen algún pin de salida para entregar los 3.3V. El problema es que los reguladores de voltaje que llevan suelen ser insuficientes, entregando como máximo 50mA. Necesitamos como mínimo 250mA. Es por esto que te has de buscar una fuente externa de 3.3V que sepas que puede dar una buena cantidad de corriente. Una solución es utilizar un adaptador para el nRF24L01, que además son muy económicos.  
+Las placas Arduino Nano y UNO, y algunas FPGAs, tienen algún pin de salida para entregar los 3.3V. El problema es que los reguladores de voltaje que llevan suelen ser insuficientes, entregando como máximo 50mA. Necesitamos como mínimo 250mA. Es por esto que te has de buscar una fuente externa de 3.3V que sepas que puede dar una buena cantidad de corriente. Una solución es utilizar un adaptador para el nRF24L01+, que además son muy económicos.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/adaptadores2.jpg)  
 
 A la izquierda es lo que compras, a la derecha verás que le he añadido unos pines macho para poder clavarla directamente en mi Alhambra II FPGA. Este adaptador lo has de alimentar con 5V; tiene un regulador en el PCB que lo convierte a 3.3V y con una corriente aceptable.
-Los nRF24L01 no se pueden conectar a una protoboard, entonces una solución es utilizar el adaptador específico para él. Y además, viene serigrafiado los nombres de los pines donde harás las conexiones, eso te ahorra tener buscar en el esquema y mirar cuál es cuál. De todas formas aquí tienes un esquema:  
+Los nRF24L01+ no se pueden conectar a una protoboard, entonces una solución es utilizar el adaptador específico para él. Y además viene serigrafiado los nombres de los pines donde harás las conexiones, eso te ahorra tener buscar en el esquema y mirar cuál es cuál. De todas formas aquí te dejo con un esquema.  
 
 ![](https://github.com/Democrito/repositorios/blob/master/radio/nRF24L01/img/nRF24L01-Pinout.jpg)  
 
-El voltaje de alimentación es de 3.3V y nunca has de superar los 3.6V, si eso sucediese, se estropearía. Los pines SPI sí que los puede usar utilizando lógica de 5V, no hay ningún problema, porque sus entradas toleran ese voltaje. Es decir, que puedes usar lógica de 3.3V y de 5V.  
+El voltaje de alimentación es de 3.3V y nunca has de superar los 3.6V, si eso sucediese, se estropearía. Los pines SPI sí que los puede usar utilizando lógica de 5V, no hay ningún problema con esto porque sus entradas toleran ese voltaje. Es decir, que puedes usar lógica de 3.3V y de 5V.  
 
-Conclusión: Recuerda que jamás has de alimentar el transceptor a 5V, suéldale un capacitor electrolítico de más de 10uF, y consigue una fuente de 3.3V que entregue una buena cantidad de corriente. Si eres amante del paracetamol o del ibuprofeno, no hagas caso en lo que he comentado en este apartado o sáltate cualquiera de ellos.  
+Conclusión: Recuerda que jamás has de alimentar el transceptor a 5V, suéldale un capacitor electrolítico de más de 10uF (cuanta más capacidad mejor), y consigue una fuente de 3.3V que entregue una buena cantidad de corriente. Si eres amante del Paracetamol o del Ibuprofeno, no hagas caso en lo que he comentado en este apartado o sáltate cualquiera de ellos.  
 
-Si te fuese posible, evita usar reguladores de tensión conmutados (DC-DC, tipo step-down o step-up) porque generan mucho ruido a la salida.  
+Intenta evita usar reguladores de tensión conmutados (DC-DC, tipo step-down o step-up) porque suelen generar mucho ruido a la salida y es posible que sufras de dolores de cabeza buscando una razón de por qué no funciona bien tu invento. Esto es un poco lotería dependiendo de la calidad del regulador conmutado.
 
 # Cableado  
 

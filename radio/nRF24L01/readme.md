@@ -33,7 +33,7 @@ El voltaje de alimentación es de 3.3V y nunca has de superar los 3.6V, si eso s
 
 Conclusión: Recuerda que jamás has de alimentar el transceptor a 5V, suéldale un capacitor electrolítico de más de 10uF (cuanta más capacidad mejor), y consigue una fuente de 3.3V que entregue una buena cantidad de corriente. Si eres amante del Paracetamol o del Ibuprofeno, no hagas caso en lo que he comentado en este apartado o sáltate cualquiera de ellos.  
 
-Intenta evita usar reguladores de tensión conmutados (DC-DC, tipo step-down o step-up) porque suelen generar mucho ruido a la salida y es posible que sufras de dolores de cabeza buscando una razón de por qué no funciona bien tu invento. Esto es un poco lotería dependiendo de la calidad del regulador conmutado.
+Intenta evitar usar reguladores de tensión conmutados (DC-DC, tipo step-down o step-up) porque suelen generar mucho ruido a la salida y es posible que sufras de dolores de cabeza buscando una razón de por qué no funciona bien tu invento. Esto es un poco lotería dependiendo de la calidad del regulador conmutado.
 
 # Cableado  
 

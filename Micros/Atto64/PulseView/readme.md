@@ -38,7 +38,7 @@ Abres PV y aparecerá esta imagen:
 
 ![](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/Pantalla%20inicial%20PV.png)  
 
-He señalado con un cuadro en rojo (arriba) un lugar que pone "**Saleae Logic**". Te ha de salir eso, si te pone otra cosa significa que no te ha reconocido el analizador lógico, y no podrás hacer nada. Quizás una mala conexión USB... a saber..., evita que se mueva el cable USB.  
+He señalado con un cuadro en rojo (arriba) un lugar que pone "**Saleae Logic**". Te ha de salir eso, si te pone otra cosa significa que no te ha reconocido el analizador lógico, y no podrás hacer nada. Quizás una mala conexión USB... a saber..., evita que se mueva el cable USB. En este caso, cierra PV y asegúrate de que el analizador está bien conectado y lo vuelves a abrir.  
 
 Y si todo ha ido bien, ya podemos comenzar a configurar PV (PulseView). Muchos de estos pasos los va a tener que hacer casi siempre porque PV sólo guarda parte de estas configuraciones entre una sensión y otra. Con el uso te irás acostumbrado a todo esto de forma rutinaria.  
 

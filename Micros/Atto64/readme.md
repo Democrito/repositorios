@@ -20,7 +20,7 @@ Las instrucciones máquina miden un byte, y de este byte los dos bits más bajos
 
 De la instrucción "F3", la "F" es una letra arbitraria, podría haber sido cualquier otra, pero había que definirla con alguna letra hexadecimal y elegí la "F" para esta instrucción. El "3" significa que esta instrucción está compuesta por la propia instrucción y le acompaña los dos bytes que representan la dirección de memoria a la que hay que saltar.  
 
-Recuerda que los dos últimos bits indica de cuántos bytes se compone la instrucción completa, eso significa que si termina en '3', 'B' ó 'F' es que está compuesta por 3 bytes. Si termina en 1, es un byte único (sólo instrucción), no le acompaña otros bytes. Y de momento no existe una instrucción completa de 2 bytes.  
+Recuerda que los dos últimos bits indica de cuántos bytes se compone la instrucción completa, eso significa que si termina en '3', 'B' ó 'F' es que está compuesta por 3 bytes. Si termina en 1, es un byte único (sólo instrucción) no le acompaña otros bytes. Y de momento no existe una instrucción completa de 2 bytes.  
 
 Ahora pasamos a ver las 13 instrucciones máquina. No olvides que siempre vamos a utilizar la notación hexadecimal, nunca introduzcas valores decimales.  
 
@@ -49,17 +49,17 @@ Donde "0x000A" = 10 en decimal, y como cada unidad vale 10us, en total son 10x10
 Temporizar tiempos menores de 10us lo veremos más adelante usando trucos con una pareja de instrucciones de la que hablaré más adelante.  
 
 ### 8B // Out port:  
-Atto tiene un puerto de salida de 16 bits. Este puerto lo usaremos para que nos ayude a multiplexar o seleccionar acciones externas, como por ejemplo, decirle a un multiplexor qué entrada queremos seleccionar (esto es añadiendo hardware), o seleccionar salidas concretas. Ahora mismo esto suena complicado, pero es un simple puerto de salida de 16 bits. La mayoría de las veces sólo utilizaremos unos pocos bits de este puerto.  
+Atto tiene un puerto de salida de 16 bits. Este puerto lo usaremos para que nos ayude a multiplexar o seleccionar acciones externas, como por ejemplo, decirle a un multiplexor qué entrada queremos seleccionar (esto es añadiendo hardware) o seleccionar salidas concretas. Ahora mismo esto suena complicado, pero es un simple puerto de salida de 16 bits. La mayoría de las veces sólo utilizaremos unos pocos bits de este puerto.  
 
-Ya conocemos dos instrucciones (salto directo y termporizador), vamos a poner un ejemplo de uso de "out port" (8B) estilo "hola mundo". Observa este circuito y además mira el código que se le ha cargado:  
+Ya conocemos dos instrucciones (salto directo y termporizador) vamos a poner un ejemplo de uso de "out port" (8B) estilo "hola mundo". Observa este circuito y además mira el código que se le ha cargado:  
 
 <p align="center">
   <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO_blink_8bits.png">
 </p>
 
-Sólo has de fijarte en "dout" (es el puerto de salida) y en el programa, todo lo demás ahora no nos interesa. A través de "dout[15:0]" hará un "blink" en los leds de la Alhambra II FPGA. Como son 8 leds, hemos de elegir el byte alto o bajo de esa salida (porque son 16 bits) y he escogido el byte bajo. El programa, al ejecutarse (es decir, cuando subas este circuito), lo que hará será hacer parpadear los 8 leds de la Alhambra II FPGA.  
+Sólo has de fijarte en "dout" (es el puerto de salida) y en el programa, todo lo demás ahora no nos interesa. A través de "dout[15:0]" hará un "blink" en los leds de la Alhambra II FPGA. Como son 8 leds, hemos de elegir el byte alto o bajo de esa salida (porque son 16 bits) y he escogido el byte bajo. El programa, al ejecutarse (es decir, cuando subas este circuito) lo que hará será hacer parpadear los 8 leds de la Alhambra II FPGA.  
 
-Este circuito se encuentra en la carpeta "Examples" como "**Example_1-blink.ice**", o lo puedes descargar haciendo [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_1-blink.ice), luego con el botón derecho del ratón pinchas sobre el botón "Raw", y después escoges la opción "Guardar contenido del enlace como" (o algo parecido a eso, depende del browser que utilices).  
+Este circuito se encuentra en la carpeta "Examples" como "**Example_1-blink.ice**", o lo puedes descargar haciendo [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_1-blink.ice) luego con el botón derecho del ratón pinchas sobre el botón "Raw", y después escoges la opción "Guardar contenido del enlace como" (o algo parecido a eso, depende del browser que utilices).  
 
 Ahora, como ejercicio para practicar un poco, te propongo dos ejercicios muy sencillos:  
 
@@ -71,9 +71,9 @@ Si has tenido problemas en resolver este ejercicio, lo puedes ver [**aquí resue
 
 ### 01 // Return (ret):  
 
-Cada vez que haces "F3" (salto directo) se guarda en un registro la posición de memoria en la que está +3 y a la vez salta a la posición de memoria que le has indicado. Se ejecutarán las instrucciones que encuentre a partir de esa posición de salto, pero si en esas ejecuciones encuentra un return (01), el contador de programa carga la posición de memoria +3 que había memorizado antes de saltar (retorna a la siguiente instrucción que había antes de saltar). Nos sirve para ejecutar código o sacar datos al exterior que se repiten muchas veces. Cuando te interese economizar código y hay trozos repetitivos, esta instrucción puede serte útil.  
+Cada vez que haces "F3" (salto directo) se guarda en un registro la posición de memoria en la que está +3 y a la vez salta a la posición de memoria que le has indicado. Se ejecutarán las instrucciones que encuentre a partir de esa posición de salto, pero si en esas ejecuciones encuentra un return (01) el contador de programa carga la posición de memoria +3 que había memorizado antes de saltar (retorna a la siguiente instrucción que había antes de saltar). Nos sirve para ejecutar código o sacar datos al exterior que se repiten muchas veces. Cuando te interese economizar código y hay trozos repetitivos, esta instrucción puede serte útil.  
 
-No se puede anidar los "return" (01), en ese caso siempre irás a la posición de la memoria +3 del último salto.  
+No se puede anidar los "return" (01) en ese caso siempre irás a la posición de la memoria +3 del último salto.  
 
 La instrución "01" (Return / ret) sólo mide un byte.  
 
@@ -85,9 +85,9 @@ En el ejemplo anterior se repite la temporización dos veces, ahora vamos a colo
   <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/ATTO-Return.png">
 </p> 
 
-En este caso el código es ineficiente (pasamos de 15 a 18 líneas de código), pero ejemplifica el funcionamiento de la instrucción "01" (return). Cuando haya algo que se repita mucho y ocupe más de 3 bytes en la memoria, es cuando se le puede sacar partido a esta instrucción.  
+En este caso el código es ineficiente (pasamos de 15 a 18 líneas de código) pero ejemplifica el funcionamiento de la instrucción "01" (return). Cuando haya algo que se repita mucho y ocupe más de 3 bytes en la memoria, es cuando se le puede sacar partido a esta instrucción.  
 
-Si haces [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_2-Return.ice) descargarás este ejemplo (ya conoces el proceso, haces clic con el botón derecho en "Raw" y eliges la opción "Descargar contenido del enlace como..."), en la carpeta "Examples" tienes este ejemplo con el nombre de "Example_2-Return.ice".  
+Si haces [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_2-Return.ice) descargarás este ejemplo (ya conoces el proceso, haces clic con el botón derecho en "Raw" y eliges la opción "Descargar contenido del enlace como...") en la carpeta "Examples" tienes este ejemplo con el nombre de "Example_2-Return.ice".  
 
 Ejercicio:  
 
@@ -99,7 +99,7 @@ Si has tenido problemas en resolver este ejercicio, lo puedes ver [**aquí resue
 
 ### C3 // Guarda en un registro de 16 bits un valor concreto que puede ser utilizado por varias instrucciones:  
 
-"C3" guardar un dato de 16 bits en un registro interno dentro de Atto. Este registro interno sólo aporta información (el valor o dato que guarda), y será utilizado por cuatro instrucciones que veremos más adelante. Nos servirá por ejemplo para comparar, para indicar cuántos bytes vamos a leer (sólo para el I2C), o cuántos bytes queremos pasar de la memoria al exterior (ya sea I2C o SPI). Cuatro instrucciones usan este registro, y antes de ejecutar cualquiera de esas cuatro instrucciones le tendremos que dar un valor a este registro. No te preocupes si esto suena extraño, cuando veamos las instrucciones que lo utiliza es cuando adquiere sentido.  
+"C3" guardar un dato de 16 bits en un registro interno dentro de Atto. Este registro interno sólo aporta información (el valor o dato que guarda) y será utilizado por cuatro instrucciones que veremos más adelante. Nos servirá por ejemplo para comparar, para indicar cuántos bytes vamos a leer (sólo para el I2C) o cuántos bytes queremos pasar de la memoria al exterior (ya sea I2C o SPI). Cuatro instrucciones usan este registro, y antes de ejecutar cualquiera de esas cuatro instrucciones le tendremos que dar un valor a este registro. No te preocupes si esto suena extraño, cuando veamos las instrucciones que lo utiliza es cuando adquiere sentido.  
 
 "C3" lo único que hace es cargar un valor, desde el propio programa, a un registro interno dentro de Atto, eso es todo. El valor que guarda siempre estará ahí, sólo otro "C3" puede modificarlo.  
 
@@ -121,7 +121,7 @@ Vamos a comparar un valor externo de 8 bits a través del bus de entrada "cmp[7:
 
 El valor que cargamos con "C3" es un valor de 16 bits, sin embargo, para comparar lo hace con el byte bajo, el byte alto queda descartado y tampoco nos importará el valor de ese byte alto si tuviera almacenado alguno.  
 
-De manera coloquial "E3" funciona así: << Estoy esperando que "cmp" tenga X valor, y si no es ese valor (X), te lanzo a otra parte. >> Donde ese "X" es cargado antes por la instrucción "C3".
+De manera coloquial "E3" funciona así: << Estoy esperando que "cmp" tenga X valor, y si no es ese valor (X) te lanzo a otra parte. >> Donde ese "X" es cargado antes por la instrucción "C3".
 
 "E3" está compuesto por tres bytes, el primero es la instrucción y los dos siguientes es la dirección de memoria a la que salta si no es igual. Recuerda que, antes de usar "E3" hay que cargar un valor con "C3", ambas instrucciones siempre van en pareja.  
 
@@ -165,7 +165,7 @@ Es mucho más sencillo que el anterior, ya que si comprendiste "E3", "83" es evi
 
 Ejercicio:  
 
-Justo al comienzo del programa, "C3" carga el registro que luego será comparado con la entrada "cmp". Como ese valor (cargado con "C3") nunca se modifica (siempre tiene el mismo valor), entonces no es necesario que los saltos vayan a la posición 0x0000. Haz que todos los saltos vayan a donde le corresponde, además esto hará que el código corra un poquito más rápido.  
+Justo al comienzo del programa, "C3" carga el registro que luego será comparado con la entrada "cmp". Como ese valor (cargado con "C3") nunca se modifica (siempre tiene el mismo valor) entonces no es necesario que los saltos vayan a la posición 0x0000. Haz que todos los saltos vayan a donde le corresponde, además esto hará que el código corra un poquito más rápido.  
 
 Haz [**clic aquí**](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg/m/PGp-WtBpDgAJ) para ver la solución.  
 
@@ -190,9 +190,9 @@ De forma esquemática sería así:
 
 Veamos un programa que ejemplifique estas dos instrucciones. Como es un poco largo, descárgalo, ábrelo con Icestudio y desde ahí lo verás en grande. Haz [**clic aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_5-Bucle_For.ice) para descargar el ejemplo, o si lo prefieres, toma el ejemplo "Example_5-Bucle_For.ice" que está en la carpeta "Examples".  
 
-El programa hace parpadear dos veces los leds de la Alhambra II FPGA, y luego repite tres veces la alternancia de leds (55..AA..), y después vuelve a repetirlo todo otra vez.  
+El programa hace parpadear dos veces los leds de la Alhambra II FPGA, y luego repite tres veces la alternancia de leds (55..AA..) y después vuelve a repetirlo todo otra vez.  
 
-A3 y D3 pueden tener una segunda utilidad y es crear temporizaciones menores de 10us, incluso, si el temporizador (FB) no te conviene en una interrupción externa (por ejemplo), puedes usar como temporizador estas dos instrucciones, creando ciclos largos.  
+A3 y D3 pueden tener una segunda utilidad y es crear temporizaciones menores de 10us, incluso, si el temporizador (FB) no te conviene en una interrupción externa (por ejemplo) puedes usar como temporizador estas dos instrucciones, creando ciclos largos.  
 
 Ejercicio:  
 
@@ -212,13 +212,13 @@ Atto tiene una entrada para hacer interrupción externa. Es la entrada "int" y f
 
 En el programa, está el programa convencional de hacer parpadear todos los leds (encender y apagar, encender...) pero al recibir un *tic* en la entrada "int" dejará de ejecutar el programa principal y saltará a la dirección de memoria que le hayamos puesto en la caja "dirInt". Entonces, ejecutará las instrucciones que se encuentre a partir de ahí, hasta que se encuentre con la instrucción "F1".  
 
-"F1" es un "return", pero en vez de un return de salto (01), es de interrupción. Ambos tipos de return funcionan exactamente igual, y también mide un sólo byte. "F1" hará que el contador de programa vuelva al programa principal, a la posición +3 desde donde se produjo la interrupción en el programa principal.  
+"F1" es un "return", pero en vez de un return de salto (01) es de interrupción. Ambos tipos de return funcionan exactamente igual, y también mide un sólo byte. "F1" hará que el contador de programa vuelva al programa principal, a la posición +3 desde donde se produjo la interrupción en el programa principal.  
 
 Durante la ejecución de interrupción externa no permite otra interrupción externa, esto significa que si volvemos a darle a la entrada "int" mientras ejecuta una interrupción, no producirá otra interrupción, sólo se podrá volver a hacer interrupción a partir de que encuentre la instrucción "F1", que es el retorno de interrupción.  
 
-Descarga el circuito de ejemplo de interrupción [**desde aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_6-Interrupcion_externa.ice), o ves la carpeta "Examples" y coges el archivo "**Example_6-Interrupcion_externa.ice**".  
+Descarga el circuito de ejemplo de interrupción [**desde aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_6-Interrupcion_externa.ice) o ves la carpeta "Examples" y coges el archivo "**Example_6-Interrupcion_externa.ice**".  
 
-Cuando subas el circuito a la FPGA (equivale a decir: ejecutar el programa), verás parpadear todos los leds, y cuando pulse el pulsador "SW1", entonces, en vez de parpadear lo que hará será alternarse los leds (55..AA) una sola vez. Aunque si pulsas repetidamente, mientras pulses rápido, se quedaría en la alternancia de los leds hasta que dejaras de pulsar repetidamente rápido.  
+Cuando subas el circuito a la FPGA (equivale a decir: ejecutar el programa) verás parpadear todos los leds, y cuando pulse el pulsador "SW1", entonces, en vez de parpadear lo que hará será alternarse los leds (55..AA) una sola vez. Aunque si pulsas repetidamente, mientras pulses rápido, se quedaría en la alternancia de los leds hasta que dejaras de pulsar repetidamente rápido.  
 
 Te propongo un ejercicio muy sencillo, simplemente cambia la posición de memoria de la interrupción y lo especificas en la caja "DirInt".
 
@@ -250,7 +250,7 @@ En la imagen de arriba se puede apreciar dos registros de 8 bits, puestos en mod
 
 Como ejemplo, usaremos la interrupción externa cuando queramos cargar esos dos valores en una zona determinada de la memoria (esa zona será en el programa principal). Usando la interrupción se verá todo más claro porque quedará separado los valores de, un antes y un después, de la interrupción.  
 
-Descarga este ejemplo para ver el código en grande [**cliqueando aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_7-cargar_externa_a_memoria.ice), o yendo a la carpeta "Examples", y tomar el ejemplo "Example_7-cargar_externa_a_memoria.ice". Y después ejecuta el programa, es decir, subes el circuito a la FPGA y lo pruebas.  
+Descarga este ejemplo para ver el código en grande [**cliqueando aquí**](https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/Examples/Example_7-cargar_externa_a_memoria.ice) o yendo a la carpeta "Examples", y tomar el ejemplo "Example_7-cargar_externa_a_memoria.ice". Y después ejecuta el programa, es decir, subes el circuito a la FPGA y lo pruebas.  
 
 Verás que todos los leds estarán parpadeando, pero si pulsas sobre el pulsador "SW1", se alternarán encendiéndose y apagándose los 4 leds de un lado con los 4 del otro.  
 
@@ -430,7 +430,7 @@ De lo que se trata ahora es de ver la mecánica de funcionamiento, luego veremos
   
 Los protocolos SPI e I2C tienen un funcionamiento interno muy distinto. SPI es capaz de escribir y leer al mismo tiempo, sin embargo I2C no puede hacer eso, porque utiliza el mismo hilo de dato (SDA) tanto para escribir como para leer. Con esto quiero decir que en realidad en SPI nunca ocurre de forma separada la lectura. En SPI se escribe y lee al mismo tiempo. Esto, a nivel interno de Atto significa que siempre vamos a escribir (porque la lectura ocurre al mismo tiempo).  
   
-Para que los protocolos SPI e I2C sean compatibles con todas las instrucciones, en el caso del **SPI**, como en realidad siempre vamos a escribir (la lectura ocurre al mismo tiempo), en la instrucción "C3" (antes de poner "AB") siempre le pondremos 0x0000, porque no leerá nada, sucede cuando escribe. Recuerda que esto sucederá siempre en SPI.  
+Para que los protocolos SPI e I2C sean compatibles con todas las instrucciones, en el caso del **SPI**, como en realidad siempre vamos a escribir (la lectura ocurre al mismo tiempo) en la instrucción "C3" (antes de poner "AB") siempre le pondremos 0x0000, porque no leerá nada, sucede cuando escribe. Recuerda que esto sucederá siempre en SPI.  
   
 En cambio, el protocolo **I2C**, si hay datos para leer, definimos esa cantidad con "C3".  
   
@@ -476,9 +476,9 @@ Y ahora viene lo interesante, y es ver las señales I2C a través de [**PulseVie
 
 (Haz clic con el botón derecho del ratón y escoge la opción "Abrir imagen en una nueva pestaña" para ver la imagen un poco más grande)  
 
-Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales. Observa que se envía primero un paquete de 3 bytes (configuración), luego otro de dos bytes (selección del canal donde el byte "02" es el canal 0), y finalmente otro paquete de dos bytes. En éste último, el último byte es el byte de lectura, es decir, el valor del potenciómetro en hexadecimal (F3). Justo por arriba del valor hexadecimal tienes el mismo valor pero en binario.  
+Comprobamos que lo que envía el programa, junto con los tiempos de pausa, se reproduce en las señales. Observa que se envía primero un paquete de 3 bytes (configuración) luego otro de dos bytes (selección del canal donde el byte "02" es el canal 0) y finalmente otro paquete de dos bytes. En éste último, el último byte es el byte de lectura, es decir, el valor del potenciómetro en hexadecimal (F3). Justo por arriba del valor hexadecimal tienes el mismo valor pero en binario.  
 
-Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write), no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C.  
+Para quien no conozca sobre cómo son las señales I2C, les dejo este [**pequeño tutorial**](https://github.com/Democrito/I2C_only_write) no es necesario leerlo todo, sólo la parte de cómo se crean e interpretan los bytes I2C.  
 
 <p align="center">
   <img src="https://github.com/Democrito/I2C_only_write/blob/master/IMG/send_address.PNG">
@@ -488,9 +488,9 @@ El primer byte de un paquete I2C siempre es la dirección del periférico con el
 
 Cuando uses Atto para comunicarte con un periférico I2C, haz este truco para convertir la dirección de 7 bits a 8 bits (un byte) y teclearlo en el programa para Atto:  
 
-Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits), lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
+Por ejemplo, si tu periférico tiene la dirección 1E (en 7 bits) lo has de multiplicar por 2 (le añade un 0 como bit más bajo). Ahora ya tienes un byte (3C) y además es la dirección de escritura. La dirección de lectura es sumar 1 al resultado anterior (3D). Por esta razón la dirección de escritura (en 8 bits) es siempre par y la de lectura es siempre impar.  
 
-Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y en 7 bits), multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
+Ahora como ejercicio, toma la dirección I2C del ADC que es "48" (hexadecimal y en 7 bits) multiplica por 2 y qué resultado obtienes? Y si a ese resultado le sumas 1, qué resultado obtienes?  
 
 ### [DS3231 Reloj de tiempo real](https://github.com/Democrito/repositorios/tree/master/Sensors/I2C/ds3231)  
 
@@ -565,9 +565,9 @@ Existen periféricos I2C en los que sólamente se escribe, y otros en los que se
   <img src="https://github.com/Democrito/repositorios/blob/master/Micros/Atto64/img/s_i2c%20cmp%20vs%20out.png">
 </p>
 
-Cuando tengamos que comparar un dato leído a través del I2C hemos de tener conectada la salida del registro de desplazamiento directamente a "cmp" de Atto, y cuando queramos extraer el dato, entonces lo haremos a través de "dout" (con programación), que en este caso he escogido el bit0 de "dout".  
+Cuando tengamos que comparar un dato leído a través del I2C hemos de tener conectada la salida del registro de desplazamiento directamente a "cmp" de Atto, y cuando queramos extraer el dato, entonces lo haremos a través de "dout" (con programación) que en este caso he escogido el bit0 de "dout".  
 
-Para saber cuándo y cuándo no se puede utilizar el pin "done" para confirmar uno o varios bytes de salida (bytes leídos a través del I2C), lo sabremos porque si necesitamos comparar para tomar decisiones (instrucciones 83 y E3), entonces __no__ se ha de utilizar el pin "done", lo haremos a través de algún bit del puerto de salida (dout) de Atto. Y si no hay comparaciones, entonces sí que podemos utilizar el pin "done" para registrar (guardar en registros) los datos leídos.  
+Para saber cuándo y cuándo no se puede utilizar el pin "done" para confirmar uno o varios bytes de salida (bytes leídos a través del I2C) lo sabremos porque si necesitamos comparar para tomar decisiones (instrucciones 83 y E3) entonces __no__ se ha de utilizar el pin "done", lo haremos a través de algún bit del puerto de salida (dout) de Atto. Y si no hay comparaciones, entonces sí que podemos utilizar el pin "done" para registrar (guardar en registros) los datos leídos.  
 
 Por último, verás que cuando conectemos Atto a cualquier módulo que maneje un protocolo serie, el pin "next" del módulo I2C siempre-siempre va conectado al pin "exec" de Atto. Es decir, que estos dos pines siempre-siempre han de estar conectados. Es el pin que le dice a Atto, "oye! ya te he enviado el byte, mándame otro!". Si no hubiese más bytes para enviar, se activaría el pin "stop" cerrando el paquete de datos.  
 
@@ -599,7 +599,7 @@ Si más o menos te haces una idea de todo lo que se ha explicado en este apartad
 
 Tener la paciencia de leer y comprender lo que estás leyendo requiere tiempo y esfuerzo mental, pero es la única manera de aprender de verdad. Hace muchos años yo iba en plan rápido con todo, queriendo sacar a la primera o a la segunda cualquier cosa. Y sí a veces funcionaba, pero en cuanto se complicaba un poco las cosas me daba contra un muro. Has de tener paciencia contigo mismo y leer todo con atención, no para memorizar, sino para familiarizarte con lo que estés leyendo. En el momento que necesites consultar algo en concreto, te será familiar y sabrás dónde está lo que buscas.
 
-Para conocer un periférico sigo unos pasos muy concretos. Primero me voy a varias webs donde usan ese periférico usando Arduino. Me informo bien, y monto el circuito. Una vez que lo hago funcionar e interactúo un poco (cambiando esto o aquello), lo siguiente que hago es echar un vistazo al Datasheet, no para estudiarlo, sólo le hecho un ojo y trato de buscar cosas claves. Luego cojo el analizador lógico y extraigo las señales y las observo para ver o deducir cosas que pueden ocurrir. Tomo el programa de Arduino y anulo (poniendo "//") casi todo el programa, para ver línea a línea qué es lo que hace a nivel de señales. De este modo voy deduciendo lo que hace. Una vez que lo tengo claro es cuando me voy a la FPGA y hago el diseño. Si hay muchas tomas de decisiones es cuando utilizo Atto. Si veo que es sencillo o no trae demasiada complicación entonces hago un diseño tradicional. Atto es un herramienta, un medio para hacer más fácil el manejo de protocolos seriales.
+Para conocer un periférico sigo unos pasos muy concretos. Primero me voy a varias webs donde usan ese periférico usando Arduino. Me informo bien, y monto el circuito. Una vez que lo hago funcionar e interactúo un poco (cambiando esto o aquello) lo siguiente que hago es echar un vistazo al Datasheet, no para estudiarlo, sólo le hecho un ojo y trato de buscar cosas claves. Luego cojo el analizador lógico y extraigo las señales y las observo para ver o deducir cosas que pueden ocurrir. Tomo el programa de Arduino y anulo (poniendo "//") casi todo el programa, para ver línea a línea qué es lo que hace a nivel de señales. De este modo voy deduciendo lo que hace. Una vez que lo tengo claro es cuando me voy a la FPGA y hago el diseño. Si hay muchas tomas de decisiones es cuando utilizo Atto. Si veo que es sencillo o no trae demasiada complicación entonces hago un diseño tradicional. Atto es un herramienta, un medio para hacer más fácil el manejo de protocolos seriales.
 
 Si tienes cualquier tipo de duda sobre Atto y/o los módulos/drivers SPI e I2C, haz clic en [este enlace](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre/c/4YDxdEzuklg). Como todo esto es un diseño personal, las respuestas a ciertas preguntas no estarán en Google o ChatGPT.
 
@@ -611,13 +611,13 @@ Las actualizaciones de Atto, aplicado a los protocolos SPI ó I2C las encontrar�
 
 * [Clifford Wolf](https://github.com/cliffordwolf) Creador del [proyecto IceStorm](https://github.com/YosysHQ/icestorm) y que gracias él y a su comunidad estamos aquí diseñando hardware para FPGAs libres y de forma gratuita. 
 
-* [Juan Gonzalez-Gomez (Obijuan)](https://github.com/Obijuan)  Líder y creador de la comunidad de [#FPGAwars](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre), tutoriales [#1](https://github.com/Obijuan/digital-electronics-with-open-FPGAs-tutorial/wiki) [#2](https://github.com/Obijuan/Cuadernos-tecnicos-FPGAs-libres/wiki) [#3](https://www.youtube.com/watch?v=GYvBAHdkRwk&list=PLmnz0JqIMEzVxJhT6F046jaz7mObMujmx), [módulos para Icestudio](https://github.com/orgs/FPGAwars/repositories?type=all) y un [largísimo etc](https://www.youtube.com/@ObijuanCube/videos).
+* [Juan Gonzalez-Gomez (Obijuan)](https://github.com/Obijuan)  Líder y creador de la comunidad de [#FPGAwars](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre) tutoriales [#1](https://github.com/Obijuan/digital-electronics-with-open-FPGAs-tutorial/wiki) [#2](https://github.com/Obijuan/Cuadernos-tecnicos-FPGAs-libres/wiki) [#3](https://www.youtube.com/watch?v=GYvBAHdkRwk&list=PLmnz0JqIMEzVxJhT6F046jaz7mObMujmx), [módulos para Icestudio](https://github.com/orgs/FPGAwars/repositories?type=all) y un [largísimo etc](https://www.youtube.com/@ObijuanCube/videos).
 
 * [Carlos Venegas Arrabé](https://github.com/cavearr)  Líder actual en el desarrollo de [Icestudio](https://icestudio.io/).
 
 * [Jesús Arroyo Torrens](https://github.com/Jesus89)  Fundador del programa [Icestudio](https://icestudio.io/).
 
-* [Eladio Delgado Mingorance](https://github.com/EladioDM)  Creador de la [Alhambra II FPGA](https://alhambrabits.com/), y en este proyecto/tutorial Atto me he basado en ella.
+* [Eladio Delgado Mingorance](https://github.com/EladioDM)  Creador de la [Alhambra II FPGA](https://alhambrabits.com/) y en este proyecto/tutorial Atto me he basado en ella.
 
 * [Comunidad FPGAwars](https://groups.google.com/g/fpga-wars-explorando-el-lado-libre)  El resto del mundo colaboramos en esta gran comunidad.
 
@@ -630,7 +630,7 @@ Las actualizaciones de Atto, aplicado a los protocolos SPI ó I2C las encontrar�
 
 La Licencia OHL (Open Hardware License) es una licencia de código abierto diseñada específicamente para el hardware digital, como diseños electrónicos y hardware embebido. Fue creada para promover la colaboración y el intercambio de diseños de hardware, permitiendo a los usuarios compartir, modificar y distribuir libremente sus creaciones.
 
-Se basa en principios similares a las licencias de software de código abierto, como la Licencia Pública General de GNU (GPL), pero está adaptada para abordar las particularidades del hardware.
+Se basa en principios similares a las licencias de software de código abierto, como la Licencia Pública General de GNU (GPL) pero está adaptada para abordar las particularidades del hardware.
 
 Entre las disposiciones de la Licencia OHL se incluyen la obligación de compartir los archivos fuente del diseño, permitir la modificación y mejora del hardware y atribuir la autoría original del diseño. Además, establece cláusulas para garantizar que las futuras versiones o modificaciones del hardware también se mantengan bajo la misma licencia de código abierto.
 

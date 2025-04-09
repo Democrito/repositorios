@@ -44,7 +44,7 @@ The SPI module does not have the "Hz" pin because it operates at a fixed frequen
 * VDD: 3.3V or 5V (It starts with 3.3V and if it doesn't turn on put 5V on it.)
 * SCL: Serial clock   
 * SDA: Serial data  
-* RES: Reset. The most common is that it does not have this pin, but there are some that do.
+* RES: Reset. The most common is that it does not have this pin, but there are some that do, it usually goes to logical 1.
 
 The main **I2C module** only has 2 pins which are SDA (serial data) and SCL (serial clock). The I2C outputs do not need pull-up resistors, at no time does it go into a floating state.
 

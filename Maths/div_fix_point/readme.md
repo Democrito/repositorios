@@ -35,7 +35,15 @@ El funcionamiento y puesta en marcha es común en ambos ejemplos. A través de u
 
 Podemos comprobar que puede realizar cualquier tipo de división, y en el caso de la división entre **0** nos saldrá el mensaje "Error!". Para **Q8.8** tendremos dos decimales, y para **Q16.16** tendremos cuatro decimales. Recomiendo utilizar el terminal serie que viene en ICEstudio.
 
-Contiene un "[bug](https://github.com/projf/projf-explore/issues/164)" y ocurre cuando el divisor es "0.algo", por ejemplo: "1 / 0.001". Trata de aproximar el resultado, pero en según que casos no es satisfactorio.
+**Nota Importante:**
+Cuando el divisor es "0.algo", por ejemplo: "1 / 0.001", trata de aproximar el resultado, pero en muchos casos no puede aproximar exactitud debido a la limitación que tiene el punto fijo. Esto mismo ocurre cuando tratas de multiplicar dos números con decimales en punto fijo. Es decir, que no es un bug sino una limitación que tiene el punto fijo cuando se hace ese tipo de operaciones. La única manera de resolver este problema es usando el punto flotante.
+
+Para comprender mejor la limitación que tiene el punto fijo, veamos este simple concepto:
+
+Si tratamos de representa en decimal "0.1" cuando lo pasamos a binario en punto fijo obtendríamos "0.0001100110011001100110011001100..." He puesto puntos suspensivos porque el patrón "1100" se repetiría hasta el infinito. Y es debido a esto mismo (que no es un valor acotado) que tanto al multiplica como al dividir nunca podrá dar un valor exacto, y cuanto menor resolución de bits decimales, más se desvía del resultado esperado.
+
+En conclusión: Si necesitas exactitud en la parte decimal, no tienes más remedio que usar el punto flotante, o usar un algoritmo que mutiplique o divida en BCD tal como lo hacemos los humanos.
+
 
 ### Reconocimientos:
 

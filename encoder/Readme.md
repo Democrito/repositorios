@@ -4,5 +4,5 @@ The x1 encoder reader can be used for mechanical encoders (potentiometer type, a
 
 I recommend the x4 encoder reader only for optical and magnetic encoders.  
 
-
-Info: https://groups.google.com/d/msg/fpga-wars-explorando-el-lado-libre/wsnPxoPgJBg/Zk8O65JlAwAJ  
+**To learn more:** https://sites.google.com/site/proyectosroboticos/encoder  
+**Log:** https://groups.google.com/d/msg/fpga-wars-explorando-el-lado-libre/wsnPxoPgJBg/Zk8O65JlAwAJ  

@@ -33,7 +33,7 @@ For i = 0 To 17
       Xnew  = X + yy
       Ynew  = Y - xx
       angle = angle - ATAN_Table(i)
-	EndIf
+   EndIf
 	
    X = Xnew
    Y = Ynew 
@@ -78,3 +78,5 @@ Sub dec65536(ByVal given As Integer) ' Translates the Q1.16 format to "human", d
 	Print Str(temp)
 	
 End Sub
+
+End
